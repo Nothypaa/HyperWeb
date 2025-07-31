@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ThemeToggle } from './ui/theme-toggle';
 
 const Navbar: React.FC = () => {
   const [showButton, setShowButton] = useState(false);
@@ -19,8 +20,9 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <nav className="sticky top-0 z-50 flex justify-center p-6">
-      <div className="flex items-center justify-between w-full max-w-xl bg-gray-100/95 backdrop-blur rounded-full px-8 h-14">
+    <>
+      <nav className="sticky top-0 z-50 flex justify-center p-6">
+        <div className="flex items-center justify-between w-full max-w-xl bg-gray-100/95 backdrop-blur rounded-full px-8 h-14">
         {/* Logo and Brand */}
         <Link href="/" className="flex items-center space-x-1 -ml-4">
           <div className="w-14 h-14 relative">
@@ -42,15 +44,15 @@ const Navbar: React.FC = () => {
           }`}>
             <Link
               href="/pricing"
-              className="text-black font-semibold text-sm hover:text-gray-700 transition-colors"
+              className="text-black font-bold text-sm hover:text-gray-700 transition-colors"
             >
-              Pricing
+              Tarifs
             </Link>
             <Link
               href="/login"
-              className="text-black font-semibold text-sm hover:text-gray-700 transition-colors"
+              className="text-black font-bold text-sm hover:text-gray-700 transition-colors"
             >
-              Log in
+              Connexion
             </Link>
           </div>
           
@@ -65,8 +67,14 @@ const Navbar: React.FC = () => {
             </button>
           </div>
         </div>
+        </div>
+      </nav>
+      
+      {/* Theme Toggle - Fixed in top right corner */}
+      <div className="fixed top-6 right-6 z-50">
+        <ThemeToggle />
       </div>
-    </nav>
+    </>
   );
 };
 
