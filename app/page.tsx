@@ -1,5 +1,6 @@
 import MockupGrid from '@/components/MockupGrid'
 import { Pricing2 } from '@/components/ui/pricing2'
+import { StarBorder } from '@/components/ui/star-border'
 
 export default function Home() {
   return (
@@ -7,18 +8,39 @@ export default function Home() {
       {/* Hero Section */}
       <section className="flex min-h-screen flex-col items-center justify-center p-24">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Bienvenue sur HyperWeb
+          <h1 className="text-6xl lg:text-7xl font-black tracking-tighter text-gray-900 dark:text-white mb-4">
+            Des sites conçus<br/>pour vendre.
           </h1>
-          <p className="text-lg text-gray-600 mb-8">
-            Une agence web moderne qui crée des sites web exceptionnels
+          <p className="text-muted-foreground text-lg mb-8">
+            Garantie Satisfait ou Remboursé à 100%.<br />Pas de Résultats ? Vous Gardez le Site ET Récupérez Votre Argent.
           </p>
           
           {/* Button Container */}
           <div className="flex items-center justify-center gap-3">
-            <button className="bg-black text-white px-5 py-2.5 rounded-full font-bold text-base hover:bg-gray-800 transition-colors">
-              Sites réalisés
-            </button>
+            <div className="relative dark:hidden">
+              <button className="bg-black text-white px-5 py-2.5 rounded-full font-bold text-base hover:bg-gray-800 transition-colors">
+                Sites réalisés
+              </button>
+            </div>
+            <div className="relative hidden dark:block">
+              <div className="absolute inset-0 rounded-full overflow-hidden">
+                <div className="absolute w-[300%] h-[50%] bottom-[-11px] right-[-250%] rounded-full animate-star-movement-bottom z-0 opacity-70"
+                     style={{
+                       background: 'radial-gradient(circle, rgba(255,255,255,0.8), transparent 10%)',
+                       animationDuration: '6s',
+                     }}
+                />
+                <div className="absolute w-[300%] h-[50%] top-[-10px] left-[-250%] rounded-full animate-star-movement-top z-0 opacity-70"
+                     style={{
+                       background: 'radial-gradient(circle, rgba(255,255,255,0.8), transparent 10%)',
+                       animationDuration: '6s',
+                     }}
+                />
+              </div>
+              <button className="relative z-10 bg-black text-white px-5 py-2.5 rounded-full font-bold text-base hover:bg-gray-800 transition-colors">
+                Sites réalisés
+              </button>
+            </div>
             <button className="bg-white text-black px-5 py-2.5 rounded-full font-bold text-base hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 border border-gray-200 shadow-sm">
               Voir nos tarifs
               <div className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center">

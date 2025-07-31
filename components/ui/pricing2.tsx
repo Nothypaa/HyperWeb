@@ -120,7 +120,7 @@ const Pricing2 = ({
                 <CardFooter className="mt-auto">
                   <a 
                     href={plan.button.url}
-                    className="w-full bg-black text-white px-5 py-2.5 rounded-full font-bold text-base hover:bg-gray-800 transition-colors flex items-center justify-center gap-2"
+                    className="w-full bg-black dark:bg-white text-white dark:text-black px-5 py-2.5 rounded-full font-bold text-base hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors flex items-center justify-center gap-2"
                   >
                     {plan.button.text}
                     <ArrowRight className="w-4 h-4" />
