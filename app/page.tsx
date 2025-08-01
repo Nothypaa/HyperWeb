@@ -3,12 +3,13 @@ import { Pricing2 } from '@/components/ui/pricing2'
 import { StarBorder } from '@/components/ui/star-border'
 import { Testimonials } from '@/components/ui/testimonials-demo'
 import { DemoOne } from '@/components/ui/contact-demo'
+import { AuroraBackground } from '@/components/ui/aurora-background'
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      {/* Hero Section */}
-      <section className="flex min-h-screen flex-col items-center justify-center p-20">
+        {/* Hero Section */}
+        <section className="flex min-h-screen flex-col items-center justify-center pt-10 pb-20 px-20">
         <div className="text-center">
           <h1 className="text-7xl lg:text-8xl font-black tracking-tighter text-gray-900 dark:text-white mb-8">
             Des sites conçus<br/>pour vendre.
@@ -26,16 +27,16 @@ export default function Home() {
             </div>
             <div className="relative hidden dark:block">
               <div className="absolute -inset-px rounded-full overflow-hidden">
-                <div className="absolute w-[300%] h-[50%] bottom-[-11px] right-[-250%] rounded-full animate-star-movement-bottom z-0 opacity-40"
+                <div className="absolute w-[300%] h-[50%] bottom-[-11px] right-[-250%] rounded-full animate-star-movement-bottom z-0 opacity-100"
                      style={{
                        background: 'radial-gradient(circle, rgba(255,255,255,0.8), transparent 10%)',
-                       animationDuration: '6s',
+                       animationDuration: '12s',
                      }}
                 />
-                <div className="absolute w-[300%] h-[50%] top-[-10px] left-[-250%] rounded-full animate-star-movement-top z-0 opacity-40"
+                <div className="absolute w-[300%] h-[50%] top-[-10px] left-[-250%] rounded-full animate-star-movement-top z-0 opacity-100"
                      style={{
                        background: 'radial-gradient(circle, rgba(255,255,255,0.8), transparent 10%)',
-                       animationDuration: '6s',
+                       animationDuration: '12s',
                      }}
                 />
               </div>
@@ -43,8 +44,8 @@ export default function Home() {
                 Sites réalisés
               </button>
             </div>
-            <button className="bg-white text-black px-5 py-2.5 rounded-full font-bold text-base hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 border border-gray-200 shadow-sm">
-              Voir nos tarifs
+            <a href="#contact" className="bg-white text-black px-5 py-2.5 rounded-full font-bold text-base hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 border border-gray-200 shadow-sm">
+              Nous contacter
               <div className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center">
                 <svg 
                   width="13" 
@@ -59,12 +60,12 @@ export default function Home() {
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
               </div>
-            </button>
+            </a>
           </div>
         </div>
-      </section>
+        </section>
 
-      {/* Portfolio Grid Section */}
+        {/* Portfolio Grid Section */}
       <MockupGrid />
 
       {/* Testimonials Section */}
@@ -118,8 +119,8 @@ export default function Home() {
         ]}
       />
       
-      {/* Contact Section */}
-      <DemoOne />
+        {/* Contact Section */}
+        <DemoOne />
     </main>
   )
 }

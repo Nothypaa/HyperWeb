@@ -40,7 +40,7 @@ const Navbar: React.FC = () => {
         <div className="flex items-center relative">
           {/* Navigation Links - slide left when button appears */}
           <div className={`flex items-center space-x-6 transition-transform duration-500 ease-out ${
-                          showButton ? 'transform -translate-x-28' : ''
+                          showButton ? 'transform -translate-x-32' : ''
           }`}>
             <Link
               href="/pricing"

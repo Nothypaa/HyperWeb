@@ -3,6 +3,7 @@ import Script from 'next/script'
 import './globals.css'
 import Navbar from '../components/Navbar'
 import StagewiseWrapper from '../components/StagewiseWrapper'
+import { AuroraBackground } from '../components/ui/aurora-background'
 
 export const metadata: Metadata = {
   title: 'HyperWeb',
@@ -35,9 +36,11 @@ export default function RootLayout({
             gtag('config', 'G-KESKV6R0ZY');
           `}
         </Script>
-        <Navbar />
-        {children}
-        <StagewiseWrapper />
+        <AuroraBackground>
+          <Navbar />
+          {children}
+          <StagewiseWrapper />
+        </AuroraBackground>
       </body>
     </html>
   )
