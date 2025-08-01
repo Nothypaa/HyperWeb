@@ -57,10 +57,10 @@ const Navbar: React.FC = () => {
           </div>
           
           {/* Sites réalisés button - fades in from below */}
-                      <div className={`absolute -right-6 transition-all duration-500 ease-out ${
+          <div className={`absolute -right-6 transition-opacity duration-500 ease-out ${
             showButton 
-              ? 'opacity-100 translate-y-0' 
-              : 'opacity-0 translate-y-8 pointer-events-none'
+              ? 'opacity-100' 
+              : 'opacity-0 pointer-events-none'
           }`}>
             <button className="bg-black text-white px-5 py-2.5 rounded-full font-bold text-sm hover:bg-gray-800 transition-colors whitespace-nowrap">
               Sites réalisés

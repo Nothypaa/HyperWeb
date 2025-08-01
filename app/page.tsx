@@ -25,14 +25,14 @@ export default function Home() {
               </button>
             </div>
             <div className="relative hidden dark:block">
-              <div className="absolute inset-0 rounded-full overflow-hidden">
-                <div className="absolute w-[300%] h-[50%] bottom-[-11px] right-[-250%] rounded-full animate-star-movement-bottom z-0 opacity-70"
+              <div className="absolute -inset-px rounded-full overflow-hidden">
+                <div className="absolute w-[300%] h-[50%] bottom-[-11px] right-[-250%] rounded-full animate-star-movement-bottom z-0 opacity-40"
                      style={{
                        background: 'radial-gradient(circle, rgba(255,255,255,0.8), transparent 10%)',
                        animationDuration: '6s',
                      }}
                 />
-                <div className="absolute w-[300%] h-[50%] top-[-10px] left-[-250%] rounded-full animate-star-movement-top z-0 opacity-70"
+                <div className="absolute w-[300%] h-[50%] top-[-10px] left-[-250%] rounded-full animate-star-movement-top z-0 opacity-40"
                      style={{
                        background: 'radial-gradient(circle, rgba(255,255,255,0.8), transparent 10%)',
                        animationDuration: '6s',
