@@ -81,10 +81,10 @@ const Pricing2 = ({
     <section className="py-32">
       <div className="container">
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 text-center">
-          <h2 className="text-pretty text-4xl font-bold lg:text-6xl">
+          <h2 className="text-pretty text-4xl font-black tracking-tighter lg:text-6xl">
             {heading}
           </h2>
-          <p className="text-muted-foreground lg:text-xl">{description}</p>
+          <p className="text-center opacity-75 lg:text-xl">{description}</p>
           <div className="flex flex-col items-stretch gap-6 md:flex-row">
             {plans.map((plan) => (
               <Card
@@ -95,13 +95,13 @@ const Pricing2 = ({
                   <CardTitle>
                     <p>{plan.name}</p>
                   </CardTitle>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-center opacity-75">
                     {plan.description}
                   </p>
                   <span className="text-4xl font-bold">
                     {plan.monthlyPrice}
                   </span>
-                  <p className="text-muted-foreground">
+                  <p className="text-center opacity-75">
                     Paiement unique
                   </p>
                 </CardHeader>
@@ -112,7 +112,7 @@ const Pricing2 = ({
                     {plan.features.map((feature, index) => (
                       <li key={index} className="flex items-center gap-2">
                         <CircleCheck className="size-4 text-green-600" />
-                        <span className={feature.text.startsWith("Everything in") ? "font-medium text-muted-foreground" : ""}>{feature.text}</span>
+                        <span className={feature.text.startsWith("Everything in") ? "font-medium opacity-75" : ""}>{feature.text}</span>
                       </li>
                     ))}
                   </ul>

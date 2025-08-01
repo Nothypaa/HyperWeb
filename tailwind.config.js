@@ -66,6 +66,7 @@ module.exports = {
       animation: {
         'star-movement-bottom': 'star-movement-bottom linear infinite alternate',
         'star-movement-top': 'star-movement-top linear infinite alternate',
+        'scroll': 'scroll linear infinite',
       },
       keyframes: {
         'star-movement-bottom': {
@@ -75,6 +76,10 @@ module.exports = {
         'star-movement-top': {
           '0%': { transform: 'translate(0%, 0%)', opacity: '1' },
           '100%': { transform: 'translate(100%, 0%)', opacity: '0' },
+        },
+        'scroll': {
+          '0%': { transform: 'translateY(0%)' },
+          '100%': { transform: 'translateY(-50%)' },
         },
       },
     },

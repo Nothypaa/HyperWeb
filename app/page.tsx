@@ -1,17 +1,19 @@
 import MockupGrid from '@/components/MockupGrid'
 import { Pricing2 } from '@/components/ui/pricing2'
 import { StarBorder } from '@/components/ui/star-border'
+import { Testimonials } from '@/components/ui/testimonials-demo'
+import { DemoOne } from '@/components/ui/contact-demo'
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="flex min-h-screen flex-col items-center justify-center p-24">
+      <section className="flex min-h-screen flex-col items-center justify-center p-20">
         <div className="text-center">
-          <h1 className="text-6xl lg:text-7xl font-black tracking-tighter text-gray-900 dark:text-white mb-4">
+          <h1 className="text-7xl lg:text-8xl font-black tracking-tighter text-gray-900 dark:text-white mb-8">
             Des sites conçus<br/>pour vendre.
           </h1>
-          <p className="text-muted-foreground text-lg mb-8">
+          <p className="text-center opacity-75 text-xl mb-8">
             Garantie Satisfait ou Remboursé à 100%.<br />Pas de Résultats ? Vous Gardez le Site ET Récupérez Votre Argent.
           </p>
           
@@ -65,6 +67,9 @@ export default function Home() {
       {/* Portfolio Grid Section */}
       <MockupGrid />
 
+      {/* Testimonials Section */}
+      <Testimonials />
+
       {/* Pricing Section */}
       <Pricing2 
         heading="Nos Offres"
@@ -112,6 +117,9 @@ export default function Home() {
           },
         ]}
       />
+      
+      {/* Contact Section */}
+      <DemoOne />
     </main>
   )
 }
