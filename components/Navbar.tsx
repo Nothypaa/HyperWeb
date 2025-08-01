@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
                           showButton ? 'transform -translate-x-32' : ''
           }`}>
             <Link
-              href="/pricing"
+              href="#pricing"
               className="text-black font-bold text-sm hover:text-gray-700 transition-colors"
             >
               Tarifs

@@ -30,13 +30,13 @@ export default function Home() {
                 <div className="absolute w-[300%] h-[50%] bottom-[-11px] right-[-250%] rounded-full animate-star-movement-bottom z-0 opacity-100"
                      style={{
                        background: 'radial-gradient(circle, rgba(255,255,255,0.8), transparent 10%)',
-                       animationDuration: '12s',
+                       animationDuration: '3s',
                      }}
                 />
                 <div className="absolute w-[300%] h-[50%] top-[-10px] left-[-250%] rounded-full animate-star-movement-top z-0 opacity-100"
                      style={{
                        background: 'radial-gradient(circle, rgba(255,255,255,0.8), transparent 10%)',
-                       animationDuration: '12s',
+                       animationDuration: '3s',
                      }}
                 />
               </div>
@@ -72,7 +72,8 @@ export default function Home() {
       <Testimonials />
 
       {/* Pricing Section */}
-      <Pricing2 
+      <section id="pricing">
+        <Pricing2 
         heading="Nos Offres"
         description="Choisissez l'offre parfaite pour vos besoins de développement web"
         plans={[
@@ -117,7 +118,8 @@ export default function Home() {
             },
           },
         ]}
-      />
+        />
+      </section>
       
         {/* Contact Section */}
         <DemoOne />
