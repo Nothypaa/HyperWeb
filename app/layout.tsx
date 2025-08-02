@@ -4,6 +4,8 @@ import './globals.css'
 import Navbar from '../components/Navbar'
 import StagewiseWrapper from '../components/StagewiseWrapper'
 import { AuroraBackground } from '../components/ui/aurora-background'
+import { Footer } from '@/components/ui/large-name-footer'
+import LenisProvider from '../components/LenisProvider'
 
 export const metadata: Metadata = {
   title: 'HyperWeb',
@@ -36,11 +38,14 @@ export default function RootLayout({
             gtag('config', 'G-KESKV6R0ZY');
           `}
         </Script>
-        <AuroraBackground>
-          <Navbar />
-          {children}
-          <StagewiseWrapper />
-        </AuroraBackground>
+        <LenisProvider>
+          <AuroraBackground>
+            <Navbar />
+            {children}
+            <Footer />
+            <StagewiseWrapper />
+          </AuroraBackground>
+        </LenisProvider>
       </body>
     </html>
   )

@@ -89,7 +89,7 @@ const Pricing2 = ({
             {plans.map((plan) => (
               <Card
                 key={plan.id}
-                className="flex w-80 flex-col justify-between text-left"
+                className="flex w-96 flex-col justify-between text-left"
               >
                 <CardHeader>
                   <CardTitle>
@@ -102,7 +102,7 @@ const Pricing2 = ({
                     {plan.monthlyPrice}
                   </span>
                   <p className="text-center opacity-75">
-                    Paiement unique
+                    Paiement unique <span className="text-lg font-medium">OU</span> en plusieurs fois
                   </p>
                 </CardHeader>
                 <CardContent>

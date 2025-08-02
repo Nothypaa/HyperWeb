@@ -70,10 +70,10 @@ export const Contact2 = ({
               </ul>
             </div>
           </div>
-          <div className="mx-auto flex max-w-screen-md flex-col gap-6 rounded-lg border p-10">
+          <div className="mx-auto flex max-w-screen-xl flex-col gap-6 rounded-3xl border p-12">
             <div className="flex gap-4">
               <div className="grid w-full items-center gap-1.5">
-                <Label htmlFor="fullname">Full Name</Label>
+                <Label htmlFor="fullname">Full Name <span className="text-red-500">*</span></Label>
                 <Input 
                   type="text" 
                   id="fullname" 
@@ -83,7 +83,7 @@ export const Contact2 = ({
                 />
               </div>
               <div className="grid w-full items-center gap-1.5">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">Email <span className="text-red-500">*</span></Label>
                 <Input 
                   type="email" 
                   id="email" 
@@ -108,7 +108,7 @@ export const Contact2 = ({
               </div>
             </div>
             <div className="grid w-full items-center gap-1.5">
-              <Label htmlFor="subject">Subject</Label>
+              <Label htmlFor="subject">Subject <span className="text-red-500">*</span></Label>
               <Select>
                 <SelectTrigger>
                   <SelectValue placeholder="Select a service" />
