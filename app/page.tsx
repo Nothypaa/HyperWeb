@@ -1,5 +1,6 @@
 import MockupGrid from '@/components/MockupGrid'
-import { Pricing2 } from '@/components/ui/pricing2'
+import { Pricing } from '@/components/ui/pricing'
+import { FAQ } from '@/components/ui/faq'
 import { StarBorder } from '@/components/ui/star-border'
 import { Testimonials } from '@/components/ui/testimonials-demo'
 import { DemoOne } from '@/components/ui/contact-demo'
@@ -73,52 +74,70 @@ export default function Home() {
 
       {/* Pricing Section */}
       <section id="pricing">
-        <Pricing2 
-        heading="Nos Offres"
-        description="Choisissez l'offre parfaite pour vos besoins de développement web"
-        plans={[
-          {
-            id: "essential",
-            name: "Site Web Essentiel",
-            description: "Parfait pour les petites entreprises & startups",
-            monthlyPrice: "€450",
-            yearlyPrice: "€450",
-            features: [
-              { text: "Design moderne et responsive" },
-              { text: "Jusqu'à 5 pages" },
-              { text: "Intégration formulaire de contact" },
-              { text: "Optimisation SEO" },
-              { text: "Approche mobile-first" },
-              { text: "3 mois de support" },
-            ],
-            button: {
-              text: "Commencer",
-              url: "#contact",
+        <Pricing 
+          title="Nos Offres"
+          description="Choisissez l'offre parfaite pour vos besoins de développement web"
+          plans={[
+            {
+              name: "Site Web Essentiel",
+              price: "€450",
+              features: [
+                "Design moderne et responsive",
+                "Jusqu'à 5 pages",
+                "Intégration formulaire de contact",
+                "Optimisation SEO",
+                "Approche mobile-first",
+                "3 mois de support",
+              ],
+              description: "Parfait pour les petites entreprises & startups",
+              buttonText: "Commencer",
+              href: "#contact",
+              isPopular: false,
             },
-          },
-          {
-            id: "premium",
-            name: "Site Web Premium",
-            description: "Solution complète pour entreprises en croissance",
-            monthlyPrice: "€1,100",
-            yearlyPrice: "€1,100",
-            features: [
-              { text: "Pages illimitées" },
-              { text: "Animations et interactions avancées" },
-              { text: "Système de gestion de contenu" },
-              { text: "Intégration e-commerce" },
-              { text: "Fonctionnalités sur mesure" },
-              { text: "Optimisation des performances" },
-              { text: "6 mois de support et maintenance" },
-              { text: "Timeline de développement prioritaire" },
-            ],
-            button: {
-              text: "Lancer Votre Projet",
-              url: "#contact",
+            {
+              name: "Site Web Premium",
+              price: "€750",
+              features: [
+                "Pages illimitées",
+                "Animations et interactions avancées",
+                "Système de gestion de contenu",
+                "Intégration e-commerce",
+                "Fonctionnalités sur mesure",
+                "Optimisation des performances",
+                "6 mois de support et maintenance",
+                "Timeline de développement prioritaire",
+              ],
+              description: "Solution complète pour entreprises en croissance",
+              buttonText: "Lancer Votre Projet",
+              href: "#contact",
+              isPopular: true,
             },
-          },
-        ]}
+            {
+              name: "Site Web Enterprise",
+              price: "€1,100+",
+              features: [
+                "Tout du Premium inclus",
+                "Application web complexe",
+                "Intégrations API avancées",
+                "Tableau de bord administrateur",
+                "Système d'authentification",
+                "Base de données personnalisée",
+                "Architecture scalable",
+                "12 mois de support premium",
+                "Formations équipe incluses",
+              ],
+              description: "Pour les grandes entreprises avec besoins spécifiques",
+              buttonText: "Contactez-nous",
+              href: "#contact",
+              isPopular: false,
+            },
+          ]}
         />
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq">
+        <FAQ />
       </section>
       
         {/* Contact Section */}

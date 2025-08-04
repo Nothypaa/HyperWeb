@@ -24,6 +24,44 @@ export default function RootLayout({
           href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,800,900&display=swap"
           rel="stylesheet"
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const theme = localStorage.getItem('theme');
+                  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  let shouldBeDark;
+                  
+                  if (theme === 'dark') {
+                    shouldBeDark = true;
+                  } else if (theme === 'light') {
+                    shouldBeDark = false;
+                  } else {
+                    // No manual preference, follow system
+                    shouldBeDark = systemPrefersDark;
+                  }
+                  
+                  if (shouldBeDark) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch (e) {
+                  // Fallback to system preference if localStorage fails
+                  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.classList.add('dark');
+                  }
+                }
+              })();
+            `,
+          }}
+        />
+        <script 
+          src="https://analytics.ahrefs.com/analytics.js" 
+          data-key="/4HvJHnAj1QZ2Gvt8iHz/Q" 
+          async
+        ></script>
       </head>
       <body>
         <Script

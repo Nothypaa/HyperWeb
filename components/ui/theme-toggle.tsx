@@ -10,32 +10,61 @@ interface ThemeToggleProps {
 
 export function ThemeToggle({ className }: ThemeToggleProps) {
   const [isDark, setIsDark] = useState(false)
+  const [isManualOverride, setIsManualOverride] = useState(false)
 
-  // Check for saved theme preference or default to light mode
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme')
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  // Apply theme to document
+  const applyTheme = (shouldBeDark: boolean) => {
+    setIsDark(shouldBeDark)
     
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-      setIsDark(true)
+    if (shouldBeDark) {
       document.documentElement.classList.add('dark')
     } else {
-      setIsDark(false)
       document.documentElement.classList.remove('dark')
+    }
+  }
+
+  // Initialize theme and listen for system changes
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme')
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    
+    // Check if we have a saved manual preference and apply it initially
+    if (savedTheme === 'dark') {
+      applyTheme(true)
+      setIsManualOverride(true)
+    } else if (savedTheme === 'light') {
+      applyTheme(false)
+      setIsManualOverride(true)
+    } else {
+      // No manual preference, follow system
+      applyTheme(mediaQuery.matches)
+      setIsManualOverride(false)
+    }
+
+    // Listen for system theme changes - ALWAYS apply them
+    const handleSystemThemeChange = (e: MediaQueryListEvent) => {
+      // System changes always take precedence, clear manual override
+      applyTheme(e.matches)
+      setIsManualOverride(false)
+      localStorage.removeItem('theme') // Clear manual preference
+    }
+
+    mediaQuery.addEventListener('change', handleSystemThemeChange)
+    
+    return () => {
+      mediaQuery.removeEventListener('change', handleSystemThemeChange)
     }
   }, [])
 
+
   const toggleTheme = () => {
-    const newTheme = !isDark
-    setIsDark(newTheme)
+    // Simple toggle: flip current state and save as manual preference
+    const newIsDark = !isDark
+    applyTheme(newIsDark)
+    setIsManualOverride(true)
     
-    if (newTheme) {
-      document.documentElement.classList.add('dark')
-      localStorage.setItem('theme', 'dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-      localStorage.setItem('theme', 'light')
-    }
+    // Save manual preference (will be cleared when system preference changes)
+    localStorage.setItem('theme', newIsDark ? 'dark' : 'light')
   }
 
   return (

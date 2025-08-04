@@ -58,7 +58,7 @@ function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="https://blog.arihant.us/" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white">
+                  <Link href="/blog" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white">
                     Blog
                   </Link>
                 </li>
