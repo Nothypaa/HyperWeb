@@ -3,21 +3,33 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ThemeToggle } from './ui/theme-toggle';
 
 const Navbar: React.FC = () => {
   const [showButton, setShowButton] = useState(false);
+  const pathname = usePathname();
+  const isBlogPage = pathname === '/blog';
 
   useEffect(() => {
+    if (isBlogPage) {
+      // Always show button on blog page, but allow initial animation
+      setTimeout(() => setShowButton(true), 100);
+      return;
+    }
+
+    // Original scroll behavior for other pages
     const handleScroll = () => {
-      // Show button when scrolled past 50vh (hero section)
       const scrolled = window.scrollY > window.innerHeight * 0.5;
       setShowButton(scrolled);
     };
 
     window.addEventListener('scroll', handleScroll);
+    // Check initial scroll position
+    handleScroll();
+    
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isBlogPage]);
 
   return (
     <>
@@ -57,10 +69,10 @@ const Navbar: React.FC = () => {
           </div>
           
           {/* Sites réalisés button - fades in from below */}
-          <div className={`absolute -right-6 transition-opacity duration-500 ease-out ${
+          <div className={`absolute -right-6 transition-all duration-500 ease-out ${
             showButton 
-              ? 'opacity-100' 
-              : 'opacity-0 pointer-events-none'
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-8 pointer-events-none'
           }`}>
             <button className="bg-black text-white px-5 py-2.5 rounded-full font-bold text-sm hover:bg-gray-800 transition-colors whitespace-nowrap">
               Sites réalisés
