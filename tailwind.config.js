@@ -71,6 +71,11 @@ module.exports = {
         'star-movement-bottom': 'star-movement-bottom linear infinite alternate',
         'star-movement-top': 'star-movement-top linear infinite alternate',
         'scroll': 'scroll linear infinite',
+        'scroll-x': 'scroll-x 60s linear infinite',
+        'scroll-x-reverse': 'scroll-x-reverse 60s linear infinite',
+        'scroll-x-right': 'scroll-x-right 60s linear infinite',
+        'scroll-x-from-200': 'scroll-x-from-200 90s linear infinite',
+        'scroll-x-from-minus-200': 'scroll-x-from-minus-200 90s linear infinite',
         aurora: "aurora 60s linear infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
@@ -89,6 +94,26 @@ module.exports = {
         'scroll': {
           '0%': { transform: 'translateY(0%)' },
           '100%': { transform: 'translateY(-50%)' },
+        },
+        'scroll-x': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+        'scroll-x-reverse': {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        'scroll-x-right': {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        'scroll-x-from-200': {
+          '0%': { transform: 'translateX(200px)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+        'scroll-x-from-minus-200': {
+          '0%': { transform: 'translateX(-200px)' },
+          '100%': { transform: 'translateX(-100%)' },
         },
         aurora: {
           from: {
@@ -109,7 +134,7 @@ module.exports = {
       },
     },
   },
-  plugins: [addVariablesForColors, require('@tailwindcss/line-clamp')],
+  plugins: [addVariablesForColors],
 };
 
 // This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).

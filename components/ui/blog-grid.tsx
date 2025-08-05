@@ -5,56 +5,41 @@ import { useLenis } from '../LenisProvider'
 
 // Custom scrollbar styles
 const customScrollbarStyle = `
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db transparent;
+  }
   .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-track {
+    width: 8px;
     background: transparent;
-    margin: 12px 0;
   }
-  
   .custom-scrollbar::-webkit-scrollbar-thumb {
     background: #d1d5db;
-    border-radius: 3px;
+    border-radius: 4px;
     min-height: 20px;
   }
-  
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: #9ca3af;
   }
-  
-  .custom-scrollbar::-webkit-scrollbar-corner {
+  .custom-scrollbar::-webkit-scrollbar-track {
     background: transparent;
   }
-  
   .custom-scrollbar::-webkit-scrollbar-button {
     display: none;
     height: 0;
     width: 0;
   }
-  
-  .custom-scrollbar::-webkit-scrollbar-button:start:decrement,
-  .custom-scrollbar::-webkit-scrollbar-button:end:increment {
-    display: none;
+  .custom-scrollbar::-webkit-scrollbar-corner {
+    background: transparent;
   }
-  
+  .dark .custom-scrollbar {
+    scrollbar-color: #4b5563 transparent;
+  }
   .dark .custom-scrollbar::-webkit-scrollbar-thumb {
     background: #4b5563;
   }
-  
   .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: #6b7280;
-  }
-  
-  /* Firefox */
-  .custom-scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: #d1d5db transparent;
-  }
-  
-  .dark .custom-scrollbar {
-    scrollbar-color: #4b5563 transparent;
   }
 `
 
@@ -245,11 +230,11 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, onClose }) => {
 
   return (
     <div 
-      className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-md z-50 flex items-end justify-center p-4"
       onClick={onClose}
     >
       <div 
-        className="bg-white dark:bg-gray-900 rounded-3xl max-w-4xl w-full flex flex-col h-[90vh] relative"
+        className="bg-white dark:bg-gray-900 rounded-3xl max-w-4xl w-full flex flex-col max-h-[calc(100vh-2rem)] relative"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Floating Close Button - Top Left */}
@@ -264,7 +249,7 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, onClose }) => {
         {/* Modal Content */}
         <div 
           ref={modalContentRef}
-          className="px-8 pt-16 pb-6 overflow-y-auto flex-grow overscroll-contain focus:outline-none custom-scrollbar" 
+          className="px-8 pt-16 pb-8 overflow-y-auto flex-1 overscroll-contain focus:outline-none custom-scrollbar" 
           style={{ 
             overscrollBehavior: 'contain'
           }}
@@ -275,7 +260,7 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, onClose }) => {
           {/* Header with category and date */}
           <div className="flex items-center gap-2 mb-8">
             <LightningIcon className="w-4 h-4 text-gray-500 dark:text-gray-500" />
-            <span className="text-sm font-medium text-gray-500 dark:text-gray-500 uppercase tracking-wide">
+            <span className="text-xs font-bold text-gray-500 dark:text-gray-500 uppercase tracking-wide">
               {post.category}
             </span>
             <span className="text-sm text-gray-500 dark:text-gray-500">•</span>

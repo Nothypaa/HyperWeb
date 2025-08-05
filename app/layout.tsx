@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import './globals.css'
 import Navbar from '../components/Navbar'
-import StagewiseWrapper from '../components/StagewiseWrapper'
+
 import { AuroraBackground } from '../components/ui/aurora-background'
 import { Footer } from '@/components/ui/large-name-footer'
 import LenisProvider from '../components/LenisProvider'
@@ -81,7 +81,7 @@ export default function RootLayout({
             <Navbar />
             {children}
             <Footer />
-            <StagewiseWrapper />
+            
           </AuroraBackground>
         </LenisProvider>
       </body>
