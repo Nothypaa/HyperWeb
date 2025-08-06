@@ -97,13 +97,13 @@ export function FAQ({
       
       <section className="py-32" id="faq">
         <div className="container">
-          <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 text-center">
+          <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 text-center">
             <h2 className="text-pretty text-4xl font-black tracking-tighter lg:text-6xl">
               {title}
             </h2>
             <p className="text-center opacity-75 lg:text-xl mb-12">{description}</p>
             
-            <div className="w-full max-w-3xl">
+            <div className="w-full max-w-5xl">
               <Accordion type="single" collapsible className="w-full">
                 {items.map((item, index) => {
                   // Create SEO-friendly anchor from question

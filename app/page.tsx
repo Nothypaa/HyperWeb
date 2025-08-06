@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <main className="min-h-screen">
         {/* Hero Section */}
-        <section className="flex min-h-screen flex-col items-center justify-center pt-10 pb-20 px-20">
+        <section className="flex min-h-screen flex-col items-center justify-center pt-10 pb-20 px-32">
         <div className="text-center">
           <h1 className="text-7xl lg:text-8xl font-black tracking-tighter text-gray-900 dark:text-white mb-8">
             Des sites conçus<br/>pour vendre.

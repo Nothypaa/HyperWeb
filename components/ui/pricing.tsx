@@ -30,13 +30,13 @@ export function Pricing({
   return (
     <section className="py-32">
       <div className="container">
-        <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 text-center">
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 text-center">
           <h2 className="text-pretty text-4xl font-black tracking-tighter lg:text-6xl">
             {title}
           </h2>
           <p className="text-center opacity-75 lg:text-xl">{description}</p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-7xl mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-9xl mt-12">
             {plans.map((plan, index) => (
               <motion.div
                 key={index}
