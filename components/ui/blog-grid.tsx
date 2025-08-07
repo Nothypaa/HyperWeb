@@ -107,7 +107,7 @@ interface BlogCardProps {
 
 const BlogCard: React.FC<BlogCardProps> = ({ post, onReadMore }) => {
   return (
-    <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300 relative group w-full border border-gray-50 dark:border-gray-800 overflow-hidden">
+    <div className="bg-white dark:bg-black rounded-3xl shadow-sm hover:shadow-md transition-all duration-300 relative group w-full border border-gray-50 dark:border-gray-800 overflow-hidden">
       {/* Image Area - Edge to edge */}
       {post.image && (
         <div className="w-full aspect-[16/10] overflow-hidden">
@@ -234,7 +234,7 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, onClose }) => {
       onClick={onClose}
     >
       <div 
-        className="bg-white dark:bg-gray-900 rounded-3xl max-w-4xl w-full flex flex-col max-h-[calc(100vh-2rem)] relative"
+        className="bg-white dark:bg-black rounded-3xl max-w-4xl w-full flex flex-col max-h-[calc(100vh-2rem)] relative"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Floating Close Button - Top Left */}

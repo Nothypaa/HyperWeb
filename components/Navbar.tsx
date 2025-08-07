@@ -40,7 +40,7 @@ const Navbar: React.FC = () => {
           <div className="w-14 h-14 relative">
             <Image
               src="/HyperWeb-logo/Hyperweb-nobg.svg"
-              alt="HyperWeb Logo"
+              alt="HyperWeb - Agence Web France Logo"
               fill
               className="object-contain"
             />

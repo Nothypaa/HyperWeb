@@ -96,10 +96,7 @@ export function Pricing({
                   <div className="mt-auto">
                     <Link
                       href={plan.href}
-                      className={cn(
-                        "w-full bg-black dark:bg-white text-white dark:text-black px-5 py-2.5 rounded-full font-bold text-base hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors flex items-center justify-center gap-2",
-                        plan.isPopular && "bg-primary hover:bg-primary/90 text-primary-foreground dark:bg-primary dark:hover:bg-primary/90 dark:text-primary-foreground"
-                      )}
+                      className="w-full bg-black dark:bg-white text-white dark:text-black px-5 py-2.5 rounded-full font-bold text-base hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors flex items-center justify-center gap-2"
                     >
                       {plan.buttonText}
                     </Link>

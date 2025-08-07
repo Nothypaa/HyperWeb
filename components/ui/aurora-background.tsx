@@ -5,17 +5,24 @@ import React, { ReactNode, useState, useEffect } from "react";
 interface AuroraBackgroundProps extends React.HTMLProps<HTMLDivElement> {
   children: ReactNode;
   showRadialGradient?: boolean;
+  showAurora?: boolean;
 }
 
 export const AuroraBackground = ({
   className,
   children,
   showRadialGradient = true,
+  showAurora: enableAurora = true,
   ...props
 }: AuroraBackgroundProps) => {
-  const [showAurora, setShowAurora] = useState(true);
+  const [showAurora, setShowAurora] = useState(enableAurora);
 
   useEffect(() => {
+    if (!enableAurora) {
+      setShowAurora(false);
+      return;
+    }
+
     const handleScroll = () => {
       // Hide aurora when scrolled past 80% of viewport height
       const scrolled = window.scrollY > window.innerHeight * 0.8;
@@ -24,7 +31,7 @@ export const AuroraBackground = ({
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [enableAurora]);
 
   return (
     <div

@@ -3,8 +3,7 @@ import Script from 'next/script'
 import './globals.css'
 import Navbar from '../components/Navbar'
 
-import { AuroraBackground } from '../components/ui/aurora-background'
-import { Footer } from '@/components/ui/large-name-footer'
+import ConditionalAurora from '../components/ConditionalAurora'
 import LenisProvider from '../components/LenisProvider'
 
 export const metadata: Metadata = {
@@ -77,12 +76,9 @@ export default function RootLayout({
           `}
         </Script>
         <LenisProvider>
-          <AuroraBackground>
-            <Navbar />
+          <ConditionalAurora>
             {children}
-            <Footer />
-            
-          </AuroraBackground>
+          </ConditionalAurora>
         </LenisProvider>
       </body>
     </html>

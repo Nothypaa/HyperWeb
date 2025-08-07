@@ -1,0 +1,96 @@
+# Robots.txt for HyperWeb - French Web Agency
+# Optimized for "agence web France", "création site internet" keywords
+# Target: Google.fr and French market
+
+# Allow all major search engines full access to public content
+User-agent: *
+Allow: /
+
+# Block Next.js technical files and build artifacts
+Disallow: /_next/
+Disallow: /api/
+Disallow: /.next/
+Disallow: /node_modules/
+
+# Block common admin and technical paths (preventive)
+Disallow: /admin/
+Disallow: /wp-admin/
+Disallow: /wp-content/
+Disallow: /wp-includes/
+Disallow: /dashboard/
+Disallow: /login/
+Disallow: /auth/
+
+# Block duplicate content and utility pages
+Disallow: /404
+Disallow: /500
+Disallow: /*?utm_*
+Disallow: /*?fbclid=*
+Disallow: /*?gclid=*
+Disallow: /*?ref=*
+
+# Allow important static assets for SEO
+Allow: /public/
+Allow: /favicon.ico
+Allow: /robots.txt
+Allow: /sitemap.xml
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.webp
+Allow: /*.svg
+Allow: /*.gif
+
+# Specific directives for Google (primary target for French market)
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Mobile-first indexing support
+User-agent: Googlebot-Mobile
+Allow: /
+Crawl-delay: 1
+
+# Image search optimization for portfolio
+User-agent: Googlebot-Image
+Allow: /public/
+Allow: /images/
+Allow: /*.webp
+Allow: /*.jpg
+Allow: /*.png
+Allow: /*.svg
+
+# Social media crawlers (beneficial for French B2B market)
+User-agent: facebookexternalhit
+Allow: /
+Allow: /blog/
+
+User-agent: Twitterbot
+Allow: /
+Allow: /blog/
+
+User-agent: LinkedInBot
+Allow: /
+Allow: /blog/
+
+# SEO and analytics tools
+User-agent: AhrefsBot
+Allow: /
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Allow: /
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Allow: /
+Crawl-delay: 10
+
+# Sitemap declarations (to be created)
+Sitemap: https://hyperweb.fr/sitemap.xml
+Sitemap: https://hyperweb.fr/blog-sitemap.xml
+
+# Host declaration
+Host: agencehyperweb.com

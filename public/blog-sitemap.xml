@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Blog Homepage -->
+  <url>
+    <loc>https://agencehyperweb.com/blog</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://agencehyperweb.com/blog.webp</image:loc>
+      <image:title>Blog HyperWeb - Conseils Création Site Internet</image:title>
+      <image:caption>Blog de l'agence web française HyperWeb avec des conseils SEO et création de sites</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Blog Article: Comment être #1 sur Google en 2025 -->
+  <url>
+    <loc>https://agencehyperweb.com/blog/comment-etre-numero-1-google-2025</loc>
+    <lastmod>2025-01-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://agencehyperweb.com/blog.webp</image:loc>
+      <image:title>Comment être #1 sur Google en 2025 - Guide SEO</image:title>
+      <image:caption>Guide complet pour atteindre la première position Google avec les meilleures stratégies SEO 2025</image:caption>
+    </image:image>
+    <news:news>
+      <news:publication>
+        <news:name>HyperWeb Blog</news:name>
+        <news:language>fr</news:language>
+      </news:publication>
+      <news:publication_date>2025-01-04</news:publication_date>
+      <news:title>Comment être #1 sur Google en 2025</news:title>
+      <news:keywords>SEO, référencement naturel, Google, stratégies SEO 2025, première position Google, agence web</news:keywords>
+    </news:news>
+  </url>
+
+  <!-- Future blog articles placeholders for SEO planning -->
+  
+  <!-- Blog Category: SEO & Référencement -->
+  <url>
+    <loc>https://agencehyperweb.com/blog/categorie/seo-referencement</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Category: Création Site Web -->
+  <url>
+    <loc>https://agencehyperweb.com/blog/categorie/creation-site-web</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Category: Marketing Digital -->
+  <url>
+    <loc>https://agencehyperweb.com/blog/categorie/marketing-digital</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Planned blog articles for French web agency SEO -->
+  
+  <!-- Future Article: Combien coûte un site internet en 2025 -->
+  <url>
+    <loc>https://agencehyperweb.com/blog/combien-coute-site-internet-2025</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Future Article: Site vitrine vs e-commerce que choisir -->
+  <url>
+    <loc>https://agencehyperweb.com/blog/site-vitrine-vs-ecommerce-que-choisir</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Future Article: Pourquoi choisir une agence web française -->
+  <url>
+    <loc>https://agencehyperweb.com/blog/pourquoi-choisir-agence-web-francaise</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Future Article: Checklist SEO pour votre nouveau site -->
+  <url>
+    <loc>https://agencehyperweb.com/blog/checklist-seo-nouveau-site</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
