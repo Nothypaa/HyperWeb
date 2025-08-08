@@ -2,7 +2,7 @@ import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 
 const testimonials = [
   {
-    text: "This ERP revolutionized our operations, streamlining finance and inventory. The cloud-based platform keeps us productive, even remotely.",
+    text: "Hyperweb a refait mon site web à Montpellier, super propre et rapide. L'équipe est sérieuse et à l'écoute. Mon site commence déjà à bien remonter sur Google, je recommande.",
     image: "https://images.unsplash.com/photo-1494790108755-2616b332c3cb?w=400&h=400&fit=crop&crop=face",
     name: "Briana Patton",
     role: "Operations Manager",
@@ -63,7 +63,7 @@ const thirdColumn = testimonials.slice(6, 9);
 
 const Testimonials = () => {
   return (
-    <section className="bg-background my-20 relative">
+    <section className="bg-background section-y-lg mt-16 relative">
       <div className="container z-10 mx-auto">
         <div className="flex flex-col items-center justify-center max-w-[540px] mx-auto">
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-black tracking-tighter mt-5">

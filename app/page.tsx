@@ -1,3 +1,5 @@
+import { AnimatedHeading } from '@/components/ui/animated-heading'
+import { FadeUp } from '@/components/ui/fade-up'
 import MockupGrid from '@/components/MockupGrid'
 import { Pricing } from '@/components/ui/pricing'
 import { FAQ } from '@/components/ui/faq'
@@ -7,23 +9,31 @@ import { DemoOne } from '@/components/ui/contact-demo'
 import { AuroraBackground } from '@/components/ui/aurora-background'
 
 export default function Home() {
+
   return (
     <main className="min-h-screen">
         {/* Hero Section */}
-        <section className="flex min-h-screen flex-col items-center justify-center pt-10 pb-20 px-32">
+        <section className="flex min-h-screen flex-col items-center justify-center pt-10 pb-28 md:pb-32 px-6 md:px-32">
         <div className="text-center">
-          <h1 className="text-7xl lg:text-8xl font-black tracking-tighter text-gray-900 dark:text-white mb-8">
-            Des sites conçus<br/>pour vendre.
-          </h1>
-          <p className="text-center opacity-75 text-xl mb-8">
-            Garantie Satisfait ou Remboursé à 100%.<br />Pas de Résultats ? Vous Gardez le Site ET Récupérez Votre Argent.
-          </p>
+          <AnimatedHeading 
+            text="Des sites conçus<br/>pour vendre."
+            className="text-7xl lg:text-8xl font-black tracking-tighter text-gray-900 dark:text-white mb-8"
+            delay={100}
+            staggerDelay={35}
+          />
           
-          {/* Button Container */}
-          <div className="flex items-center justify-center gap-3">
+          <FadeUp delay={800} duration={800} distance={30}>
+            <p className="text-center opacity-75 text-xl mb-8">
+              Garantie Satisfait ou Remboursé à 100%.<br />Pas de Résultats ? Vous Gardez le Site ET Récupérez Votre Argent.
+            </p>
+          </FadeUp>
+          
+          {/* Button Container with staggered animation */}
+          <FadeUp delay={1000} duration={800} distance={20}>
+            <div className="flex items-center justify-center gap-3">
             <div className="relative dark:hidden">
               <button className="bg-black text-white px-5 py-2.5 rounded-full font-bold text-base hover:bg-gray-800 transition-colors">
-                Sites réalisés
+                View Our Work
               </button>
             </div>
             <div className="relative hidden dark:block">
@@ -42,11 +52,11 @@ export default function Home() {
                 />
               </div>
               <button className="relative z-10 bg-black text-white px-5 py-2.5 rounded-full font-bold text-base hover:bg-gray-800 transition-colors">
-                Sites réalisés
+                View Our Work
               </button>
             </div>
             <a href="#contact" className="bg-white text-black px-5 py-2.5 rounded-full font-bold text-base hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 border border-gray-200 shadow-sm">
-              Nous contacter
+              Contact Us
               <div className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center">
                 <svg 
                   width="13" 
@@ -61,8 +71,9 @@ export default function Home() {
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
               </div>
-            </a>
-          </div>
+                          </a>
+            </div>
+          </FadeUp>
         </div>
         </section>
 

@@ -3,7 +3,7 @@
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { Check, Star } from "lucide-react";
+import { Check } from "lucide-react";
 import Link from "next/link";
 
 interface PricingPlan {
@@ -28,7 +28,7 @@ export function Pricing({
   description = "Choisissez l'offre parfaite pour vos besoins de développement web",
 }: PricingProps) {
   return (
-    <section className="py-32">
+    <section className="py-32 md:py-40" id="pricing">
       <div className="container">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 text-center">
           <h2 className="text-pretty text-4xl font-black tracking-tighter lg:text-6xl">
@@ -60,14 +60,7 @@ export function Pricing({
                   "h-full"
                 )}
               >
-                {plan.isPopular && (
-                  <div className="absolute top-0 right-0 bg-primary py-1 px-3 rounded-bl-xl rounded-tr-xl flex items-center">
-                    <Star className="text-primary-foreground h-4 w-4 fill-current" />
-                    <span className="text-primary-foreground ml-1 font-semibold text-sm">
-                      Populaire
-                    </span>
-                  </div>
-                )}
+
                 
                 <div className="flex-1 flex flex-col">
                   <p className="text-base font-semibold text-muted-foreground mb-2">

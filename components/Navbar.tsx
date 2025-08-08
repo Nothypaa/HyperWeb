@@ -10,10 +10,11 @@ const Navbar: React.FC = () => {
   const [showButton, setShowButton] = useState(false);
   const pathname = usePathname();
   const isBlogPage = pathname === '/blog';
+  const isFaqPage = pathname === '/faq';
 
   useEffect(() => {
-    if (isBlogPage) {
-      // Always show button on blog page, but allow initial animation
+    if (isBlogPage || isFaqPage) {
+      // Always show button on blog and FAQ pages, but allow initial animation
       setTimeout(() => setShowButton(true), 100);
       return;
     }
@@ -29,7 +30,7 @@ const Navbar: React.FC = () => {
     handleScroll();
     
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isBlogPage]);
+  }, [isBlogPage, isFaqPage]);
 
   return (
     <>

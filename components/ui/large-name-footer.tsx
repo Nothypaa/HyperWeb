@@ -32,8 +32,8 @@ function Footer() {
               <h3 className="font-semibold mb-4">Pages</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/docs" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white">
-                    Docs
+                  <Link href="/faq" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white">
+                    FAQ
                   </Link>
                 </li>
                 <li>

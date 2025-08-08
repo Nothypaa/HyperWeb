@@ -12,11 +12,12 @@ interface ConditionalAuroraProps {
 export default function ConditionalAurora({ children }: ConditionalAuroraProps) {
   const pathname = usePathname();
   
-  // Disable aurora animation on blog pages
+  // Disable aurora animation on blog and FAQ pages
   const isBlogPage = pathname?.startsWith('/blog');
+  const isFaqPage = pathname?.startsWith('/faq');
   
   return (
-    <AuroraBackground showAurora={!isBlogPage}>
+    <AuroraBackground showAurora={!isBlogPage && !isFaqPage}>
       <Navbar />
       {children}
       <Footer />

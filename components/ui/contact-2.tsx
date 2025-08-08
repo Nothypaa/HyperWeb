@@ -36,10 +36,10 @@ export const Contact2 = ({
     }
   }, [fullName, userEmail]);
   return (
-    <section id="contact" className="py-32">
+    <section id="contact" className="py-32 md:py-40 scroll-mt-offset">
       <div className="container">
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-10 lg:flex-row lg:gap-20">
-          <div className="mx-auto flex max-w-sm flex-col justify-between gap-10">
+          <div className="mx-auto flex max-w-sm flex-col justify-between gap-6">
             <div className="text-center lg:text-left">
               <h1 className="mb-2 text-5xl font-semibold lg:mb-1 lg:text-6xl">
                 {title}
@@ -70,7 +70,7 @@ export const Contact2 = ({
               </ul>
             </div>
           </div>
-          <div className="mx-auto flex max-w-7xl flex-col gap-6 rounded-3xl border p-12">
+          <div className="mx-auto flex max-w-7xl flex-col gap-8 rounded-3xl border p-16">
             <div className="flex gap-4">
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="fullname">Full Name <span className="text-red-500">*</span></Label>
@@ -80,6 +80,7 @@ export const Contact2 = ({
                   placeholder="Jean Dupont"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
+                  className="h-14 text-base"
                 />
               </div>
               <div className="grid w-full items-center gap-1.5">
@@ -90,6 +91,7 @@ export const Contact2 = ({
                   placeholder="dupont@gmail.com"
                   value={userEmail}
                   onChange={(e) => setUserEmail(e.target.value)}
+                  className="h-14 text-base"
                 />
               </div>
             </div>
@@ -104,13 +106,14 @@ export const Contact2 = ({
                   type="tel" 
                   id="phone" 
                   placeholder="+33 6 12 34 56 78"
+                  className="h-14 text-base"
                 />
               </div>
             </div>
             <div className="grid w-full items-center gap-1.5">
               <Label htmlFor="subject">Subject <span className="text-red-500">*</span></Label>
               <Select>
-                <SelectTrigger>
+                <SelectTrigger className="h-14 text-base">
                   <SelectValue placeholder="Select a service" />
                 </SelectTrigger>
                 <SelectContent>
@@ -122,9 +125,13 @@ export const Contact2 = ({
             </div>
             <div className="grid w-full gap-1.5">
               <Label htmlFor="message">Message</Label>
-              <Textarea placeholder="Hello! I'm interested in developing a modern website for my business. Could we schedule a consultation to discuss my project requirements and timeline?" id="message" />
+              <Textarea 
+                placeholder="Hello! I'm interested in developing a modern website for my business. Could we schedule a consultation to discuss my project requirements and timeline?" 
+                id="message" 
+                className="min-h-[200px] text-base p-4"
+              />
             </div>
-            <Button className="w-full">Send Message</Button>
+            <Button className="w-full h-14 text-base font-semibold">Send Message</Button>
           </div>
         </div>
       </div>
