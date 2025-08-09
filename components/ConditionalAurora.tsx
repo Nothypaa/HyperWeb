@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import { AuroraBackground } from './ui/aurora-background';
 import Navbar from './Navbar';
 import { Footer } from './ui/large-name-footer';
+import { SimpleFooter } from './ui/simple-footer';
 
 interface ConditionalAuroraProps {
   children: React.ReactNode;
@@ -20,7 +21,7 @@ export default function ConditionalAurora({ children }: ConditionalAuroraProps) 
     <AuroraBackground showAurora={!isBlogPage && !isFaqPage}>
       <Navbar />
       {children}
-      <Footer />
+      {isBlogPage || isFaqPage ? <SimpleFooter /> : <Footer />}
     </AuroraBackground>
   );
 }

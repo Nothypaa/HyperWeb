@@ -39,10 +39,9 @@ const MockupGrid: React.FC = () => {
 
   return (
     <div className="w-full max-w-[120rem] mx-auto p-4 md:p-8">
-      <div 
-        className={`${currentItem.bgClass} backdrop-blur rounded-3xl h-[600px] md:h-[800px] w-full p-4 md:p-8 flex items-center justify-center overflow-hidden transition-all duration-1000 ease-in-out relative`}
-      >
-        <div className="w-[90%] md:w-[80%] max-w-4xl aspect-[16/10] bg-white/5 dark:bg-black/5 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-white/10">
+      {/* Mobile/Tablet layout (base to md) - simplified single container */}
+      <div className="lg:hidden relative">
+        <div className="w-full aspect-[16/10] max-w-6xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-white/5 dark:bg-black/5">
           <Image 
             key={currentItem.id} // Force re-render for smooth transitions
             src={currentItem.image}
@@ -54,20 +53,55 @@ const MockupGrid: React.FC = () => {
           />
         </div>
         
-        {/* Navigation dots */}
-        <div className="absolute bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2">
+        {/* Navigation dots for mobile/tablet */}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
           {portfolioItems.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
               className={`h-2 rounded-full transition-all duration-300 ${
                 index === currentIndex 
-                  ? 'bg-white w-8' 
-                  : 'bg-white/40 hover:bg-white/60 w-2'
+                  ? 'bg-gray-800 w-8' 
+                  : 'bg-gray-400 w-2'
               }`}
-              aria-label={`Go to slide ${index + 1}`}
+              aria-label={`Aller à la diapositive ${index + 1}`}
             />
           ))}
+        </div>
+      </div>
+
+      {/* Desktop layout (lg and up) - keep exactly as it was */}
+      <div className="hidden lg:block">
+        <div 
+          className={`${currentItem.bgClass} backdrop-blur rounded-3xl h-[800px] w-full p-8 flex items-center justify-center overflow-hidden transition-all duration-1000 ease-in-out relative`}
+        >
+          <div className="w-[80%] max-w-4xl aspect-[16/10] bg-white/5 dark:bg-black/5 rounded-3xl overflow-hidden shadow-2xl border border-white/10">
+            <Image 
+              key={currentItem.id} // Force re-render for smooth transitions
+              src={currentItem.image}
+              alt={currentItem.alt}
+              width={1200}
+              height={750}
+              className="w-full h-full object-cover animate-fadeIn"
+              priority
+            />
+          </div>
+          
+          {/* Navigation dots for desktop */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2">
+            {portfolioItems.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  index === currentIndex 
+                    ? 'bg-white w-8' 
+                    : 'bg-white/40 w-2'
+                }`}
+                aria-label={`Aller à la diapositive ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>

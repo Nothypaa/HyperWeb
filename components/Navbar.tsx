@@ -5,12 +5,24 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ThemeToggle } from './ui/theme-toggle';
+import { useAnchorNavigation } from '@/hooks/useAnchorNavigation';
 
 const Navbar: React.FC = () => {
   const [showButton, setShowButton] = useState(false);
   const pathname = usePathname();
   const isBlogPage = pathname === '/blog';
   const isFaqPage = pathname === '/faq';
+  const { navigateToAnchor } = useAnchorNavigation();
+
+  const handlePortfolioClick = () => {
+    if (pathname === '/') {
+      // Same page navigation
+      navigateToAnchor('#portfolio');
+    } else {
+      // Cross-page navigation
+      navigateToAnchor('#portfolio', '/');
+    }
+  };
 
   useEffect(() => {
     if (isBlogPage || isFaqPage) {
@@ -75,7 +87,10 @@ const Navbar: React.FC = () => {
               ? 'opacity-100 translate-y-0' 
               : 'opacity-0 translate-y-8 pointer-events-none'
           }`}>
-            <button className="bg-black text-white px-5 py-2.5 rounded-full font-bold text-sm hover:bg-gray-800 transition-colors whitespace-nowrap">
+            <button 
+              onClick={handlePortfolioClick}
+              className="bg-black text-white px-5 py-2.5 rounded-full font-bold text-sm hover:bg-gray-800 transition-colors whitespace-nowrap"
+            >
               Sites réalisés
             </button>
           </div>

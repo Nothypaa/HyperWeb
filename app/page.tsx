@@ -1,3 +1,6 @@
+'use client'
+
+import Link from 'next/link'
 import { AnimatedHeading } from '@/components/ui/animated-heading'
 import { FadeUp } from '@/components/ui/fade-up'
 import MockupGrid from '@/components/MockupGrid'
@@ -7,33 +10,38 @@ import { StarBorder } from '@/components/ui/star-border'
 import { Testimonials } from '@/components/ui/testimonials-demo'
 import { DemoOne } from '@/components/ui/contact-demo'
 import { AuroraBackground } from '@/components/ui/aurora-background'
+import { useAnchorNavigation } from '@/hooks/useAnchorNavigation'
 
 export default function Home() {
+  const { navigateToAnchor } = useAnchorNavigation()
 
   return (
     <main className="min-h-screen">
         {/* Hero Section */}
         <section className="flex min-h-screen flex-col items-center justify-center pt-10 pb-28 md:pb-32 px-6 md:px-32">
-        <div className="text-center">
+        <div className="text-center max-w-5xl mx-auto">
           <AnimatedHeading 
             text="Des sites conçus<br/>pour vendre."
-            className="text-7xl lg:text-8xl font-black tracking-tighter text-gray-900 dark:text-white mb-8"
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-6xl xl:text-7xl font-black tracking-tighter text-gray-900 dark:text-white mb-6 md:mb-8 leading-tight"
             delay={100}
             staggerDelay={35}
           />
           
           <FadeUp delay={800} duration={800} distance={30}>
-            <p className="text-center opacity-75 text-xl mb-8">
+            <h2 className="text-center opacity-75 text-lg sm:text-xl md:text-2xl mb-8 md:mb-10 font-medium leading-relaxed text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
               Garantie Satisfait ou Remboursé à 100%.<br />Pas de Résultats ? Vous Gardez le Site ET Récupérez Votre Argent.
-            </p>
+            </h2>
           </FadeUp>
           
           {/* Button Container with staggered animation */}
           <FadeUp delay={1000} duration={800} distance={20}>
             <div className="flex items-center justify-center gap-3">
             <div className="relative dark:hidden">
-              <button className="bg-black text-white px-5 py-2.5 rounded-full font-bold text-base hover:bg-gray-800 transition-colors">
-                View Our Work
+              <button 
+                onClick={() => navigateToAnchor('#portfolio')}
+                className="bg-black text-white px-5 py-2.5 rounded-full font-bold text-base hover:bg-gray-800 transition-colors"
+              >
+                Sites réalisés
               </button>
             </div>
             <div className="relative hidden dark:block">
@@ -51,12 +59,15 @@ export default function Home() {
                      }}
                 />
               </div>
-              <button className="relative z-10 bg-black text-white px-5 py-2.5 rounded-full font-bold text-base hover:bg-gray-800 transition-colors">
-                View Our Work
+              <button 
+                onClick={() => navigateToAnchor('#portfolio')}
+                className="relative z-10 bg-black text-white px-5 py-2.5 rounded-full font-bold text-base hover:bg-gray-800 transition-colors"
+              >
+                Sites réalisés
               </button>
             </div>
             <a href="#contact" className="bg-white text-black px-5 py-2.5 rounded-full font-bold text-base hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 border border-gray-200 shadow-sm">
-              Contact Us
+              Nous contacter
               <div className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center">
                 <svg 
                   width="13" 
@@ -78,7 +89,11 @@ export default function Home() {
         </section>
 
         {/* Portfolio Grid Section */}
-      <MockupGrid />
+        <section id="portfolio" className="py-16 md:py-24">
+          <FadeUp delay={200} duration={1000} distance={40}>
+            <MockupGrid />
+          </FadeUp>
+        </section>
 
       {/* Testimonials Section */}
       <Testimonials />

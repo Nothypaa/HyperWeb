@@ -3,8 +3,9 @@
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { Check, HelpCircle } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 interface PricingPlan {
   name: string;
@@ -77,7 +78,7 @@ export function Pricing({
                     Paiement unique <span className="text-base font-medium">OU</span> en plusieurs fois
                   </p>
 
-                  <ul className="space-y-4 mb-8 flex-1">
+                  <ul className="space-y-4 mb-6 flex-1">
                     {plan.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start gap-2 text-left">
                         <Check className="h-4 w-4 text-green-600 mt-1 flex-shrink-0" />
@@ -85,6 +86,9 @@ export function Pricing({
                       </li>
                     ))}
                   </ul>
+
+                  {/* Guarantee Section */}
+                  <GuaranteeSection />
 
                   <div className="mt-auto">
                     <Link
@@ -105,5 +109,61 @@ export function Pricing({
         </div>
       </div>
     </section>
+  );
+}
+
+// Guarantee Section Component
+function GuaranteeSection() {
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [showMobileExpansion, setShowMobileExpansion] = useState(false);
+
+  const explanationText = "Votre satisfaction est notre priorité absolue. Si notre approche ne génère pas les résultats attendus, c'est que nous n'avons pas été à la hauteur de la confiance que vous nous avez accordée. Dans ce cas, nous vous rembourserons intégralement.";
+
+  return (
+    <div className="mb-4 px-2">
+      <div className="flex items-center justify-center gap-2">
+        <span className="text-sm font-medium text-green-700 dark:text-green-400">
+          ✓ Garantie satisfait ou remboursé
+        </span>
+        
+        {/* Desktop Tooltip */}
+        <div 
+          className="relative hidden md:block"
+          onMouseEnter={() => setShowTooltip(true)}
+          onMouseLeave={() => setShowTooltip(false)}
+        >
+          <HelpCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+          {showTooltip && (
+            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-80 p-3 bg-black dark:bg-white text-white dark:text-black text-sm rounded-lg shadow-lg z-10 before:content-[''] before:absolute before:top-full before:left-1/2 before:transform before:-translate-x-1/2 before:border-4 before:border-transparent before:border-t-black dark:before:border-t-white">
+              <p className="leading-relaxed">{explanationText}</p>
+            </div>
+          )}
+        </div>
+
+        {/* Mobile Clickable Icon */}
+        <button
+          className="md:hidden focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 rounded-full p-1"
+          onClick={() => setShowMobileExpansion(!showMobileExpansion)}
+          aria-label="Plus d'informations sur la garantie"
+        >
+          <HelpCircle className="h-4 w-4 text-muted-foreground" />
+        </button>
+      </div>
+
+      {/* Mobile Expandable Section */}
+      <div 
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          showMobileExpansion 
+            ? 'max-h-32 opacity-100 mt-3' 
+            : 'max-h-0 opacity-0'
+        }`}
+      >
+        <div className="px-3 py-2 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700">
+          <p className="text-xs leading-relaxed text-gray-700 dark:text-gray-300">
+            {explanationText}
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }

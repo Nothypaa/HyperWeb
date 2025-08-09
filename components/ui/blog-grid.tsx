@@ -144,7 +144,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, onReadMore }) => {
       <button 
         onClick={onReadMore}
         className="absolute bottom-6 right-6 w-10 h-10 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full flex items-center justify-center transition-all duration-200 group-hover:scale-110 transform"
-        aria-label="Read more"
+        aria-label="Lire la suite"
       >
         <PlusIcon className="w-6 h-6 text-gray-500 dark:text-gray-500" />
       </button>
@@ -241,7 +241,7 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, onClose }) => {
         <button
           onClick={onClose}
           className="absolute top-6 left-6 z-10 w-8 h-8 bg-gray-100/80 dark:bg-gray-800/80 hover:bg-gray-200/80 dark:hover:bg-gray-700/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-200"
-          aria-label="Close modal"
+          aria-label="Fermer la fenêtre"
         >
           <CloseIcon className="w-4 h-4 text-gray-600 dark:text-gray-400" />
         </button>

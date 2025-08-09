@@ -19,8 +19,20 @@ export const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), delay)
-    return () => clearTimeout(timer)
+    // Check if animation has already run after hydration
+    const completedBefore = sessionStorage.getItem('animated-heading-completed') === 'true'
+    
+    if (completedBefore) {
+      // If already completed, show immediately
+      setIsVisible(true)
+    } else {
+      // Run animation with delay
+      const timer = setTimeout(() => {
+        setIsVisible(true)
+        sessionStorage.setItem('animated-heading-completed', 'true')
+      }, delay)
+      return () => clearTimeout(timer)
+    }
   }, [delay])
 
   // Split text by <br/> first, then by letters

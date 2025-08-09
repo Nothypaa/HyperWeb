@@ -23,7 +23,7 @@ export default function BlogPage() {
         </div>
         
         {/* FAQ Section - No Title */}
-        <div className="max-w-7xl mx-auto mt-32">
+        <div className="max-w-7xl mx-auto mt-16">
           <FAQ 
             title=""
             description=""

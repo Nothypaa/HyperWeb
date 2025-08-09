@@ -21,7 +21,21 @@ export const FadeUp: React.FC<FadeUpProps> = ({
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), delay)
+    // For hero section animations (delay <= 1000ms), check if they've already run
+    const isHeroAnimation = delay <= 1000
+    const heroCompleted = isHeroAnimation ? sessionStorage.getItem('hero-animations-completed') === 'true' : false
+    
+    if (isHeroAnimation && heroCompleted) {
+      setIsVisible(true)
+      return
+    }
+    
+    const timer = setTimeout(() => {
+      setIsVisible(true)
+      if (isHeroAnimation) {
+        sessionStorage.setItem('hero-animations-completed', 'true')
+      }
+    }, delay)
     return () => clearTimeout(timer)
   }, [delay])
 

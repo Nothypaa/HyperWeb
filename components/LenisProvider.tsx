@@ -29,47 +29,57 @@ export default function LenisProvider({ children }: LenisProviderProps) {
       return
     }
 
-    // Initialize Lenis
-    const newLenis = new Lenis({
-      duration: 1.2,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // exponential easing
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-      infinite: false,
-    })
+    try {
+      // Initialize Lenis
+      const newLenis = new Lenis({
+        duration: 1.2,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // exponential easing
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        touchMultiplier: 2,
+        infinite: false,
+        autoRaf: false, // We handle raf manually
+      })
 
-    // Store it in state
-    setLenis(newLenis)
+      // Store it in state
+      setLenis(newLenis)
 
-    // Request animation frame loop
-    function raf(time: number) {
-      newLenis.raf(time)
-      requestAnimationFrame(raf)
-    }
-
-    requestAnimationFrame(raf)
-
-    // Handle window resize - disable on mobile if window becomes smaller
-    const handleResize = () => {
-      if (!isDesktop()) {
-        newLenis.destroy()
-        setLenis(null)
+      // Request animation frame loop
+      const raf = (time: number) => {
+        if (newLenis) {
+          newLenis.raf(time)
+          requestAnimationFrame(raf)
+        }
       }
-    }
 
-    window.addEventListener('resize', handleResize)
+      requestAnimationFrame(raf)
 
-    // Cleanup function
-    return () => {
-      newLenis.destroy()
-      setLenis(null) // Clear state on unmount
-      window.removeEventListener('resize', handleResize)
+      // Handle window resize - disable on mobile if window becomes smaller
+      const handleResize = () => {
+        if (!isDesktop()) {
+          if (newLenis && !newLenis.isDestroyed) {
+            newLenis.destroy()
+          }
+          setLenis(null)
+        }
+      }
+
+      window.addEventListener('resize', handleResize)
+
+      // Cleanup function
+      return () => {
+        if (newLenis && !newLenis.isDestroyed) {
+          newLenis.destroy()
+        }
+        setLenis(null) // Clear state on unmount
+        window.removeEventListener('resize', handleResize)
+      }
+    } catch (error) {
+      console.warn('Failed to initialize Lenis smooth scrolling:', error)
+      setLenis(null)
     }
-    // We only want this to run once on mount, so we leave the dependency array empty.
-    // The resize handler will manage destruction on smaller screens.
   }, [])
 
   return <LenisContext.Provider value={lenis}>{children}</LenisContext.Provider>
