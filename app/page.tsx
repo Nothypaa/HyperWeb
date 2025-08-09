@@ -28,7 +28,7 @@ export default function Home() {
           />
           
           <FadeUp delay={800} duration={800} distance={30}>
-            <h2 className="text-center opacity-75 text-lg sm:text-xl md:text-2xl mb-8 md:mb-10 font-medium leading-relaxed text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
+            <h2 className="text-center opacity-75 text-xl mb-8 md:mb-10 font-medium leading-relaxed text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
               Garantie Satisfait ou Remboursé à 100%.<br />Pas de Résultats ? Vous Gardez le Site ET Récupérez Votre Argent.
             </h2>
           </FadeUp>
@@ -66,7 +66,10 @@ export default function Home() {
                 Sites réalisés
               </button>
             </div>
-            <a href="#contact" className="bg-white text-black px-5 py-2.5 rounded-full font-bold text-base hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 border border-gray-200 shadow-sm">
+            <button 
+              onClick={() => navigateToAnchor('#contact')}
+              className="bg-white text-black px-5 py-2.5 rounded-full font-bold text-base hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 border border-gray-200 shadow-sm"
+            >
               Nous contacter
               <div className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center">
                 <svg 
@@ -82,7 +85,7 @@ export default function Home() {
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
               </div>
-                          </a>
+            </button>
             </div>
           </FadeUp>
         </div>

@@ -97,7 +97,7 @@ function Footer() {
           </div>
         </div>
         <div className=" w-full flex mt-4 items-center justify-center   ">
-          <h1 className="text-center text-3xl md:text-5xl lg:text-[10rem] font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-50 dark:from-neutral-700 dark:to-neutral-900 select-none">
+          <h1 className="text-center text-2xl sm:text-3xl md:text-5xl lg:text-[10rem] font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-50 dark:from-neutral-700 dark:to-neutral-900 select-none">
             HyperWeb
           </h1>
         </div>

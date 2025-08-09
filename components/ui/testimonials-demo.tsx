@@ -66,11 +66,11 @@ const Testimonials = () => {
     <section className="bg-background section-y-lg mt-16 relative">
       <div className="container z-10 mx-auto">
         <div className="flex flex-col items-center justify-center max-w-[540px] mx-auto">
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-black tracking-tighter mt-5">
-            What our users say
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-black tracking-tighter mt-5">
+            Ce que disent nos clients
           </h2>
           <p className="text-center mt-5 opacity-75">
-            See what our customers have to say about us.
+            Découvrez les avis de nos clients satisfaits.
           </p>
         </div>
 

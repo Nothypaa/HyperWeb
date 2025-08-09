@@ -7,6 +7,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Head from "next/head";
+import { useAnchorNavigation } from "@/hooks/useAnchorNavigation";
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 interface FAQItem {
   question: string;
@@ -45,6 +48,24 @@ export function FAQ({
     }
   ]
 }: FAQProps) {
+  const { navigateToAnchor } = useAnchorNavigation();
+  const pathname = usePathname();
+
+  // Set up global navigation function for HTML buttons
+  useEffect(() => {
+    (window as any).navigateToSection = (anchor: string) => {
+      if (pathname === '/') {
+        navigateToAnchor(anchor);
+      } else {
+        navigateToAnchor(anchor, '/');
+      }
+    };
+
+    return () => {
+      delete (window as any).navigateToSection;
+    };
+  }, [navigateToAnchor, pathname]);
+
   // Generate FAQ Schema markup for SEO
   const faqSchema = {
     "@context": "https://schema.org",
@@ -101,8 +122,8 @@ export function FAQ({
                             __html: item.answer
                               .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                               .replace(/• /g, '• ')
-                              .replace(/Voir nos offres détaillées/g, '<a href="#pricing" class="text-primary hover:underline">Voir nos offres détaillées</a>')
-                              .replace(/Contactez-nous/g, '<a href="#contact" class="text-primary hover:underline">Contactez-nous</a>')
+                              .replace(/Voir nos offres détaillées/g, `<button onclick="window.navigateToSection('#pricing')" class="text-primary hover:underline cursor-pointer bg-transparent border-none p-0 font-inherit underline-offset-auto">Voir nos offres détaillées</button>`)
+                              .replace(/Contactez-nous/g, `<button onclick="window.navigateToSection('#contact')" class="text-primary hover:underline cursor-pointer bg-transparent border-none p-0 font-inherit underline-offset-auto">Contactez-nous</button>`)
                           }}
                         />
                       </AccordionContent>

@@ -24,6 +24,16 @@ const Navbar: React.FC = () => {
     }
   };
 
+  const handlePricingClick = () => {
+    if (pathname === '/') {
+      // Same page navigation
+      navigateToAnchor('#pricing');
+    } else {
+      // Cross-page navigation
+      navigateToAnchor('#pricing', '/');
+    }
+  };
+
   useEffect(() => {
     if (isBlogPage || isFaqPage) {
       // Always show button on blog and FAQ pages, but allow initial animation
@@ -67,12 +77,12 @@ const Navbar: React.FC = () => {
           <div className={`flex items-center space-x-6 transition-transform duration-500 ease-out ${
                           showButton ? 'transform -translate-x-32' : ''
           }`}>
-            <Link
-              href="#pricing"
+            <button
+              onClick={handlePricingClick}
               className="text-black font-bold text-sm hover:text-gray-700 transition-colors"
             >
               Tarifs
-            </Link>
+            </button>
             <Link
               href="/login"
               className="text-black font-bold text-sm hover:text-gray-700 transition-colors"

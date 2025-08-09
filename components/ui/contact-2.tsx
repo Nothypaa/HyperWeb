@@ -41,7 +41,7 @@ export const Contact2 = ({
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-8 md:gap-10 lg:flex-row lg:gap-20">
           <div className="mx-auto flex max-w-sm flex-col justify-between gap-6">
             <div className="text-center lg:text-left">
-              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-black tracking-tighter mt-5 mb-2 lg:mb-1">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-black tracking-tighter mt-5 mb-2 lg:mb-1">
                 {title}
               </h1>
               <p className="text-muted-foreground">{description}</p>
