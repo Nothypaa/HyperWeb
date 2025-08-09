@@ -24,7 +24,7 @@ function Footer() {
             </Link>
             </div>
             <p className="text-sm dark:text-gray-400 mt-5">
-              © {new Date().getFullYear()} HyperWeb. All rights reserved.
+              © {new Date().getFullYear()} HyperWeb. Tous droits réservés.
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">

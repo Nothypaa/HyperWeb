@@ -74,8 +74,8 @@ const BlogGrid: React.FC<BlogGridProps> = ({ posts }) => {
     {
       id: '1',
       title: 'Comment être #1 sur Google en 2025',
-      date: 'August 4, 2025',
-      category: 'QUICK READ',
+      date: '4 août 2025',
+      category: 'LECTURE RAPIDE',
       image: '/blog.webp'
     }
   ]
@@ -296,7 +296,7 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, onClose }) => {
           {/* Article Content */}
           <div className="max-w-none">
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-8 font-normal">
-              Opening August 19, the Apple Manufacturing Academy in Detroit will offer free programming to train and support American businesses, innovators, and manufacturers.
+              Le référencement naturel est devenu l'élément clé pour dominer les résultats de recherche en 2025. Découvrez les stratégies avancées qui permettent d'atteindre et de maintenir la première position sur Google.
             </p>
             
             <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed mb-6">

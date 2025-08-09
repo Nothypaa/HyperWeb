@@ -56,8 +56,8 @@ export function Pricing({
                   delay: index * 0.1,
                 }}
                 className={cn(
-                  "rounded-2xl border-[1px] p-6 bg-background text-center relative flex flex-col",
-                  plan.isPopular ? "border-primary border-2 shadow-lg" : "border-border",
+                  "rounded-2xl border-[1px] p-6 bg-background text-center relative flex flex-col z-10",
+                  plan.isPopular ? "border-primary border-2 shadow-lg z-20" : "border-border",
                   "h-full"
                 )}
               >
@@ -134,7 +134,7 @@ function GuaranteeSection() {
         >
           <HelpCircle className="h-4 w-4 text-muted-foreground cursor-help" />
           {showTooltip && (
-            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-80 p-3 bg-black dark:bg-white text-white dark:text-black text-sm rounded-lg shadow-lg z-10 before:content-[''] before:absolute before:top-full before:left-1/2 before:transform before:-translate-x-1/2 before:border-4 before:border-transparent before:border-t-black dark:before:border-t-white">
+            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-80 p-3 bg-black dark:bg-white text-white dark:text-black text-sm rounded-lg shadow-lg z-50 before:content-[''] before:absolute before:top-full before:left-1/2 before:transform before:-translate-x-1/2 before:border-4 before:border-transparent before:border-t-black dark:before:border-t-white">
               <p className="leading-relaxed">{explanationText}</p>
             </div>
           )}
