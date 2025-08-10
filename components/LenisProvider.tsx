@@ -59,7 +59,7 @@ export default function LenisProvider({ children }: LenisProviderProps) {
       // Handle window resize - disable on mobile if window becomes smaller
       const handleResize = () => {
         if (!isDesktop()) {
-          if (newLenis && !newLenis.isDestroyed) {
+          if (newLenis) {
             newLenis.destroy()
           }
           setLenis(null)
@@ -70,7 +70,7 @@ export default function LenisProvider({ children }: LenisProviderProps) {
 
       // Cleanup function
       return () => {
-        if (newLenis && !newLenis.isDestroyed) {
+        if (newLenis) {
           newLenis.destroy()
         }
         setLenis(null) // Clear state on unmount

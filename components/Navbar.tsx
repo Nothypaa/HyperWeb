@@ -81,6 +81,7 @@ const Navbar: React.FC = () => {
                   alt="HyperWeb - Agence Web France Logo"
                   fill
                   className="object-contain"
+                  priority
                 />
               </div>
               <span className="hidden md:inline text-black font-black text-lg tracking-tight">HyperWeb</span>

@@ -1,0 +1,22 @@
+{
+  "name": "HyperWeb - Agence Web France",
+  "short_name": "HyperWeb",
+  "description": "Des sites conçus pour vendre - Agence Web France",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/HyperWeb-logo/Hyperweb-nobg.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/Hyperweb-nobg.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

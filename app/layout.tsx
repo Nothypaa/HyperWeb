@@ -19,6 +19,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Favicon - multiple sizes for better visibility */}
+        <link rel="icon" href="/Hyperweb-nobg.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="/Hyperweb-nobg.ico" />
+        
+        {/* Apple Touch Icon - larger icon for mobile bookmarks */}
+        <link rel="apple-touch-icon" sizes="180x180" href="/HyperWeb-logo/Hyperweb-nobg.svg" />
+        
+        {/* SVG favicons for better quality at different sizes */}
+        <link rel="icon" type="image/svg+xml" href="/HyperWeb-logo/Hyperweb-nobg.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/HyperWeb-logo/Hyperweb-nobg.svg" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/HyperWeb-logo/Hyperweb-nobg.svg" />
+        
+        {/* Web App Manifest */}
+        <link rel="manifest" href="/site.webmanifest" />
+        
+        {/* Meta tags for better PWA support */}
+        <meta name="theme-color" content="#000000" />
+        <meta name="application-name" content="HyperWeb" />
         <link
           href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,800,900&display=swap"
           rel="stylesheet"
@@ -65,9 +83,9 @@ export default function RootLayout({
       <body>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-KESKV6R0ZY"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
