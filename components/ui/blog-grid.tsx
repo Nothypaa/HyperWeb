@@ -69,7 +69,7 @@ const BlogGrid: React.FC<BlogGridProps> = ({ posts }) => {
     }
   }, [])
   
-  // Default single post for demonstration
+  // Default posts for demonstration
   const defaultPosts: BlogPost[] = [
     {
       id: '1',
@@ -77,6 +77,13 @@ const BlogGrid: React.FC<BlogGridProps> = ({ posts }) => {
       date: '4 août 2025',
       category: 'LECTURE RAPIDE',
       image: '/blog.webp'
+    },
+    {
+      id: '2',
+      title: 'Combien coûte un site internet en France en 2025 ? (Guide agence web)',
+      date: '10 août 2025',
+      category: 'GUIDE TARIFS',
+      image: '/blog2.webp'
     }
   ]
 
@@ -188,6 +195,114 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, onClose }) => {
   const lenis = useLenis()
   const modalContentRef = React.useRef<HTMLDivElement>(null)
 
+  // Get blog content based on post ID
+  const getBlogContent = (postId: string) => {
+    switch (postId) {
+      case '1':
+        return {
+          introduction: "Le référencement naturel est devenu l'élément clé pour dominer les résultats de recherche en 2025. Découvrez les stratégies avancées qui permettent d'atteindre et de maintenir la première position sur Google.",
+          content: [
+            {
+              type: 'paragraph',
+              text: "Le référencement naturel (SEO) est devenu l'un des piliers essentiels du marketing digital en 2025. Avec l'évolution constante des algorithmes de Google et l'émergence de l'intelligence artificielle, les stratégies pour atteindre la première position ont considérablement évolué."
+            },
+            {
+              type: 'heading',
+              text: "Les fondamentaux du SEO en 2025"
+            },
+            {
+              type: 'paragraph',
+              text: "Google privilégie désormais l'expérience utilisateur avant tout. Les Core Web Vitals, l'optimisation mobile et la vitesse de chargement sont devenus des facteurs de classement cruciaux. Une approche holistique combinant contenu de qualité et performance technique est indispensable."
+            },
+            {
+              type: 'heading',
+              text: "Stratégies avancées pour 2025"
+            },
+            {
+              type: 'list',
+              items: [
+                "Optimisation pour la recherche vocale et l'IA générative",
+                "Création de contenu orienté E-A-T (Expertise, Authoritativeness, Trustworthiness)",
+                "Utilisation stratégique des données structurées",
+                "Optimisation pour les featured snippets et les réponses directes",
+                "Focus sur l'intent de recherche plutôt que sur les mots-clés seuls"
+              ]
+            },
+            {
+              type: 'paragraph',
+              text: "La clé du succès réside dans une approche patiente et méthodique, en gardant toujours l'utilisateur au centre de votre stratégie SEO."
+            }
+          ]
+        }
+      case '2':
+        return {
+          introduction: "En 2025, investir dans un site internet performant est un choix stratégique pour toute entreprise en France. Mais le prix d'un site internet en France dépend de nombreux facteurs : objectifs, design, fonctionnalités et ambition digitale. Chez HyperWeb, nous concevons des sites sur-mesure pensés pour convertir vos visiteurs en clients et dominer les résultats Google.",
+          content: [
+            {
+              type: 'heading',
+              text: "1. Fourchette de prix d'un site internet en France en 2025"
+            },
+            {
+              type: 'table',
+              headers: ["Type de site professionnel", "Prix moyen en France (2025)", "Délai moyen"],
+              rows: [
+                ["Site vitrine (image de marque & visibilité)", "1 000 € – 3 000 €", "2 à 4 semaines"],
+                ["Site corporate premium (image haut de gamme)", "3 000 € – 7 000 €", "4 à 8 semaines"],
+                ["Site e-commerce (vente en ligne optimisée)", "4 000 € – 12 000 €", "6 à 10 semaines"],
+                ["Projet sur-mesure (plateforme, web app)", "10 000 € – 25 000 €+", "Sur devis"]
+              ]
+            },
+            {
+              type: 'callout',
+              text: "💡 Chez HyperWeb, nous intégrons toujours une optimisation SEO native et des performances maximales dès la conception."
+            },
+            {
+              type: 'heading',
+              text: "2. Facteurs qui influencent le prix d'un site internet"
+            },
+            {
+              type: 'list',
+              items: [
+                "Design sur-mesure – Chaque interface est pensée pour votre image de marque.",
+                "Fonctionnalités avancées – Réservation en ligne, paiement sécurisé, espace client, etc.",
+                "Optimisation SEO avancée – Pour atteindre la première page de Google.",
+                "Performances techniques – Rapidité, sécurité, et compatibilité multi-supports.",
+                "Accompagnement stratégique – Analyse de marché, conseil en conversion, suivi post-lancement."
+              ]
+            },
+            {
+              type: 'heading',
+              text: "3. Pourquoi investir dans un site haut de gamme ?"
+            },
+            {
+              type: 'list',
+              items: [
+                "Attirer et convaincre : un design unique capte l'attention.",
+                "Dominer Google : chaque page est optimisée pour vos mots-clés stratégiques.",
+                "Maximiser la conversion : chaque élément est pensé pour générer des clients.",
+                "Investissement durable : un site pensé pour évoluer avec votre activité."
+              ]
+            },
+            {
+              type: 'heading',
+              text: "4. Conclusion"
+            },
+            {
+              type: 'paragraph',
+              text: "Le prix d'un site internet en France en 2025 varie généralement entre 1 000 € et 25 000 €, selon la complexité et les objectifs. Un site créé par une agence web experte comme HyperWeb n'est pas une dépense, mais un investissement rentable qui travaille pour vous 24h/24."
+            }
+          ]
+        }
+      default:
+        return {
+          introduction: "Contenu par défaut",
+          content: []
+        }
+    }
+  }
+
+  const blogContent = getBlogContent(post.id)
+
   // Prevent background scroll and disable Lenis when modal is open
   React.useEffect(() => {
     // Disable Lenis smooth scrolling to prevent it from capturing wheel events
@@ -296,41 +411,70 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, onClose }) => {
           {/* Article Content */}
           <div className="max-w-none">
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-8 font-normal">
-              Le référencement naturel est devenu l'élément clé pour dominer les résultats de recherche en 2025. Découvrez les stratégies avancées qui permettent d'atteindre et de maintenir la première position sur Google.
+              {blogContent.introduction}
             </p>
             
-            <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-              Le référencement naturel (SEO) est devenu l'un des piliers essentiels du marketing digital en 2025. 
-              Avec l'évolution constante des algorithmes de Google et l'émergence de l'intelligence artificielle, 
-              les stratégies pour atteindre la première position ont considérablement évolué.
-            </p>
-            
-            <h2 className="text-2xl font-bold text-black dark:text-white mb-6 mt-10">
-              Les fondamentaux du SEO en 2025
-            </h2>
-            
-            <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-              Google privilégie désormais l'expérience utilisateur avant tout. Les Core Web Vitals, 
-              l'optimisation mobile et la vitesse de chargement sont devenus des facteurs de classement cruciaux. 
-              Une approche holistique combinant contenu de qualité et performance technique est indispensable.
-            </p>
-
-            <h2 className="text-2xl font-bold text-black dark:text-white mb-6 mt-10">
-              Stratégies avancées pour 2025
-            </h2>
-            
-            <ul className="list-disc pl-6 text-base text-gray-600 dark:text-gray-400 leading-relaxed mb-6 space-y-2">
-              <li>Optimisation pour la recherche vocale et l'IA générative</li>
-              <li>Création de contenu orienté E-A-T (Expertise, Authoritativeness, Trustworthiness)</li>
-              <li>Utilisation stratégique des données structurées</li>
-              <li>Optimisation pour les featured snippets et les réponses directes</li>
-              <li>Focus sur l'intent de recherche plutôt que sur les mots-clés seuls</li>
-            </ul>
-
-            <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
-              La clé du succès réside dans une approche patiente et méthodique, 
-              en gardant toujours l'utilisateur au centre de votre stratégie SEO.
-            </p>
+            {blogContent.content.map((item, index) => {
+              switch (item.type) {
+                case 'paragraph':
+                  return (
+                    <p key={index} className="text-base text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
+                      {item.text}
+                    </p>
+                  )
+                case 'heading':
+                  return (
+                    <h2 key={index} className="text-2xl font-bold text-black dark:text-white mb-6 mt-10">
+                      {item.text}
+                    </h2>
+                  )
+                case 'list':
+                  return (
+                    <ul key={index} className="list-disc pl-6 text-base text-gray-600 dark:text-gray-400 leading-relaxed mb-6 space-y-2">
+                      {item.items.map((listItem, listIndex) => (
+                        <li key={listIndex}>{listItem}</li>
+                      ))}
+                    </ul>
+                  )
+                case 'table':
+                  return (
+                    <div key={index} className="overflow-x-auto mb-8">
+                      <table className="w-full border-collapse border border-gray-200 dark:border-gray-700 rounded-lg">
+                        <thead>
+                          <tr className="bg-gray-50 dark:bg-gray-800">
+                            {item.headers.map((header, headerIndex) => (
+                              <th key={headerIndex} className="border border-gray-200 dark:border-gray-700 px-4 py-3 text-left font-semibold text-gray-900 dark:text-gray-100">
+                                {header}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {item.rows.map((row, rowIndex) => (
+                            <tr key={rowIndex} className="even:bg-gray-50 dark:even:bg-gray-800">
+                              {row.map((cell, cellIndex) => (
+                                <td key={cellIndex} className="border border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-700 dark:text-gray-300">
+                                  {cell}
+                                </td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )
+                case 'callout':
+                  return (
+                    <div key={index} className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 mb-8">
+                      <p className="text-blue-800 dark:text-blue-200 font-medium whitespace-pre-line">
+                        {item.text}
+                      </p>
+                    </div>
+                  )
+                default:
+                  return null
+              }
+            })}
           </div>
         </div>
       </div>

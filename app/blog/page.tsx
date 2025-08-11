@@ -12,7 +12,7 @@ export default function BlogPage() {
         </div>
         
         <div className="flex justify-center mb-32">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-black tracking-tighter text-black dark:text-white">
+          <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-black tracking-tighter text-black dark:text-white">
             BLOG
           </h1>
         </div>

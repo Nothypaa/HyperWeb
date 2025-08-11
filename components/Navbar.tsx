@@ -10,6 +10,7 @@ import { useAnchorNavigation } from '@/hooks/useAnchorNavigation';
 const Navbar: React.FC = () => {
   const [showButton, setShowButton] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const pathname = usePathname();
   const isBlogPage = pathname === '/blog';
   const isFaqPage = pathname === '/faq';
@@ -37,6 +38,17 @@ const Navbar: React.FC = () => {
     setIsMobileMenuOpen(false); // Close mobile menu after navigation
   };
 
+  const handleContactClick = () => {
+    if (pathname === '/') {
+      // Same page navigation
+      navigateToAnchor('#contact');
+    } else {
+      // Cross-page navigation
+      navigateToAnchor('#contact', '/');
+    }
+    setIsMobileMenuOpen(false); // Close mobile menu after navigation
+  };
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -46,10 +58,15 @@ const Navbar: React.FC = () => {
   };
 
   useEffect(() => {
+    // Initial animation for navbar appearance
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 100);
+
     if (isBlogPage || isFaqPage) {
       // Always show button on blog and FAQ pages, but allow initial animation
-      setTimeout(() => setShowButton(true), 100);
-      return;
+      setTimeout(() => setShowButton(true), 600);
+      return () => clearTimeout(timer);
     }
 
     // Original scroll behavior for other pages
@@ -62,15 +79,20 @@ const Navbar: React.FC = () => {
     // Check initial scroll position
     handleScroll();
     
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timer);
+    };
   }, [isBlogPage, isFaqPage]);
 
   return (
     <>
-      <nav className="sticky top-0 z-50 flex justify-center p-6">
-        <div className={`w-full max-w-xl bg-gray-100/95 backdrop-blur px-8 rounded-[28px] md:rounded-full ${
-          isMobileMenuOpen ? 'py-3' : 'py-0'
-        } transition-[padding] duration-500 ease-in-out`}>
+      <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center p-3 md:p-6">
+        <div className={`w-full max-w-xl bg-gray-100/95 backdrop-blur px-8 py-0 rounded-[28px] md:rounded-full transition-all duration-800 ease-out ${
+          isVisible 
+            ? 'opacity-100 translate-y-0' 
+            : 'opacity-0 -translate-y-8'
+        }`}>
           {/* Top row with logo and hamburger/desktop nav */}
           <div className="flex items-center justify-between h-12 md:h-14">
             {/* Logo and Brand */}
@@ -99,12 +121,12 @@ const Navbar: React.FC = () => {
                 >
                   Tarifs
                 </button>
-                <Link
-                  href="/login"
+                <button
+                  onClick={handleContactClick}
                   className="text-black font-bold text-sm hover:text-gray-700 transition-colors"
                 >
-                  Connexion
-                </Link>
+                  Contact
+                </button>
               </div>
               
               {/* Sites réalisés button - fades in from below */}
@@ -145,49 +167,66 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Mobile Menu - Expanding content inside navbar container */}
-          <div className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${
+          <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
             isMobileMenuOpen 
               ? 'max-h-96 opacity-100' 
               : 'max-h-0 opacity-0'
           }`}>
             {/* Mobile Navigation Links */}
-            <div className="pt-4 pb-2 space-y-4">
-              <div className="text-center">
+            <div className="pt-6 pb-4 space-y-0">
+              <div className="text-left">
                 <button
                   onClick={handlePricingClick}
-                  className="block w-full text-black font-bold text-lg py-3 hover:text-gray-700 transition-colors"
+                  className="block w-full text-black font-extrabold text-xl py-2 text-left hover:text-gray-700 transition-colors"
                 >
                   Tarifs
                 </button>
               </div>
               
-              <div className="text-center">
+              <div className="text-left">
+                <button
+                  onClick={handleContactClick}
+                  className="block w-full text-black font-extrabold text-xl py-2 text-left hover:text-gray-700 transition-colors"
+                >
+                  Contact
+                </button>
+              </div>
+              
+              <div className="text-left">
                 <Link
-                  href="/login"
-                  className="block w-full text-black font-bold text-lg py-3 hover:text-gray-700 transition-colors"
+                  href="/blog"
+                  className="block w-full text-black font-extrabold text-xl py-2 text-left hover:text-gray-700 transition-colors"
                   onClick={closeMobileMenu}
                 >
-                  Connexion
+                  Blog
                 </Link>
               </div>
 
-              {showButton && (
-                <div className="text-center pt-2">
-                  <button 
-                    onClick={handlePortfolioClick}
-                    className="bg-black text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-gray-800 transition-colors w-full max-w-xs"
-                  >
-                    Sites réalisés
-                  </button>
-                </div>
-              )}
+              {/* Theme Toggle for Mobile */}
+              <div className="flex justify-center py-4 border-t border-gray-200 mt-4">
+                <ThemeToggle />
+              </div>
+
+              {/* Always show on mobile, conditional on desktop */}
+              <div className="text-center pt-2">
+                <button 
+                  onClick={handlePortfolioClick}
+                  className="bg-black text-white px-8 py-2 rounded-full font-semibold text-lg hover:bg-gray-800 transition-colors w-full"
+                >
+                  Sites réalisés
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </nav>
       
       {/* Theme Toggle - Hidden on mobile, visible on desktop */}
-      <div className="hidden md:block fixed top-6 right-6 z-50">
+      <div className={`hidden md:block fixed top-6 right-6 z-50 transition-all duration-800 ease-out delay-200 ${
+        isVisible 
+          ? 'opacity-100 translate-x-0' 
+          : 'opacity-0 translate-x-8'
+      }`}>
         <ThemeToggle />
       </div>
     </>

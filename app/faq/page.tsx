@@ -11,10 +11,10 @@ export default function FAQPage() {
         </div>
         
         <div className="flex flex-col items-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-black tracking-tighter text-black dark:text-white">
+          <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-black tracking-tighter text-black dark:text-white">
             FAQ
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400 mt-4">
+          <p className="text-lg text-gray-600 dark:text-gray-400 mt-4 text-center">
             Toutes les réponses sur la création de sites web modernes
           </p>
         </div>

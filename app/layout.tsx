@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <head>
         {/* Favicon - multiple sizes for better visibility */}
         <link rel="icon" href="/Hyperweb-nobg.ico" type="image/x-icon" />

@@ -46,7 +46,7 @@ export const Contact2 = ({
               </h1>
               <p className="text-muted-foreground">{description}</p>
             </div>
-            <div className="mx-auto w-fit lg:mx-0 hidden lg:block">
+            <div className="mx-auto w-fit lg:mx-0 hidden lg:block lg:-mt-4">
               <h3 className="mb-6 text-center text-2xl font-semibold lg:text-left">
                 Coordonnées
               </h3>
@@ -131,7 +131,7 @@ export const Contact2 = ({
                 className="min-h-[150px] md:min-h-[200px] text-base p-3 md:p-4"
               />
             </div>
-            <Button className="w-full h-12 md:h-14 text-base font-semibold">Envoyer le message</Button>
+            <Button className="w-full h-12 md:h-14 text-base font-bold bg-black text-white dark:bg-white dark:text-black rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors">Envoyer le message</Button>
           </div>
           <div className="mx-auto w-fit lg:mx-0 lg:hidden">
             <h3 className="mb-6 text-center text-2xl font-semibold lg:text-left">

@@ -15,14 +15,6 @@ function Footer() {
               <h2 className="text-lg font-bold">HyperWeb</h2>
             </Link>
 
-            <div className="mt-2">
-            <Link  href="https://x.com/compose/tweet?text=I%27ve%20been%20using%20%23SpectrumUI%20 share%20yourtought%20%40arihantCodes%20">
-              <Button variant='secondary'>
-                Share Your Thoughts On
-                <Icons.twitter className="icon-class ml-1 w-3.5 " />
-              </Button>
-            </Link>
-            </div>
             <p className="text-sm dark:text-gray-400 mt-5">
               © {new Date().getFullYear()} HyperWeb. Tous droits réservés.
             </p>
@@ -37,21 +29,6 @@ function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/docs" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white">
-                    Components
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/examples" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white">
-                    Examples
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/pricing" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white">
-                    Pricing
-                  </Link>
-                </li>
-                <li>
                   <Link href="/blog" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white">
                     Blog
                   </Link>
@@ -59,39 +36,38 @@ function Footer() {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-4">Socials</h3>
+              <h3 className="font-semibold mb-4">Réseaux Sociaux</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="https://github.com/arihantcodes/spectrum-ui" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white">
-                    Github
+                  <Link href="https://www.instagram.com/agencehyperweb/?utm_source=ig_web_button_share_sheet" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white">
+                    Instagram
                   </Link>
                 </li>
                 <li>
-                  <Link href="https://www.linkedin.com/in/arihantcodes" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white">
+                  <Link href="https://www.linkedin.com/company/agencehyperweb" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white">
                     LinkedIn
                   </Link>
                 </li>
                 <li>
-                  <Link href="https://x.com/arihantcodes" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white">
+                  <Link href="https://x.com/agencehyperweb" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white">
                     X
                   </Link>
                 </li>
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-4">Legal</h3>
+              <h3 className="font-semibold mb-4">Légal</h3>
               <ul className="space-y-2">
                 <li>
                   <Link href="/privacy-policy" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white">
-                    Privacy Policy
+                    Politique de Confidentialité
                   </Link>
                 </li>
                 <li>
                   <Link href="/tos" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white">
-                    Terms of Service
+                    Conditions d'Utilisation
                   </Link>
                 </li>
-              
               </ul>
             </div>
           </div>

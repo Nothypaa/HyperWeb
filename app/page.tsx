@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <main className="min-h-screen">
         {/* Hero Section */}
-        <section className="flex min-h-screen flex-col items-center justify-center pt-10 pb-28 md:pb-32 px-6 md:px-32">
+        <section className="flex min-h-screen flex-col items-center justify-center pt-6 md:pt-10 pb-12 md:pb-8 px-6 md:px-32">
         <div className="text-center max-w-5xl mx-auto">
           <AnimatedHeading 
             text="Des sites conçus<br/>pour vendre."
@@ -28,7 +28,7 @@ export default function Home() {
           />
           
           <FadeUp delay={800} duration={800} distance={30}>
-            <h2 className="text-center opacity-75 text-xl mb-8 md:mb-10 font-medium leading-relaxed text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
+            <h2 className="text-center opacity-75 text-lg md:text-xl mb-8 md:mb-10 font-medium leading-relaxed text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
               Garantie Satisfait ou Remboursé à 100%.<br />Pas de Résultats ? Vous Gardez le Site ET Récupérez Votre Argent.
             </h2>
           </FadeUp>
@@ -70,7 +70,7 @@ export default function Home() {
               onClick={() => navigateToAnchor('#contact')}
               className="bg-white text-black px-5 py-2.5 rounded-full font-bold text-base hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 border border-gray-200 shadow-sm"
             >
-              Nous contacter
+              Devis gratuit
               <div className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center">
                 <svg 
                   width="13" 
@@ -92,14 +92,16 @@ export default function Home() {
         </section>
 
         {/* Portfolio Grid Section */}
-        <section id="portfolio" className="py-16 md:py-24">
+        <section id="portfolio" className="pt-0 pb-4 md:pt-0 md:pb-12">
           <FadeUp delay={200} duration={1000} distance={40}>
             <MockupGrid />
           </FadeUp>
         </section>
 
-      {/* Testimonials Section */}
-      <Testimonials />
+      {/* Testimonials Section - Hidden */}
+      <div className="hidden">
+        <Testimonials />
+      </div>
 
       {/* Pricing Section */}
       <section id="pricing">
@@ -152,9 +154,6 @@ export default function Home() {
                 "Système d'authentification",
                 "Base de données personnalisée",
                 "Architecture scalable",
-                "Support premium étendu",
-                "Formations équipe incluses",
-                "Devis personnalisé selon vos besoins",
               ],
               description: "Prix adapté selon la complexité et vos besoins spécifiques",
               buttonText: "Demander un devis gratuit",
