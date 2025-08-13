@@ -55,6 +55,40 @@ interface BlogGridProps {
   posts?: BlogPost[]
 }
 
+// Content type definitions
+interface ParagraphItem {
+  type: 'paragraph'
+  text: string
+}
+
+interface HeadingItem {
+  type: 'heading'
+  text: string
+}
+
+interface ListItem {
+  type: 'list'
+  items: string[]
+}
+
+interface TableItem {
+  type: 'table'
+  headers: string[]
+  rows: string[][]
+}
+
+interface CalloutItem {
+  type: 'callout'
+  text: string
+}
+
+type ContentItem = ParagraphItem | HeadingItem | ListItem | TableItem | CalloutItem
+
+interface BlogContent {
+  introduction: string
+  content: ContentItem[]
+}
+
 const BlogGrid: React.FC<BlogGridProps> = ({ posts }) => {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null)
   
@@ -196,7 +230,7 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, onClose }) => {
   const modalContentRef = React.useRef<HTMLDivElement>(null)
 
   // Get blog content based on post ID
-  const getBlogContent = (postId: string) => {
+  const getBlogContent = (postId: string): BlogContent => {
     switch (postId) {
       case '1':
         return {
@@ -419,19 +453,19 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, onClose }) => {
                 case 'paragraph':
                   return (
                     <p key={index} className="text-base text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-                      {item.text}
+                      {(item as ParagraphItem).text}
                     </p>
                   )
                 case 'heading':
                   return (
                     <h2 key={index} className="text-2xl font-bold text-black dark:text-white mb-6 mt-10">
-                      {item.text}
+                      {(item as HeadingItem).text}
                     </h2>
                   )
                 case 'list':
                   return (
                     <ul key={index} className="list-disc pl-6 text-base text-gray-600 dark:text-gray-400 leading-relaxed mb-6 space-y-2">
-                      {item.items.map((listItem, listIndex) => (
+                      {(item as ListItem).items.map((listItem, listIndex) => (
                         <li key={listIndex}>{listItem}</li>
                       ))}
                     </ul>
@@ -442,7 +476,7 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, onClose }) => {
                       <table className="w-full border-collapse border border-gray-200 dark:border-gray-700 rounded-lg">
                         <thead>
                           <tr className="bg-gray-50 dark:bg-gray-800">
-                            {item.headers.map((header, headerIndex) => (
+                            {(item as TableItem).headers.map((header, headerIndex) => (
                               <th key={headerIndex} className="border border-gray-200 dark:border-gray-700 px-4 py-3 text-left font-semibold text-gray-900 dark:text-gray-100">
                                 {header}
                               </th>
@@ -450,7 +484,7 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, onClose }) => {
                           </tr>
                         </thead>
                         <tbody>
-                          {item.rows.map((row, rowIndex) => (
+                          {(item as TableItem).rows.map((row, rowIndex) => (
                             <tr key={rowIndex} className="even:bg-gray-50 dark:even:bg-gray-800">
                               {row.map((cell, cellIndex) => (
                                 <td key={cellIndex} className="border border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-700 dark:text-gray-300">
@@ -467,7 +501,7 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, onClose }) => {
                   return (
                     <div key={index} className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 mb-8">
                       <p className="text-blue-800 dark:text-blue-200 font-medium whitespace-pre-line">
-                        {item.text}
+                        {(item as CalloutItem).text}
                       </p>
                     </div>
                   )
