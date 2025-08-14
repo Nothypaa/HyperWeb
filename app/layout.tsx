@@ -6,10 +6,18 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import ConditionalAurora from '../components/ConditionalAurora'
 import LenisProvider from '../components/LenisProvider'
+import LocalBusinessSchema from '../components/LocalBusinessSchema'
 
 export const metadata: Metadata = {
-  title: 'HyperWeb',
-  description: 'A modern web application',
+  title: 'HyperWeb - Agence Web France | Création Site Internet dès 450€',
+  description: 'Agence web française spécialisée en création de sites internet professionnels. Développement React/Next.js. Tarifs transparents dès 450€. Garantie satisfait ou remboursé.',
+  keywords: 'agence web france, création site internet, développement web professionnel, site web sur mesure',
+  openGraph: {
+    title: 'HyperWeb - Agence Web France | Sites Internet Professionnels',
+    description: 'Création de sites internet professionnels dès 450€. Garantie satisfait ou remboursé.',
+    type: 'website',
+    locale: 'fr_FR',
+  }
 }
 
 export default function RootLayout({
@@ -80,6 +88,7 @@ export default function RootLayout({
           data-key="/4HvJHnAj1QZ2Gvt8iHz/Q" 
           async
         ></script>
+        <LocalBusinessSchema />
       </head>
       <body>
         <Script
