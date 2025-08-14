@@ -121,20 +121,33 @@ const BlogGrid: React.FC<BlogGridProps> = ({ posts }) => {
     }
   ]
 
+  // SEO-optimized alt text for blog images
+  const getOptimizedAltText = (post: BlogPost): string => {
+    switch (post.id) {
+      case '1':
+        return 'Stratégies SEO Google 2025 - agence web France création site internet optimisé référencement'
+      case '2':
+        return 'Prix création site internet France 2025 - développement web professionnel tarifs agence web'
+      default:
+        return post.title
+    }
+  }
+
   const displayPosts = posts || defaultPosts
 
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {displayPosts.map((post) => (
-          <BlogCard key={post.id} post={post} onReadMore={() => setSelectedPost(post)} />
+          <BlogCard key={post.id} post={post} onReadMore={() => setSelectedPost(post)} getOptimizedAltText={getOptimizedAltText} />
         ))}
       </div>
       
       {selectedPost && (
         <BlogModal 
           post={selectedPost} 
-          onClose={() => setSelectedPost(null)} 
+          onClose={() => setSelectedPost(null)}
+          getOptimizedAltText={getOptimizedAltText}
         />
       )}
     </>
@@ -144,9 +157,10 @@ const BlogGrid: React.FC<BlogGridProps> = ({ posts }) => {
 interface BlogCardProps {
   post: BlogPost
   onReadMore: () => void
+  getOptimizedAltText: (post: BlogPost) => string
 }
 
-const BlogCard: React.FC<BlogCardProps> = ({ post, onReadMore }) => {
+const BlogCard: React.FC<BlogCardProps> = ({ post, onReadMore, getOptimizedAltText }) => {
   return (
     <div className="bg-white dark:bg-black rounded-3xl shadow-sm hover:shadow-md transition-all duration-300 relative group w-full border border-gray-50 dark:border-gray-800 overflow-hidden">
       {/* Image Area - Edge to edge */}
@@ -154,7 +168,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, onReadMore }) => {
         <div className="w-full aspect-[16/10] overflow-hidden">
           <img 
             src={post.image} 
-            alt={post.title}
+            alt={getOptimizedAltText(post)}
             className="w-full h-full object-cover"
           />
         </div>
@@ -223,9 +237,10 @@ const PlusIcon: React.FC<{ className?: string }> = ({ className }) => (
 interface BlogModalProps {
   post: BlogPost
   onClose: () => void
+  getOptimizedAltText: (post: BlogPost) => string
 }
 
-const BlogModal: React.FC<BlogModalProps> = ({ post, onClose }) => {
+const BlogModal: React.FC<BlogModalProps> = ({ post, onClose, getOptimizedAltText }) => {
   const lenis = useLenis()
   const modalContentRef = React.useRef<HTMLDivElement>(null)
 
@@ -436,7 +451,7 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, onClose }) => {
             <div className="w-full aspect-[16/9] rounded-3xl mb-12 overflow-hidden">
               <img 
                 src={post.image} 
-                alt={post.title}
+                alt={getOptimizedAltText(post)}
                 className="w-full h-full object-cover"
               />
             </div>

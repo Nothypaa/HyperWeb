@@ -100,7 +100,7 @@ const Navbar: React.FC = () => {
               <div className="w-14 h-14 md:w-14 md:h-14 relative">
                 <Image
                   src="/HyperWeb-logo/Hyperweb-nobg.svg"
-                  alt="HyperWeb - Agence Web France Logo"
+                  alt="HyperWeb logo - agence web France spécialisée création site internet et développement web professionnel"
                   fill
                   className="object-contain"
                   priority

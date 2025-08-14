@@ -7,7 +7,7 @@ const portfolioItems = [
   {
     id: 1,
     image: "/projet-client/examplesiteweb1.webp",
-    alt: "Site web vidéosurveillance créé à Montpellier",
+    alt: "Création site internet vidéosurveillance professionnel Montpellier - HyperWeb agence web France",
     bgClass: "bg-gradient-to-br from-zinc-900/95 via-red-950/90 to-zinc-900/95",
     name: "Site Vidéosurveillance",
     description: "Installation vidéosurveillance"
@@ -15,7 +15,7 @@ const portfolioItems = [
   {
     id: 2,
     image: "/projet-client/examplesiteweb2.webp",
-    alt: "Site web tatouage créé à Castelnau-le-Lez",
+    alt: "Site web sur mesure salon tatouage Castelnau-le-Lez - développement web professionnel HyperWeb",
     bgClass: "bg-gradient-to-br from-orange-600/95 via-amber-500/90 to-orange-600/95",
     name: "Site Tatouage",
     description: "Studio de tatouage"
