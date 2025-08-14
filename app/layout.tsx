@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import './globals.css'
 import Navbar from '../components/Navbar'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import ConditionalAurora from '../components/ConditionalAurora'
 import LenisProvider from '../components/LenisProvider'
@@ -98,6 +99,7 @@ export default function RootLayout({
             {children}
           </ConditionalAurora>
         </LenisProvider>
+        <SpeedInsights />
       </body>
     </html>
   )
