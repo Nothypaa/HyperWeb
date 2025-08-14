@@ -6,7 +6,7 @@ import Image from 'next/image'
 const portfolioItems = [
   {
     id: 1,
-    image: "/projet-client/examplesiteweb1.webp",
+    image: "/projet-client/site-videosurveillance-montpellier-agence-web-france.webp",
     alt: "Création site internet vidéosurveillance professionnel Montpellier - HyperWeb agence web France",
     bgClass: "bg-gradient-to-br from-zinc-900/95 via-red-950/90 to-zinc-900/95",
     name: "Site Vidéosurveillance",
@@ -14,7 +14,7 @@ const portfolioItems = [
   },
   {
     id: 2,
-    image: "/projet-client/examplesiteweb2.webp",
+    image: "/projet-client/creation-site-tatouage-castelnau-le-lez-developpement-web.webp",
     alt: "Site web sur mesure salon tatouage Castelnau-le-Lez - développement web professionnel HyperWeb",
     bgClass: "bg-gradient-to-br from-orange-600/95 via-amber-500/90 to-orange-600/95",
     name: "Site Tatouage",
@@ -37,8 +37,47 @@ const MockupGrid: React.FC = () => {
 
   const currentItem = portfolioItems[currentIndex]
 
+  // Generate CreativeWork schema for portfolio items
+  const portfolioSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Portfolio HyperWeb - Réalisations Sites Web",
+    "description": "Portfolio des sites internet créés par HyperWeb, agence web française",
+    "itemListElement": portfolioItems.map((item, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "CreativeWork",
+        "name": item.name === "Site Vidéosurveillance" 
+          ? "Site Web Vidéosurveillance Professionnel Montpellier"
+          : "Site Web Salon Tatouage Professionnel Castelnau-le-Lez",
+        "description": item.name === "Site Vidéosurveillance"
+          ? "Site web professionnel pour entreprise de vidéosurveillance à Montpellier, développé par HyperWeb agence web France"
+          : "Site web sur mesure pour salon de tatouage à Castelnau-le-Lez, création HyperWeb agence web professionnelle",
+        "creator": {
+          "@type": "Organization",
+          "name": "HyperWeb",
+          "url": "https://agencehyperweb.com"
+        },
+        "image": `https://agencehyperweb.com${item.image}`,
+        "dateCreated": "2025",
+        "genre": "Site Web Professionnel",
+        "keywords": item.name === "Site Vidéosurveillance"
+          ? "site web vidéosurveillance, création site internet Montpellier, agence web France"
+          : "site web tatouage, création site internet Castelnau-le-Lez, développement web professionnel"
+      }
+    }))
+  }
+
   return (
-    <div className="w-full max-w-[120rem] mx-auto p-4 md:p-8">
+    <>
+      {/* Portfolio Schema Markup for Rich Snippets */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(portfolioSchema) }}
+      />
+      
+      <div className="w-full max-w-[120rem] mx-auto p-4 md:p-8">
       {/* Mobile/Tablet layout (base to md) - simplified single container */}
       <div className="lg:hidden relative">
         <div className="w-full aspect-[16/10] max-w-6xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-white/5 dark:bg-black/5">
@@ -104,7 +143,8 @@ const MockupGrid: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   )
 }
 

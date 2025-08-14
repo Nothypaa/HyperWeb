@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import Image from 'next/image'
 import { useLenis } from '../LenisProvider'
 
 // Custom scrollbar styles
@@ -110,14 +111,14 @@ const BlogGrid: React.FC<BlogGridProps> = ({ posts }) => {
       title: 'Comment être #1 sur Google en 2025',
       date: '4 août 2025',
       category: 'LECTURE RAPIDE',
-      image: '/blog.webp'
+      image: '/seo-google-2025-strategies-referencement-naturel-france.webp'
     },
     {
       id: '2',
       title: 'Combien coûte un site internet en France en 2025 ? (Guide agence web)',
       date: '10 août 2025',
       category: 'GUIDE TARIFS',
-      image: '/blog2.webp'
+      image: '/prix-cout-site-internet-france-2025-tarifs-agence-web.webp'
     }
   ]
 
@@ -135,8 +136,58 @@ const BlogGrid: React.FC<BlogGridProps> = ({ posts }) => {
 
   const displayPosts = posts || defaultPosts
 
+  // Generate BlogPosting schema for SEO
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Blog HyperWeb - Articles Développement Web",
+    "description": "Articles de blog sur la création de sites internet, le SEO et le développement web par HyperWeb agence web France",
+    "itemListElement": displayPosts.map((post, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "BlogPosting",
+        "headline": post.title,
+        "author": {
+          "@type": "Organization",
+          "name": "HyperWeb",
+          "url": "https://agencehyperweb.com"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "HyperWeb",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://agencehyperweb.com/HyperWeb-logo/Hyperweb-nobg.svg"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": `https://agencehyperweb.com${post.image}`,
+          "caption": getOptimizedAltText(post)
+        },
+        "datePublished": post.id === '1' ? "2025-08-04" : "2025-08-10",
+        "dateModified": post.id === '1' ? "2025-08-04" : "2025-08-10",
+        "description": post.id === '1' 
+          ? "Stratégies avancées pour atteindre et maintenir la première position sur Google en 2025"
+          : "Guide complet des tarifs pour la création d'un site internet professionnel en France en 2025",
+        "keywords": post.id === '1'
+          ? "SEO, référencement Google, agence web France, optimisation site internet"
+          : "prix site internet, tarif création site web, agence web France, coût développement web",
+        "articleSection": post.category,
+        "wordCount": post.id === '1' ? 800 : 1200
+      }
+    }))
+  }
+
   return (
     <>
+      {/* Blog Schema Markup for Rich Snippets */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
+      
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {displayPosts.map((post) => (
           <BlogCard key={post.id} post={post} onReadMore={() => setSelectedPost(post)} getOptimizedAltText={getOptimizedAltText} />
@@ -166,10 +217,14 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, onReadMore, getOptimizedAltTe
       {/* Image Area - Edge to edge */}
       {post.image && (
         <div className="w-full aspect-[16/10] overflow-hidden">
-          <img 
+          <Image 
             src={post.image} 
             alt={getOptimizedAltText(post)}
+            width={800}
+            height={500}
             className="w-full h-full object-cover"
+            quality={90}
+            priority={false}
           />
         </div>
       )}
@@ -449,10 +504,14 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, onClose, getOptimizedAltTex
           {/* Hero Image */}
           {post.image && (
             <div className="w-full aspect-[16/9] rounded-3xl mb-12 overflow-hidden">
-              <img 
+              <Image 
                 src={post.image} 
                 alt={getOptimizedAltText(post)}
+                width={800}
+                height={450}
                 className="w-full h-full object-cover"
+                quality={90}
+                priority={true}
               />
             </div>
           )}
