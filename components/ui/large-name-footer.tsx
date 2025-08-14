@@ -49,6 +49,11 @@ function Footer() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="https://share.google/N6Yc8AanPtFa7BZhG" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white" target="_blank" rel="noopener noreferrer">
+                    Avis Google
+                  </Link>
+                </li>
+                <li>
                   <Link href="https://x.com/agencehyperweb" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white">
                     X
                   </Link>

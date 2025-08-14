@@ -26,6 +26,14 @@ function SimpleFooter() {
             >
               Blog
             </Link>
+            <Link 
+              href="https://share.google/N6Yc8AanPtFa7BZhG" 
+              className="text-sm text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white transition-colors"
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              Avis Google
+            </Link>
           </nav>
           
           {/* Copyright */}
