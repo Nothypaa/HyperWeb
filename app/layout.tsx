@@ -98,8 +98,8 @@ export default function RootLayout({
           <ConditionalAurora>
             {children}
           </ConditionalAurora>
+          {process.env.NODE_ENV === 'production' && <SpeedInsights />}
         </LenisProvider>
-        <SpeedInsights />
       </body>
     </html>
   )
