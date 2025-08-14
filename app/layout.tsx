@@ -38,9 +38,6 @@ export default function RootLayout({
         {/* Meta tags for better PWA support */}
         <meta name="theme-color" content="#000000" />
         <meta name="application-name" content="HyperWeb" />
-        
-        {/* Bing Webmaster Tools verification */}
-        <meta name="msvalidate.01" content="BB8B5ED661A19DEDECF126A18904E5EA" />
         <link
           href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,800,900&display=swap"
           rel="stylesheet"
