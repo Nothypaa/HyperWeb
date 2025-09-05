@@ -26,7 +26,9 @@ export default function Home() {
         <div className="text-center max-w-5xl mx-auto">
           <AnimatedHeading 
             text="La seule agence web Montpellier<br/>qui vous rembourse si votre site<br/>ne génère aucun résultat"
+            mobileText="La seule agence web<br/>Montpellier qui<br/>vous rembourse si<br/>votre site ne génère<br/>aucun résultat"
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tighter text-gray-900 dark:text-white mb-6 md:mb-8 leading-tight uppercase"
+            mobileClassName="text-4xl sm:text-5xl font-black tracking-tighter text-gray-900 dark:text-white mb-6 leading-tight uppercase"
             delay={50}
             staggerDelay={15}
           />
