@@ -12,6 +12,11 @@ export const metadata: Metadata = {
   title: 'HyperWeb - Agence Web France | Création Site Internet dès 450€',
   description: 'Agence web française spécialisée en création de sites internet professionnels. Développement React/Next.js. Tarifs transparents dès 450€. Garantie satisfait ou remboursé.',
   keywords: 'agence web france, création site internet, développement web professionnel, site web sur mesure',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+  },
   openGraph: {
     title: 'HyperWeb - Agence Web France | Sites Internet Professionnels',
     description: 'Création de sites internet professionnels dès 450€. Garantie satisfait ou remboursé.',

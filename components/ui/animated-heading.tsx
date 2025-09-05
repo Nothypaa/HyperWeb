@@ -44,7 +44,7 @@ export const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
       {lines.map((line, lineIndex) => (
         <React.Fragment key={lineIndex}>
           {lineIndex > 0 && <br />}
-          <span className="inline-block">
+          <span className="inline-block whitespace-normal md:whitespace-nowrap">
             {line.split('').map((char, charIndex) => {
               const currentIndex = letterIndex++
               return (

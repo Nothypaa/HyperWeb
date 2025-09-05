@@ -88,7 +88,7 @@ const Navbar: React.FC = () => {
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center p-3 md:p-6">
-        <div className={`w-full max-w-xl bg-gray-100/95 backdrop-blur px-8 py-0 rounded-[28px] md:rounded-full transition-all duration-800 ease-out ${
+        <div className={`w-full max-w-sm md:max-w-xl bg-gray-100/95 backdrop-blur px-8 py-0 rounded-[28px] md:rounded-full transition-all duration-800 ease-out ${
           isVisible 
             ? 'opacity-100 translate-y-0' 
             : 'opacity-0 -translate-y-8'

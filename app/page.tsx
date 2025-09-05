@@ -3,6 +3,8 @@
 import Link from 'next/link'
 import { AnimatedHeading } from '@/components/ui/animated-heading'
 import { FadeUp } from '@/components/ui/fade-up'
+import { HelpCircle } from 'lucide-react'
+import { useState } from 'react'
 import MockupGrid from '@/components/MockupGrid'
 import { Pricing } from '@/components/ui/pricing'
 import { FAQ } from '@/components/ui/faq'
@@ -14,23 +16,42 @@ import { useAnchorNavigation } from '@/hooks/useAnchorNavigation'
 
 export default function Home() {
   const { navigateToAnchor } = useAnchorNavigation()
+  const [showTooltip, setShowTooltip] = useState(false)
+  const [showMobileExpansion, setShowMobileExpansion] = useState(false)
 
   return (
     <main className="min-h-screen">
         {/* Hero Section */}
-        <section className="flex min-h-screen flex-col items-center justify-center pt-6 md:pt-10 pb-12 md:pb-8 px-6 md:px-32">
+        <section className="flex min-h-screen flex-col items-center justify-center pt-8 md:pt-10 pb-16 md:pb-8 px-4 sm:px-6 md:px-32">
         <div className="text-center max-w-5xl mx-auto">
           <AnimatedHeading 
-            text="Des sites conçus<br/>pour vendre."
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-6xl xl:text-7xl font-black tracking-tighter text-gray-900 dark:text-white mb-6 md:mb-8 leading-tight"
-            delay={100}
-            staggerDelay={35}
+            text="La seule agence web Montpellier<br/>qui vous rembourse si votre site<br/>ne génère aucun résultat"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tighter text-gray-900 dark:text-white mb-6 md:mb-8 leading-tight uppercase"
+            delay={50}
+            staggerDelay={15}
           />
           
           <FadeUp delay={800} duration={800} distance={30}>
-            <h2 className="text-center opacity-75 text-lg md:text-xl mb-8 md:mb-10 font-medium leading-relaxed text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
-              Garantie Satisfait ou Remboursé à 100%.<br />Pas de Résultats ? Vous Gardez le Site ET Récupérez Votre Argent.
-            </h2>
+            <div className="text-center max-w-3xl mx-auto">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-base sm:text-lg md:text-xl mb-8 md:mb-10 font-medium leading-relaxed">
+                <span className="opacity-75 text-gray-700 dark:text-gray-300">
+                  Remboursement total. Site offert. Sans conditions. Sans questions.
+                  {/* New Simple Tooltip - Inline with text */}
+                  <span className="relative group ml-1 inline-block">
+                    <HelpCircle className="h-4 w-4 text-muted-foreground cursor-help inline" />
+                    <div className="absolute invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-300 bottom-full left-1/2 transform -translate-x-1/2 mb-3 w-80 max-w-[calc(100vw-3rem)] px-4 py-3 text-sm text-white rounded-lg shadow-xl z-50" 
+                         style={{backgroundColor: '#1a1a1a', border: '1px solid #333'}}>
+                      <div className="text-center leading-relaxed">
+                        Votre satisfaction est notre priorité absolue. Si notre approche ne génère pas les résultats attendus, nous vous rembourserons intégralement ET vous gardez le site. Aucune condition, aucune question.
+                      </div>
+                      {/* Arrow */}
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0" 
+                           style={{borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: '6px solid #1a1a1a'}}></div>
+                    </div>
+                  </span>
+                </span>
+              </div>
+            </div>
           </FadeUp>
           
           {/* Button Container with staggered animation */}
@@ -89,6 +110,33 @@ export default function Home() {
             </div>
           </FadeUp>
         </div>
+        </section>
+
+        {/* Pain Point Section */}
+        <section className="py-40 md:py-48 px-6 md:px-32">
+          <div className="max-w-5xl mx-auto">
+            <FadeUp delay={200} duration={800} distance={30}>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-gray-900 dark:text-white mb-16 leading-tight text-center uppercase">
+                « J'ai payé des milliers d'euros pour un site web… et il n'apparaît jamais sur Google ! »
+              </h2>
+            </FadeUp>
+            
+            <FadeUp delay={400} duration={800} distance={20}>
+              <div className="text-lg md:text-xl leading-loose text-gray-700 dark:text-gray-300 space-y-8">
+                <p>
+                  Beaucoup de chefs d'entreprise tombent dans le piège de payer des sommes énormes pour un site "magnifique" que personne ne trouve. Il est peut-être joli, mais sans véritable optimisation pour les moteurs de recherche (<Link href="/seo" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline font-medium transition-colors">SEO</Link>) et sans stratégie pour attirer les bons visiteurs, <span className="px-1 py-0.5 text-black" style={{backgroundColor: '#fffd01'}}>c'est comme ouvrir une boutique en plein désert</span> : <strong className="text-gray-900 dark:text-white">pas de trafic, pas de clients, aucun retour sur investissement.</strong>
+                </p>
+                
+                <p>
+                  Pour nous, un site web doit être bien plus qu'une simple vitrine digitale. C'est pourquoi nous créons des sites non seulement esthétiques, mais aussi construits sur des bases SEO solides, afin que votre entreprise soit trouvée par les personnes qui recherchent réellement vos services.
+                </p>
+                
+                <p className="text-xl md:text-2xl font-semibold text-gray-900 dark:text-white">
+                  Et tout cela à un prix qui ne fera pas pâlir votre comptable.
+                </p>
+              </div>
+            </FadeUp>
+          </div>
         </section>
 
         {/* Portfolio Grid Section */}
