@@ -39,8 +39,42 @@ export const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
     }
   }, [delay])
 
-  // Function to render text with animation
-  const renderAnimatedText = (textToRender: string, additionalClassName: string = '', keyPrefix: string = '') => {
+  // Desktop-specific render function
+  const renderDesktopText = (textToRender: string, keyPrefix: string = 'desktop') => {
+    const lines = textToRender.split('<br/>')
+    let letterIndex = 0
+
+    return (
+      <>
+        {lines.map((line, lineIndex) => (
+          <React.Fragment key={`${keyPrefix}-${lineIndex}`}>
+            <span className="block text-center whitespace-nowrap">
+              {line.split('').map((char, charIndex) => {
+                const currentIndex = letterIndex++
+                return (
+                  <span
+                    key={`${keyPrefix}-${lineIndex}-${charIndex}`}
+                    className="inline-block transition-all duration-700 ease-out"
+                    style={{
+                      transform: isVisible ? 'translateY(0px)' : 'translateY(-20px)',
+                      opacity: isVisible ? 1 : 0,
+                      filter: isVisible ? 'blur(0px)' : 'blur(10px)',
+                      transitionDelay: `${currentIndex * staggerDelay}ms`,
+                    }}
+                  >
+                    {char === ' ' ? '\u00A0' : char}
+                  </span>
+                )
+              })}
+            </span>
+          </React.Fragment>
+        ))}
+      </>
+    )
+  }
+
+  // Mobile-specific render function
+  const renderMobileText = (textToRender: string, keyPrefix: string = 'mobile') => {
     const lines = textToRender.split('<br/>')
     let letterIndex = 0
 
@@ -49,7 +83,7 @@ export const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
         {lines.map((line, lineIndex) => (
           <React.Fragment key={`${keyPrefix}-${lineIndex}`}>
             {lineIndex > 0 && <br />}
-            <span className={cn("inline-block whitespace-normal md:whitespace-nowrap", additionalClassName)}>
+            <span className="inline-block whitespace-normal">
               {line.split('').map((char, charIndex) => {
                 const currentIndex = letterIndex++
                 return (
@@ -78,13 +112,13 @@ export const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
     <>
       {/* Desktop Version */}
       <h1 className={cn("relative hidden md:block", className)}>
-        {renderAnimatedText(text, "", "desktop")}
+        {renderDesktopText(text)}
       </h1>
       
       {/* Mobile Version */}
       {mobileText && (
         <h1 className={cn("relative block md:hidden", mobileClassName || className)}>
-          {renderAnimatedText(mobileText, "", "mobile")}
+          {renderMobileText(mobileText)}
         </h1>
       )}
     </>
