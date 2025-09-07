@@ -36,6 +36,23 @@ function SimpleFooter() {
             </Link>
           </nav>
           
+          {/* Legal Links */}
+          <nav className="flex items-center space-x-4 text-xs">
+            <Link 
+              href="/politique-confidentialite" 
+              className="text-gray-500 hover:text-black dark:text-gray-500 dark:hover:text-white transition-colors"
+            >
+              Politique de Confidentialité
+            </Link>
+            <span className="text-gray-300 dark:text-gray-600">•</span>
+            <Link 
+              href="/mentions-legales" 
+              className="text-gray-500 hover:text-black dark:text-gray-500 dark:hover:text-white transition-colors"
+            >
+              Mentions Légales
+            </Link>
+          </nav>
+          
           {/* Copyright */}
           <p className="text-sm text-gray-600 dark:text-gray-400">
             © 2025 HyperWeb. Tous droits réservés.

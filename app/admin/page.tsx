@@ -16,6 +16,7 @@ export default function AdminPage() {
   const [error, setError] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [checkingAuth, setCheckingAuth] = useState(true);
+  const [deletingIds, setDeletingIds] = useState<Set<number>>(new Set());
 
   // Check if user is already authenticated on page load
   useEffect(() => {
@@ -105,6 +106,43 @@ export default function AdminPage() {
     } catch (error) {
       console.error('Login error:', error);
       return false;
+    }
+  };
+
+  const handleDelete = async (contactId: number) => {
+    if (!confirm('Êtes-vous sûr de vouloir supprimer cette soumission ?')) {
+      return;
+    }
+
+    // Add to deleting set to show loading state
+    setDeletingIds(prev => new Set(prev).add(contactId));
+
+    try {
+      const response = await fetch(`/api/admin/contacts/${contactId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('adminToken')}`,
+        },
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        // Remove from contacts list
+        setContacts(prev => prev.filter(contact => contact.id !== contactId));
+      } else {
+        alert('Erreur lors de la suppression: ' + (result.error || 'Erreur inconnue'));
+      }
+    } catch (error) {
+      console.error('Delete error:', error);
+      alert('Erreur lors de la suppression');
+    } finally {
+      // Remove from deleting set
+      setDeletingIds(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(contactId);
+        return newSet;
+      });
     }
   };
 
@@ -210,8 +248,24 @@ export default function AdminPage() {
         ) : (
           <div className="space-y-6">
             {contacts.map((contact) => (
-              <div key={contact.id} className="bg-white rounded-lg shadow p-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div key={contact.id} className="bg-white rounded-lg shadow p-6 relative">
+                {/* Delete button */}
+                <button
+                  onClick={() => contact.id && handleDelete(contact.id)}
+                  disabled={!contact.id || deletingIds.has(contact.id)}
+                  className="absolute top-4 right-4 p-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  title="Supprimer cette soumission"
+                >
+                  {contact.id && deletingIds.has(contact.id) ? (
+                    <div className="w-5 h-5 animate-spin rounded-full border-2 border-red-600 border-t-transparent"></div>
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  )}
+                </button>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 pr-12">
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-1">
                       {contact.full_name}

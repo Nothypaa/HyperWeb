@@ -64,13 +64,13 @@ function Footer() {
               <h3 className="font-semibold mb-4">Légal</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/privacy-policy" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white">
+                  <Link href="/politique-confidentialite" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white">
                     Politique de Confidentialité
                   </Link>
                 </li>
                 <li>
-                  <Link href="/tos" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white">
-                    Conditions d'Utilisation
+                  <Link href="/mentions-legales" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white">
+                    Mentions Légales
                   </Link>
                 </li>
               </ul>

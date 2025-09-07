@@ -12,6 +12,7 @@ import { StarBorder } from '@/components/ui/star-border'
 import { Testimonials } from '@/components/ui/testimonials-demo'
 import { DemoOne } from '@/components/ui/contact-demo'
 import { AuroraBackground } from '@/components/ui/aurora-background'
+import { Chatbot } from '@/components/ui/chatbot'
 import { useAnchorNavigation } from '@/hooks/useAnchorNavigation'
 
 export default function Home() {
@@ -36,22 +37,24 @@ export default function Home() {
           <FadeUp delay={800} duration={800} distance={30}>
             <div className="text-center max-w-3xl mx-auto">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-base sm:text-lg md:text-xl mb-8 md:mb-10 font-medium leading-relaxed">
-                <span className="opacity-75 text-gray-700 dark:text-gray-300">
-                  Remboursement total. Site offert. Sans conditions. Sans questions.
-                  {/* New Simple Tooltip - Inline with text */}
-                  <span className="relative group ml-1 inline-block">
-                    <HelpCircle className="h-4 w-4 text-muted-foreground cursor-help inline" />
-                    <div className="absolute invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-300 bottom-full left-1/2 transform -translate-x-1/2 mb-3 w-80 max-w-[calc(100vw-3rem)] px-4 py-3 text-sm text-white rounded-lg shadow-xl z-50" 
-                         style={{backgroundColor: '#1a1a1a', border: '1px solid #333'}}>
-                      <div className="text-center leading-relaxed">
-                        Votre satisfaction est notre priorité absolue. Si notre approche ne génère pas les résultats attendus, nous vous rembourserons intégralement ET vous gardez le site. Aucune condition, aucune question.
-                      </div>
-                      {/* Arrow */}
-                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0" 
-                           style={{borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: '6px solid #1a1a1a'}}></div>
-                    </div>
+                <>
+                  <span className="opacity-75 text-gray-700 dark:text-gray-300">
+                    Remboursement total. Site offert. Sans conditions. Sans questions.
                   </span>
-                </span>
+                  {/* Tooltip outside opacity wrapper */}
+                  <div 
+                    className="relative inline-block ml-1"
+                    onMouseEnter={() => setShowTooltip(true)}
+                    onMouseLeave={() => setShowTooltip(false)}
+                  >
+                    <HelpCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                    {showTooltip && (
+                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-80 p-3 bg-black dark:bg-white text-white dark:text-black text-sm rounded-lg shadow-lg z-50 before:content-[''] before:absolute before:top-full before:left-1/2 before:transform before:-translate-x-1/2 before:border-4 before:border-transparent before:border-t-black dark:before:border-t-white">
+                        <p className="leading-relaxed">Votre satisfaction est notre priorité absolue. Si notre approche ne génère pas les résultats attendus, nous vous rembourserons intégralement ET vous gardez le site. Aucune condition, aucune question.</p>
+                      </div>
+                    )}
+                  </div>
+                </>
               </div>
             </div>
           </FadeUp>
@@ -221,6 +224,9 @@ export default function Home() {
       
         {/* Contact Section */}
         <DemoOne />
+        
+        {/* AI Chatbot */}
+        <Chatbot />
     </main>
   )
 }

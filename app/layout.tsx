@@ -9,20 +9,43 @@ import LenisProvider from '../components/LenisProvider'
 import LocalBusinessSchema from '../components/LocalBusinessSchema'
 
 export const metadata: Metadata = {
-  title: 'HyperWeb - Agence Web France | Création Site Internet dès 450€',
-  description: 'Agence web française spécialisée en création de sites internet professionnels. Développement React/Next.js. Tarifs transparents dès 450€. Garantie satisfait ou remboursé.',
-  keywords: 'agence web france, création site internet, développement web professionnel, site web sur mesure',
+  title: {
+    template: '%s | Agence HyperWeb Montpellier',
+    default: 'Agence Web Montpellier - Sites avec Garantie Résultats | HyperWeb'
+  },
+  description: 'La seule agence web Montpellier qui vous rembourse si votre site ne génère aucun résultat. Création de sites web performants avec SEO inclus. Devis gratuit.',
+  keywords: 'agence web montpellier, création site web montpellier, développement web, SEO montpellier, site internet montpellier, garantie résultats',
+  authors: [{ name: 'Agence HyperWeb Montpellier' }],
   viewport: {
     width: 'device-width',
     initialScale: 1,
     maximumScale: 5,
   },
   openGraph: {
-    title: 'HyperWeb - Agence Web France | Sites Internet Professionnels',
-    description: 'Création de sites internet professionnels dès 450€. Garantie satisfait ou remboursé.',
-    type: 'website',
+    title: 'Agence Web Montpellier - Sites avec Garantie Résultats',
+    description: 'La seule agence web Montpellier qui vous rembourse si votre site ne génère aucun résultat. Création de sites web performants avec SEO inclus.',
+    url: 'https://agencehyperweb.com',
+    siteName: 'Agence HyperWeb Montpellier',
+    images: [
+      {
+        url: 'https://agencehyperweb.com/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Agence HyperWeb Montpellier - Création de sites web',
+      },
+    ],
     locale: 'fr_FR',
-  }
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Agence Web Montpellier - Sites avec Garantie Résultats',
+    description: 'La seule agence web Montpellier qui vous rembourse si votre site ne génère aucun résultat.',
+    images: ['https://agencehyperweb.com/og-image.jpg'],
+  },
+  alternates: {
+    canonical: 'https://agencehyperweb.com',
+  },
 }
 
 export default function RootLayout({
@@ -108,6 +131,10 @@ export default function RootLayout({
             gtag('config', 'G-KESKV6R0ZY');
           `}
         </Script>
+        <Script 
+          src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js" 
+          strategy="lazyOnload"
+        />
         <LenisProvider>
           <ConditionalAurora>
             {children}

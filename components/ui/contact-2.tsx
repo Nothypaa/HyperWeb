@@ -7,6 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from '@/components/animate-ui/headless/checkbox';
+import { Field, Label as HeadlessLabel } from '@headlessui/react';
 
 interface Contact2Props {
   title?: string;
@@ -29,7 +31,9 @@ export const Contact2 = ({
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [honeypot, setHoneypot] = useState(""); // Spam protection
+  const [rgpdConsent, setRgpdConsent] = useState(false); // RGPD consent
   const [showPhoneField, setShowPhoneField] = useState(false);
+  const [showRgpdConsent, setShowRgpdConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState("");
@@ -45,6 +49,15 @@ export const Contact2 = ({
     }
   }, [fullName, userEmail]);
 
+  useEffect(() => {
+    // Show RGPD consent when user starts typing message
+    if (message.trim().length > 0) {
+      setShowRgpdConsent(true);
+    } else {
+      setShowRgpdConsent(false);
+    }
+  }, [message]);
+
   const resetForm = () => {
     setSubmitStatus('idle');
     setAnimationProgress(377);
@@ -57,6 +70,12 @@ export const Contact2 = ({
     e.preventDefault();
     
     if (isSubmitting) return;
+
+    // Validate RGPD consent
+    if (!rgpdConsent) {
+      setErrorMessage('Veuillez accepter notre politique de confidentialité pour continuer.');
+      return;
+    }
     
     setIsSubmitting(true);
     setSubmitStatus('idle');
@@ -316,9 +335,37 @@ export const Contact2 = ({
                 className="min-h-[150px] md:min-h-[200px] text-base p-3 md:p-4"
               />
             </div>
+            
+            {/* RGPD Consent */}
+            <div className={`overflow-hidden transition-all duration-500 ease-in-out ${
+              showRgpdConsent 
+                ? 'max-h-32 md:max-h-28 opacity-100 transform translate-y-0' 
+                : 'max-h-0 opacity-0 transform -translate-y-2'
+            }`}>
+              <Field className="flex items-start gap-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                <Checkbox
+                  id="rgpd-consent"
+                  checked={rgpdConsent}
+                  onChange={setRgpdConsent}
+                  className="mt-1"
+                />
+                <HeadlessLabel htmlFor="rgpd-consent" className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                  <span className="text-red-500">*</span> J'accepte que mes données personnelles soient traitées selon la{' '}
+                  <a 
+                    href="/politique-confidentialite" 
+                    target="_blank"
+                    className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                  >
+                    politique de confidentialité
+                  </a>
+                  {' '}de HyperWeb. Mes données ne seront utilisées que pour répondre à ma demande.
+                </HeadlessLabel>
+              </Field>
+            </div>
+            
             <Button 
               type="submit"
-              disabled={isSubmitting || !fullName || !userEmail || !subject}
+              disabled={isSubmitting || !fullName || !userEmail || !subject || !rgpdConsent}
               className="w-full h-12 md:h-14 text-base font-bold bg-black text-white dark:bg-white dark:text-black rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? (

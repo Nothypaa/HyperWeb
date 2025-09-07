@@ -102,7 +102,7 @@ const Navbar: React.FC = () => {
                   src="/HyperWeb-logo/Hyperweb-nobg.svg"
                   alt="HyperWeb logo - agence web France spécialisée création site internet et développement web professionnel"
                   fill
-                  className="object-contain"
+                  className="object-contain lazyload"
                   priority
                 />
               </div>

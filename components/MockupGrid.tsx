@@ -87,8 +87,8 @@ const MockupGrid: React.FC = () => {
             alt={currentItem.alt}
             width={1200}
             height={750}
-            className="w-full h-full object-cover animate-fadeIn"
-            priority
+            className="w-full h-full object-cover animate-fadeIn lazyload"
+            loading="lazy"
           />
         </div>
         
@@ -121,8 +121,8 @@ const MockupGrid: React.FC = () => {
               alt={currentItem.alt}
               width={1200}
               height={750}
-              className="w-full h-full object-cover animate-fadeIn"
-              priority
+              className="w-full h-full object-cover animate-fadeIn lazyload"
+              loading="lazy"
             />
           </div>
           

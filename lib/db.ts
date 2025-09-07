@@ -203,3 +203,68 @@ export async function logAuditEvent(eventType: string, ipAddress: string, userAg
     [eventType, ipAddress, userAgent || null, details || null]
   );
 }
+
+export async function deleteContactSubmission(id: number): Promise<{ success: boolean; error?: string }> {
+  try {
+    const database = await initDatabase();
+    
+    // Check if contact exists
+    const contact = await database.get('SELECT id FROM contacts WHERE id = ?', [id]);
+    if (!contact) {
+      return { success: false, error: 'Contact submission not found' };
+    }
+    
+    // Delete the contact
+    await database.run('DELETE FROM contacts WHERE id = ?', [id]);
+    
+    return { success: true };
+  } catch (error) {
+    console.error('Delete contact error:', error);
+    return { success: false, error: 'Database error' };
+  }
+}
+
+export async function verifyAdminToken(token: string): Promise<boolean> {
+  try {
+    const jwt = require('jsonwebtoken');
+    const jwtSecret = process.env.JWT_SECRET;
+    
+    if (!jwtSecret) {
+      console.error('JWT_SECRET not configured');
+      return false;
+    }
+    
+    // Verify JWT token
+    const decoded = jwt.verify(token, jwtSecret);
+    
+    // Check if it's an admin token and not expired
+    return decoded && decoded.admin === true && decoded.type === 'admin';
+  } catch (error) {
+    console.error('Token verification error:', error);
+    return false;
+  }
+}
+
+export async function generateAdminToken(): Promise<string> {
+  try {
+    const jwt = require('jsonwebtoken');
+    const jwtSecret = process.env.JWT_SECRET;
+    
+    if (!jwtSecret) {
+      throw new Error('JWT_SECRET not configured');
+    }
+    
+    // Generate proper JWT token with expiration
+    const payload = {
+      admin: true,
+      type: 'admin',
+      iat: Math.floor(Date.now() / 1000),
+      exp: Math.floor(Date.now() / 1000) + (24 * 60 * 60) // 24 hours
+    };
+    
+    return jwt.sign(payload, jwtSecret);
+  } catch (error) {
+    console.error('Token generation error:', error);
+    throw error;
+  }
+}

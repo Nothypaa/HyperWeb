@@ -85,6 +85,7 @@ export async function POST(request: NextRequest) {
       const token = jwt.sign(
         { 
           admin: true,
+          type: 'admin',
           iat: Math.floor(Date.now() / 1000),
           exp: Math.floor(Date.now() / 1000) + (4 * 60 * 60) // 4 hours
         },
