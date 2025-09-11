@@ -111,11 +111,6 @@ export default function RootLayout({
             `,
           }}
         />
-        <script 
-          src="https://analytics.ahrefs.com/analytics.js" 
-          data-key="/4HvJHnAj1QZ2Gvt8iHz/Q" 
-          async
-        ></script>
         <LocalBusinessSchema />
       </head>
       <body>
@@ -135,6 +130,13 @@ export default function RootLayout({
           src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js" 
           strategy="lazyOnload"
         />
+        {process.env.NODE_ENV === 'production' && (
+          <Script 
+            src="https://analytics.ahrefs.com/analytics.js" 
+            strategy="lazyOnload"
+            onError={() => console.warn('Ahrefs analytics failed to load')}
+          />
+        )}
         <LenisProvider>
           <ConditionalAurora>
             {children}

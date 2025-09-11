@@ -7,7 +7,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { flushSync } from 'react-dom';
-import { Contact, supabaseAdmin } from '@/lib/supabase';
+import { Contact, supabase } from '@/lib/supabase';
 import { AdminLogin } from '@/components/ui/admin-login';
 
 export default function AdminPage() {
@@ -89,7 +89,7 @@ export default function AdminPage() {
   useEffect(() => {
     return () => {
       // Sign out from Supabase to prevent auth state pollution
-      supabaseAdmin.auth.signOut().catch(console.error);
+      supabase.auth.signOut().catch(console.error);
     };
   }, []);
 
@@ -160,7 +160,7 @@ export default function AdminPage() {
     
     try {
       // Sign out from Supabase to clear auth state
-      await supabaseAdmin.auth.signOut();
+      await supabase.auth.signOut();
       console.log('Signed out from Supabase');
       
       localStorage.removeItem('adminToken');
@@ -234,11 +234,11 @@ export default function AdminPage() {
             </a>
             <button
               type="button"
-              onMouseDown={(e) => {
+              onMouseDown={async (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 console.log('Button clicked - mouse down');
-                handleLogout();
+                await handleLogout();
               }}
               onClick={(e) => {
                 e.preventDefault();
