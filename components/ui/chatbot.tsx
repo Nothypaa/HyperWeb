@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { FadeUp } from '@/components/ui/fade-up'
-import { X, Send, Loader2, Shield } from 'lucide-react'
+import { X, Send, Loader2 } from 'lucide-react'
 import { HyperWebIcon } from '@/components/ui/hyperweb-icon'
 
 interface Message {
@@ -23,7 +23,6 @@ interface ChatbotProps {
 
 export const Chatbot: React.FC<ChatbotProps> = ({ className }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [isConsenting, setIsConsenting] = useState(true)
   const [messages, setMessages] = useState<Message[]>([])
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -51,21 +50,6 @@ export const Chatbot: React.FC<ChatbotProps> = ({ className }) => {
     return () => clearTimeout(timer)
   }, [hasInteracted, isOpen])
 
-  const handleConsent = (accepted: boolean) => {
-    if (accepted) {
-      setIsConsenting(false)
-      // Add welcome message
-      const welcomeMessage: Message = {
-        id: 'welcome',
-        content: 'Bonjour ! Je suis votre conseiller digital. Je vais vous aider à déterminer le type de site web parfait pour votre entreprise. Commençons par le début : quel type d\'entreprise dirigez-vous ?',
-        sender: 'bot',
-        timestamp: new Date()
-      }
-      setMessages([welcomeMessage])
-    } else {
-      setIsOpen(false)
-    }
-  }
 
   const sendMessage = async () => {
     if (!inputValue.trim() || isLoading) return
@@ -134,6 +118,16 @@ export const Chatbot: React.FC<ChatbotProps> = ({ className }) => {
     setIsOpen(true)
     setHasInteracted(true)
     setShowPrompt(false)
+    // Add welcome message when chat opens
+    if (messages.length === 0) {
+      const welcomeMessage: Message = {
+        id: 'welcome',
+        content: 'Bonjour ! Je suis votre conseiller digital. Je vais vous aider à déterminer le type de site web parfait pour votre entreprise. Commençons par le début : quel type d\'entreprise dirigez-vous ?',
+        sender: 'bot',
+        timestamp: new Date()
+      }
+      setMessages([welcomeMessage])
+    }
   }
 
   const dismissPrompt = () => {
@@ -243,51 +237,6 @@ export const Chatbot: React.FC<ChatbotProps> = ({ className }) => {
     },
   }
 
-  // RGPD Consent Modal
-  const ConsentModal = () => (
-    <div className="absolute inset-0 bg-black/50 backdrop-blur-sm rounded-3xl flex items-center justify-center p-6">
-      <div className="bg-white dark:bg-gray-900 rounded-3xl p-6 max-w-sm w-full shadow-xl border">
-        <div className="flex items-center gap-3 mb-4">
-          <Shield className="h-6 w-6 text-blue-600" />
-          <h3 className="font-bold text-lg">Protection des données</h3>
-        </div>
-        <div className="text-sm text-muted-foreground mb-6 leading-relaxed space-y-3">
-          <p>
-            Notre assistant IA utilise vos messages pour vous conseiller sur nos services web. 
-            Les conversations sont temporaires et traitées via Claude AI (Anthropic).
-          </p>
-          <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg">
-            <p className="text-xs">
-              <strong>Vos droits RGPD :</strong> Accès, rectification, suppression de vos données. 
-              Plus d'infos dans notre{' '}
-              <a 
-                href="/politique-confidentialite" 
-                target="_blank"
-                className="text-blue-600 dark:text-blue-400 hover:underline"
-              >
-                Politique de Confidentialité
-              </a>
-            </p>
-          </div>
-        </div>
-        <div className="flex gap-3">
-          <Button 
-            onClick={() => handleConsent(false)}
-            variant="outline" 
-            className="flex-1 rounded-full"
-          >
-            Refuser
-          </Button>
-          <Button 
-            onClick={() => handleConsent(true)}
-            className="flex-1 rounded-full bg-black text-white hover:bg-gray-800"
-          >
-            Accepter
-          </Button>
-        </div>
-      </div>
-    </div>
-  )
 
   return (
     <>
@@ -453,8 +402,6 @@ export const Chatbot: React.FC<ChatbotProps> = ({ className }) => {
                 </div>
               </div>
 
-              {/* RGPD Consent Modal */}
-              {isConsenting && <ConsentModal />}
             </Card>
           </motion.div>
         )}

@@ -13,11 +13,11 @@ export function middleware(request: NextRequest) {
   // Content Security Policy
   const csp = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://analytics.ahrefs.com https://www.googletagmanager.com", // unsafe-* needed for Next.js dev
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://analytics.ahrefs.com https://www.googletagmanager.com https://cdn.jsdelivr.net", // unsafe-* needed for Next.js dev
     "style-src 'self' 'unsafe-inline' https://api.fontshare.com", // unsafe-inline needed for Tailwind
     "img-src 'self' data: https:",
     "font-src 'self' https://api.fontshare.com https://cdn.fontshare.com",
-    "connect-src 'self' https://analytics.ahrefs.com https://www.googletagmanager.com https://www.google-analytics.com https://region1.google-analytics.com",
+    "connect-src 'self' https://analytics.ahrefs.com https://www.googletagmanager.com https://www.google-analytics.com https://region1.google-analytics.com https://bfksghkgtjnimmoetour.supabase.co",
     "frame-src 'none'"
   ].join('; ');
   
