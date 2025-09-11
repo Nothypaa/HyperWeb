@@ -7,7 +7,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { flushSync } from 'react-dom';
-import { Contact } from '@/lib/supabase';
+import { Contact, supabaseAdmin } from '@/lib/supabase';
 import { AdminLogin } from '@/components/ui/admin-login';
 
 export default function AdminPage() {
@@ -85,6 +85,14 @@ export default function AdminPage() {
     }
   }, [isAuthenticated]);
 
+  // Cleanup auth state when component unmounts
+  useEffect(() => {
+    return () => {
+      // Sign out from Supabase to prevent auth state pollution
+      supabaseAdmin.auth.signOut().catch(console.error);
+    };
+  }, []);
+
   const handleLogin = async (email: string, password: string): Promise<boolean> => {
     try {
       const response = await fetch('/api/admin/auth', {
@@ -147,10 +155,14 @@ export default function AdminPage() {
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     console.log('Logout function called at:', new Date().toISOString());
     
     try {
+      // Sign out from Supabase to clear auth state
+      await supabaseAdmin.auth.signOut();
+      console.log('Signed out from Supabase');
+      
       localStorage.removeItem('adminToken');
       console.log('Token cleared from localStorage');
       
