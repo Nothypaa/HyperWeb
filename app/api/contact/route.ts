@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { insertContact, checkRateLimit, ContactSubmission } from '@/lib/db';
+import { supabaseAdmin, type Contact } from '@/lib/supabase';
 
 // Input validation functions
 function validateEmail(email: string): boolean {
@@ -36,20 +36,6 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const clientIp = getClientIp(request);
-
-    // Check rate limit (default 5 submissions per hour per IP)
-    const rateLimitMax = parseInt(process.env.RATE_LIMIT_PER_HOUR || '5');
-    const withinRateLimit = await checkRateLimit(clientIp, rateLimitMax);
-    
-    if (!withinRateLimit) {
-      return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Rate limit exceeded. Please try again later.' 
-        },
-        { status: 429 }
-      );
-    }
 
     // Extract and validate required fields
     const { fullName, email, phone, subject, message, honeypot } = body;
@@ -89,16 +75,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Sanitize inputs
-    const contactData: ContactSubmission = {
-      full_name: sanitizeInput(fullName),
-      email: sanitizeInput(email),
-      phone: phone ? sanitizeInput(phone) : undefined,
-      subject: sanitizeInput(subject),
-      message: message ? sanitizeInput(message) : undefined,
-      ip_address: clientIp
-    };
-
     // Validate subject is one of the expected values
     const validSubjects = [
       'web-development',
@@ -106,25 +82,46 @@ export async function POST(request: NextRequest) {
       'consultation'
     ];
     
-    if (!validSubjects.includes(contactData.subject)) {
+    if (!validSubjects.includes(subject)) {
       return NextResponse.json(
         { success: false, error: 'Invalid subject selection' },
         { status: 400 }
       );
     }
 
-    // Insert into database
-    const contactId = await insertContact(contactData);
+    // Prepare contact data
+    const contactData: Omit<Contact, 'id' | 'created_at'> = {
+      full_name: sanitizeInput(fullName),
+      email: sanitizeInput(email),
+      phone: phone ? sanitizeInput(phone) : undefined,
+      subject: sanitizeInput(subject),
+      message: message ? sanitizeInput(message) : undefined,
+      ip_address: clientIp,
+    };
+
+    // Insert into Supabase
+    const { data, error } = await supabaseAdmin
+      .from('contacts')
+      .insert([contactData])
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Supabase error:', error);
+      return NextResponse.json(
+        { success: false, error: 'Failed to save contact' },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({
       success: true,
       message: 'Contact form submitted successfully',
-      contactId
+      contactId: data.id
     });
 
   } catch (error) {
-    console.error('Error processing contact form:', error);
-    
+    console.error('Contact API error:', error);
     return NextResponse.json(
       { 
         success: false, 

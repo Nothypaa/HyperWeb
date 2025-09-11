@@ -7,11 +7,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { flushSync } from 'react-dom';
-import { ContactSubmission } from '@/lib/db';
+import { Contact } from '@/lib/supabase';
 import { AdminLogin } from '@/components/ui/admin-login';
 
 export default function AdminPage() {
-  const [contacts, setContacts] = useState<ContactSubmission[]>([]);
+  const [contacts, setContacts] = useState<Contact[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -30,17 +30,13 @@ export default function AdminPage() {
       }
       
       try {
-        const response = await fetch('/api/admin/verify', {
-          method: 'POST',
+        const response = await fetch('/api/admin/contacts', {
           headers: {
-            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
           },
-          body: JSON.stringify({ token }),
         });
         
-        const result = await response.json();
-        
-        if (result.success) {
+        if (response.ok) {
           setIsAuthenticated(true);
         } else {
           localStorage.removeItem('adminToken');
@@ -64,7 +60,12 @@ export default function AdminPage() {
       const loadContacts = async () => {
         setLoading(true);
         try {
-          const response = await fetch('/api/admin/contacts');
+          const token = localStorage.getItem('adminToken');
+          const response = await fetch('/api/admin/contacts', {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          });
           const result = await response.json();
           
           if (result.success) {
@@ -84,14 +85,14 @@ export default function AdminPage() {
     }
   }, [isAuthenticated]);
 
-  const handleLogin = async (password: string): Promise<boolean> => {
+  const handleLogin = async (email: string, password: string): Promise<boolean> => {
     try {
       const response = await fetch('/api/admin/auth', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ email, password }),
       });
       
       const result = await response.json();

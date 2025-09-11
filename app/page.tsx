@@ -9,7 +9,6 @@ import MockupGrid from '@/components/MockupGrid'
 import { Pricing } from '@/components/ui/pricing'
 import { FAQ } from '@/components/ui/faq'
 import { StarBorder } from '@/components/ui/star-border'
-import { Testimonials } from '@/components/ui/testimonials-demo'
 import { DemoOne } from '@/components/ui/contact-demo'
 import { AuroraBackground } from '@/components/ui/aurora-background'
 import { Chatbot } from '@/components/ui/chatbot'
@@ -151,10 +150,6 @@ export default function Home() {
           </FadeUp>
         </section>
 
-      {/* Testimonials Section - Hidden */}
-      <div className="hidden">
-        <Testimonials />
-      </div>
 
       {/* Pricing Section */}
       <section id="pricing">

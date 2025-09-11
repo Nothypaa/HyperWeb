@@ -28,6 +28,8 @@ export const Chatbot: React.FC<ChatbotProps> = ({ className }) => {
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isInputFocused, setIsInputFocused] = useState(false)
+  const [showPrompt, setShowPrompt] = useState(false)
+  const [hasInteracted, setHasInteracted] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const scrollToBottom = () => {
@@ -37,6 +39,17 @@ export const Chatbot: React.FC<ChatbotProps> = ({ className }) => {
   useEffect(() => {
     scrollToBottom()
   }, [messages])
+
+  // Show prompt bubble after 10 seconds if user hasn't interacted
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!hasInteracted && !isOpen) {
+        setShowPrompt(true)
+      }
+    }, 10000) // 10 seconds
+
+    return () => clearTimeout(timer)
+  }, [hasInteracted, isOpen])
 
   const handleConsent = (accepted: boolean) => {
     if (accepted) {
@@ -117,6 +130,17 @@ export const Chatbot: React.FC<ChatbotProps> = ({ className }) => {
     setIsInputFocused(false)
   }
 
+  const handleChatOpen = () => {
+    setIsOpen(true)
+    setHasInteracted(true)
+    setShowPrompt(false)
+  }
+
+  const dismissPrompt = () => {
+    setShowPrompt(false)
+    setHasInteracted(true)
+  }
+
   // Animation variants
   const chatVariants = {
     hidden: {
@@ -189,6 +213,36 @@ export const Chatbot: React.FC<ChatbotProps> = ({ className }) => {
     },
   }
 
+  const promptVariants = {
+    hidden: {
+      scale: 0.8,
+      opacity: 0,
+      y: 10,
+      filter: 'blur(4px)',
+    },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: {
+        type: 'spring' as const,
+        damping: 20,
+        stiffness: 300,
+        duration: 0.8,
+      },
+    },
+    exit: {
+      scale: 0.8,
+      opacity: 0,
+      y: -10,
+      filter: 'blur(4px)',
+      transition: {
+        duration: 0.4,
+      },
+    },
+  }
+
   // RGPD Consent Modal
   const ConsentModal = () => (
     <div className="absolute inset-0 bg-black/50 backdrop-blur-sm rounded-3xl flex items-center justify-center p-6">
@@ -250,12 +304,49 @@ export const Chatbot: React.FC<ChatbotProps> = ({ className }) => {
               style={{ willChange: 'transform' }}
             >
               <Button
-                onClick={() => setIsOpen(true)}
+                onClick={handleChatOpen}
                 className="h-14 w-14 rounded-full bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                 size="icon"
               >
                 <HyperWebIcon className="h-6 w-6" />
               </Button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Chat Prompt Bubble */}
+        <AnimatePresence>
+          {showPrompt && !isOpen && (
+            <motion.div
+              key="prompt-bubble"
+              variants={promptVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="fixed bottom-24 right-6 max-w-xs"
+              style={{ willChange: 'transform' }}
+            >
+              <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-600 p-4 mr-2">
+                {/* Speech bubble pointer */}
+                <div className="absolute bottom-[-8px] right-6 w-4 h-4 bg-white dark:bg-gray-800 border-r border-b border-gray-200 dark:border-gray-600 rotate-45"></div>
+                
+                {/* Close button */}
+                <button
+                  onClick={dismissPrompt}
+                  className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                  aria-label="Fermer"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+                
+                {/* Content */}
+                <div className="pr-6">
+                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                    Pour obtenir une estimation simulée ou toute question sur les sites web, vous pouvez aussi parler avec{' '}
+                    <span className="font-semibold text-black dark:text-white">Hyper</span>, notre agent IA
+                  </p>
+                </div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
