@@ -25,15 +25,31 @@ export async function GET(request: NextRequest) {
     }
 
     // Fetch contacts from database
+    console.log('Fetching contacts for user:', user.id, user.email);
     const { data: contacts, error: dbError } = await supabaseAdmin
       .from('contacts')
       .select('*')
       .order('created_at', { ascending: false });
+    
+    console.log('Query result:', { 
+      contactsCount: contacts?.length || 0, 
+      error: dbError?.message,
+      firstContact: contacts?.[0] 
+    });
 
     if (dbError) {
-      console.error('Database error:', dbError);
+      console.error('Database error details:', {
+        message: dbError.message,
+        details: dbError.details,
+        hint: dbError.hint,
+        code: dbError.code
+      });
       return NextResponse.json(
-        { success: false, error: 'Failed to fetch contacts' },
+        { 
+          success: false, 
+          error: 'Failed to fetch contacts',
+          details: process.env.NODE_ENV === 'development' ? dbError.message : undefined
+        },
         { status: 500 }
       );
     }
