@@ -130,13 +130,6 @@ export default function RootLayout({
           src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js" 
           strategy="lazyOnload"
         />
-        {process.env.NODE_ENV === 'production' && (
-          <Script 
-            src="https://analytics.ahrefs.com/analytics.js" 
-            strategy="lazyOnload"
-            onError={() => console.warn('Ahrefs analytics failed to load')}
-          />
-        )}
         <LenisProvider>
           <ConditionalAurora>
             {children}

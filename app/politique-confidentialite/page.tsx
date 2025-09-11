@@ -55,7 +55,7 @@ export default function PolitiqueConfidentialite() {
             <h3 className="text-xl font-medium mb-3 mt-6">2.3 Données de navigation</h3>
             <p>Nous collectons automatiquement certaines données techniques :</p>
             <ul className="ml-6 list-disc">
-              <li><strong>Cookies analytiques</strong> (Google Analytics, Ahrefs)</li>
+              <li><strong>Cookies analytiques</strong> (Google Analytics)</li>
               <li><strong>Pages visitées</strong> et temps passé sur le site</li>
               <li><strong>Type de navigateur</strong> et système d'exploitation</li>
               <li><strong>Résolution d'écran</strong> et préférences d'affichage</li>
@@ -136,7 +136,6 @@ export default function PolitiqueConfidentialite() {
             <ul className="ml-6 list-disc">
               <li><strong>Anthropic</strong> (Claude AI) - pour le fonctionnement du chatbot</li>
               <li><strong>Google</strong> (Analytics) - pour les statistiques de visite</li>
-              <li><strong>Ahrefs</strong> - pour l'analyse SEO et les performances</li>
             </ul>
 
             <h3 className="text-xl font-medium mb-3 mt-6">5.2 Hébergement</h3>
@@ -217,7 +216,7 @@ export default function PolitiqueConfidentialite() {
             <h3 className="text-xl font-medium mb-3 mt-6">8.1 Types de cookies</h3>
             <ul className="ml-6 list-disc space-y-2">
               <li><strong>Cookies essentiels :</strong> Fonctionnement de base du site (thème, préférences)</li>
-              <li><strong>Cookies analytiques :</strong> Google Analytics, Ahrefs (avec votre consentement)</li>
+              <li><strong>Cookies analytiques :</strong> Google Analytics (avec votre consentement)</li>
               <li><strong>Cookies de chat :</strong> Fonctionnement du chatbot IA</li>
             </ul>
 
