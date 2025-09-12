@@ -102,9 +102,9 @@ export async function POST(request: NextRequest) {
     // Insert into Supabase
     const { data, error } = await supabaseAdmin
       .from('contacts')
-      .insert([contactData] as any)
+      .insert([contactData])
       .select()
-      .single();
+      .single() as { data: Contact | null; error: any };
 
     if (error) {
       console.error('Supabase error details:', {
@@ -126,7 +126,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message: 'Contact form submitted successfully',
-      contactId: data.id
+      contactId: data?.id
     });
 
   } catch (error) {
