@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getSupabaseAdmin } from '@/lib/supabase'
-import * as Sentry from '@sentry/nextjs'
 
 // =======================================
 // STATUS TYPES

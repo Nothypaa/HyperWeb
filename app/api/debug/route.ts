@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getSupabaseAdmin, resetSupabaseConnections } from '@/lib/supabase'
-import * as Sentry from '@sentry/nextjs'
 
 // =======================================
 // DEBUG TYPES

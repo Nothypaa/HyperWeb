@@ -1,5 +1,4 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
-import * as Sentry from '@sentry/nextjs'
 
 // =======================================
 // ENVIRONMENT VALIDATION
@@ -21,7 +20,6 @@ function validateEnvironment(): SupabaseConfig {
       'Missing NEXT_PUBLIC_SUPABASE_URL environment variable.\n' +
       'Please add it to your .env.local file or Vercel environment variables.'
     )
-    Sentry.captureException(error, { tags: { component: 'supabase_config' } })
     throw error
   }
 
@@ -30,7 +28,6 @@ function validateEnvironment(): SupabaseConfig {
       'Missing NEXT_PUBLIC_SUPABASE_ANON_KEY environment variable.\n' +
       'Please add it to your .env.local file or Vercel environment variables.'
     )
-    Sentry.captureException(error, { tags: { component: 'supabase_config' } })
     throw error
   }
 
@@ -39,17 +36,12 @@ function validateEnvironment(): SupabaseConfig {
     new URL(url)
   } catch {
     const error = new Error(`Invalid NEXT_PUBLIC_SUPABASE_URL format: ${url}`)
-    Sentry.captureException(error, { tags: { component: 'supabase_config' } })
     throw error
   }
 
   // Warn if service key is missing on server side
   if (typeof window === 'undefined' && !serviceKey) {
     console.warn('⚠️  SUPABASE_SERVICE_ROLE_KEY is missing. Admin operations may fail.')
-    Sentry.captureMessage('Supabase service key missing', {
-      level: 'warning',
-      tags: { component: 'supabase_config' }
-    })
   }
 
   console.log('✅ Supabase environment variables validated successfully')
@@ -67,9 +59,6 @@ async function testConnection(client: SupabaseClient, clientType: string): Promi
     
     if (error) {
       console.error(`❌ ${clientType} connection test failed:`, error.message)
-      Sentry.captureException(new Error(`${clientType} connection failed: ${error.message}`), {
-        tags: { component: 'supabase_connection' }
-      })
       return false
     }
     
@@ -77,9 +66,6 @@ async function testConnection(client: SupabaseClient, clientType: string): Promi
     return true
   } catch (error) {
     console.error(`❌ ${clientType} connection error:`, error)
-    Sentry.captureException(error as Error, {
-      tags: { component: 'supabase_connection' }
-    })
     return false
   }
 }
@@ -127,9 +113,6 @@ export function getSupabaseClient(): SupabaseClient {
     return _supabaseClient
   } catch (error) {
     console.error('❌ Failed to create Supabase client:', error)
-    Sentry.captureException(error as Error, {
-      tags: { component: 'supabase_client_creation' }
-    })
     throw error
   }
 }
@@ -168,9 +151,6 @@ export function getSupabaseAdmin(): SupabaseClient {
     return _supabaseAdminClient
   } catch (error) {
     console.error('❌ Failed to create Supabase admin client:', error)
-    Sentry.captureException(error as Error, {
-      tags: { component: 'supabase_admin_creation' }
-    })
     throw error
   }
 }
@@ -202,9 +182,6 @@ export async function healthCheckSupabase(): Promise<{
     return result
   } catch (error) {
     console.error('❌ Health check failed:', error)
-    Sentry.captureException(error as Error, {
-      tags: { component: 'supabase_health_check' }
-    })
     
     return {
       client: false,

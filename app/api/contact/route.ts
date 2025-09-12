@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getSupabaseAdmin, type Contact, type ContactSubmission, type DatabaseResult } from '@/lib/supabase'
-import * as Sentry from '@sentry/nextjs'
 
 // =======================================
 // RATE LIMITING & SPAM DETECTION
@@ -237,11 +236,6 @@ async function saveContactToDatabase(contactData: Omit<Contact, 'id' | 'created_
         code: error.code
       })
       
-      Sentry.captureException(new Error(`Database save failed: ${error.message}`), {
-        tags: { operation: 'contact_save', error_code: error.code },
-        extra: { errorDetails: error, contactData }
-      })
-      
       return {
         success: false,
         error: error.message,
@@ -256,10 +250,6 @@ async function saveContactToDatabase(contactData: Omit<Contact, 'id' | 'created_
     }
   } catch (error) {
     console.error('❌ Unexpected database error:', error)
-    Sentry.captureException(error as Error, {
-      tags: { operation: 'contact_save_unexpected' },
-      extra: { contactData }
-    })
     
     return {
       success: false,
@@ -298,12 +288,6 @@ async function verifyContactSaved(contactId: number): Promise<boolean> {
 // =======================================
 
 export async function POST(request: NextRequest) {
-  return Sentry.startSpan(
-    {
-      op: 'http.server',
-      name: 'POST /api/contact',
-    },
-    async () => {
       const startTime = Date.now()
       const clientIp = getClientIp(request)
       
@@ -314,11 +298,6 @@ export async function POST(request: NextRequest) {
         console.log('🔒 Checking rate limits...')
         if (!checkRateLimit(clientIp)) {
           console.log(`❌ Rate limit exceeded for IP: ${clientIp}`)
-          Sentry.captureMessage('Rate limit exceeded', {
-            level: 'warning',
-            tags: { operation: 'contact_rate_limit' },
-            extra: { ip: clientIp }
-          })
           
           return NextResponse.json(
             { 
@@ -349,11 +328,6 @@ export async function POST(request: NextRequest) {
         console.log('🍯 Checking honeypot...')
         if (honeypot && honeypot.trim() !== '') {
           console.log(`🚫 Spam detected via honeypot (IP: ${clientIp})`)
-          Sentry.captureMessage('Honeypot spam detected', {
-            level: 'warning',
-            tags: { operation: 'contact_spam' },
-            extra: { ip: clientIp }
-          })
           
           return NextResponse.json(
             { success: false, error: 'Spam detected' },
@@ -389,11 +363,6 @@ export async function POST(request: NextRequest) {
         
         if (isDuplicate && recentSubmission) {
           console.log(`🚫 Duplicate submission detected for ${email}`)
-          Sentry.captureMessage('Duplicate contact submission', {
-            level: 'info',
-            tags: { operation: 'contact_duplicate' },
-            extra: { email, recentId: recentSubmission.id }
-          })
           
           return NextResponse.json({
             success: true, // Return success to avoid user confusion
@@ -448,27 +417,12 @@ export async function POST(request: NextRequest) {
         
         if (!isVerified) {
           console.error('❌ Save verification failed')
-          Sentry.captureMessage('Contact save verification failed', {
-            level: 'error',
-            tags: { operation: 'contact_verify_failed' },
-            extra: { contactId, contactData }
-          })
         }
         
         // Step 9: Success response
         const processingTime = Date.now() - startTime
         console.log(`🎉 Contact form processed successfully in ${processingTime}ms`)
         
-        Sentry.addBreadcrumb({
-          message: 'Contact form submitted successfully',
-          level: 'info',
-          data: {
-            contactId,
-            email: contactData.email,
-            subject: contactData.subject,
-            processingTime
-          }
-        })
         
         return NextResponse.json({
           success: true,
@@ -482,15 +436,6 @@ export async function POST(request: NextRequest) {
         const processingTime = Date.now() - startTime
         console.error('❌ Unexpected contact API error:', error)
         
-        Sentry.captureException(error as Error, {
-          tags: { operation: 'contact_api_unexpected' },
-          extra: {
-            requestUrl: request.url,
-            requestMethod: request.method,
-            clientIp,
-            processingTime
-          }
-        })
         
         return NextResponse.json(
           {
@@ -499,9 +444,7 @@ export async function POST(request: NextRequest) {
           },
           { status: 500 }
         )
-      }
-    }
-  )
+  }
 }
 
 export async function GET() {

@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getSupabaseAdmin, type Contact, type DatabaseResult } from '@/lib/supabase'
-import * as Sentry from '@sentry/nextjs'
 
 // =======================================
 // TYPES AND INTERFACES
@@ -233,12 +232,6 @@ async function fetchContacts(query: ContactsQuery): Promise<DatabaseResult<{ con
 // =======================================
 
 export async function GET(request: NextRequest) {
-  return Sentry.startSpan(
-    {
-      op: 'http.server',
-      name: 'GET /api/admin/contacts',
-    },
-    async () => {
       const startTime = Date.now()
       const clientIp = getClientIp(request)
       
@@ -279,14 +272,6 @@ export async function GET(request: NextRequest) {
         if (!contactsResult.success) {
           console.error('❌ Failed to fetch contacts:', contactsResult.error)
           
-          Sentry.captureException(new Error(`Admin contacts fetch failed: ${contactsResult.error}`), {
-            tags: { operation: 'admin_contacts_fetch' },
-            extra: {
-              errorDetails: contactsResult.details,
-              userId: authResult.user.id,
-              query
-            }
-          })
           
           return NextResponse.json(
             {
@@ -311,17 +296,6 @@ export async function GET(request: NextRequest) {
         })
         
         // Step 5: Log activity
-        Sentry.addBreadcrumb({
-          message: 'Admin contacts fetched',
-          level: 'info',
-          data: {
-            userId: authResult.user.id,
-            contactsReturned: contacts.length,
-            totalContacts: totalCount,
-            processingTime,
-            filters: query
-          }
-        })
         
         const response: ContactsResponse = {
           success: true,
@@ -346,15 +320,6 @@ export async function GET(request: NextRequest) {
         const processingTime = Date.now() - startTime
         console.error('❌ Unexpected admin contacts error:', error)
         
-        Sentry.captureException(error as Error, {
-          tags: { operation: 'admin_contacts_unexpected' },
-          extra: {
-            requestUrl: request.url,
-            requestMethod: request.method,
-            clientIp,
-            processingTime
-          }
-        })
         
         return NextResponse.json(
           {
@@ -363,7 +328,5 @@ export async function GET(request: NextRequest) {
           },
           { status: 500 }
         )
-      }
-    }
-  )
+  }
 }
