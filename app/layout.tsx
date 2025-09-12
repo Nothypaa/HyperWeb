@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar'
 import ConditionalAurora from '../components/ConditionalAurora'
 import LenisProvider from '../components/LenisProvider'
 import LocalBusinessSchema from '../components/LocalBusinessSchema'
+import SentryTest from '../components/SentryTest'
 
 export const metadata: Metadata = {
   title: {
@@ -133,6 +134,7 @@ export default function RootLayout({
           <ConditionalAurora>
             {children}
           </ConditionalAurora>
+          <SentryTest />
         </LenisProvider>
       </body>
     </html>

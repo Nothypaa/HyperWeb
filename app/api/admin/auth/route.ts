@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
+import * as Sentry from "@sentry/nextjs";
 
 export async function POST(request: NextRequest) {
   try {
@@ -20,6 +21,13 @@ export async function POST(request: NextRequest) {
 
     if (error) {
       console.error('Supabase auth error:', error.message);
+      
+      // Capture auth failures in Sentry (without sensitive data)
+      Sentry.captureException(new Error(`Admin auth failed: ${error.message}`), {
+        tags: { operation: 'admin_auth' },
+        extra: { errorCode: error.status, email: email.replace(/(.{2}).*(@.*)/, '$1***$2') }
+      });
+      
       return NextResponse.json(
         { success: false, error: 'Invalid credentials' },
         { status: 401 }

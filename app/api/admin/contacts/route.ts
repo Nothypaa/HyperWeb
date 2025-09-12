@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
+import * as Sentry from "@sentry/nextjs";
 
 export async function GET(request: NextRequest) {
   try {
@@ -38,12 +39,20 @@ export async function GET(request: NextRequest) {
     });
 
     if (dbError) {
-      console.error('Database error details:', {
+      const errorDetails = {
         message: dbError.message,
         details: dbError.details,
         hint: dbError.hint,
         code: dbError.code
+      };
+      console.error('Database error details:', errorDetails);
+      
+      // Capture error in Sentry
+      Sentry.captureException(new Error(`Admin contacts fetch failed: ${dbError.message}`), {
+        tags: { operation: 'admin_contacts_fetch' },
+        extra: { errorDetails, userId: user.id }
       });
+      
       return NextResponse.json(
         { 
           success: false, 
@@ -62,6 +71,13 @@ export async function GET(request: NextRequest) {
 
   } catch (error) {
     console.error('Contacts API error:', error);
+    
+    // Capture error in Sentry
+    Sentry.captureException(error, {
+      tags: { operation: 'admin_contacts_api' },
+      extra: { requestUrl: request.url, requestMethod: request.method }
+    });
+    
     return NextResponse.json(
       { success: false, error: 'Internal server error' },
       { status: 500 }

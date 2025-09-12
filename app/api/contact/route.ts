@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin, type Contact } from '@/lib/supabase';
+import * as Sentry from "@sentry/nextjs";
 
 // Input validation functions
 function validateEmail(email: string): boolean {
@@ -33,6 +34,12 @@ function getClientIp(request: NextRequest): string {
 }
 
 export async function POST(request: NextRequest) {
+  return Sentry.startSpan(
+    {
+      op: "http.server",
+      name: "POST /api/contact",
+    },
+    async () => {
   try {
     const body = await request.json();
     const clientIp = getClientIp(request);
@@ -107,12 +114,20 @@ export async function POST(request: NextRequest) {
       .single() as { data: Contact | null; error: any };
 
     if (error) {
-      console.error('Supabase error details:', {
+      const errorDetails = {
         message: error.message,
         details: error.details,
         hint: error.hint,
         code: error.code
+      };
+      console.error('Supabase error details:', errorDetails);
+      
+      // Capture error in Sentry
+      Sentry.captureException(new Error(`Supabase contact save failed: ${error.message}`), {
+        tags: { operation: 'contact_save' },
+        extra: { errorDetails, contactData }
       });
+      
       return NextResponse.json(
         { 
           success: false, 
@@ -131,6 +146,13 @@ export async function POST(request: NextRequest) {
 
   } catch (error) {
     console.error('Contact API error:', error);
+    
+    // Capture error in Sentry
+    Sentry.captureException(error, {
+      tags: { operation: 'contact_api' },
+      extra: { requestUrl: request.url, requestMethod: request.method }
+    });
+    
     return NextResponse.json(
       { 
         success: false, 
@@ -139,6 +161,8 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
+    }
+  );
 }
 
 export async function GET() {
