@@ -102,7 +102,7 @@ export async function POST(request: NextRequest) {
     // Insert into Supabase
     const { data, error } = await supabaseAdmin
       .from('contacts')
-      .insert([contactData])
+      .insert([contactData] as any)
       .select()
       .single();
 
