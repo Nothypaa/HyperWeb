@@ -85,13 +85,6 @@ export default function AdminPage() {
     }
   }, [isAuthenticated]);
 
-  // Cleanup auth state when component unmounts
-  useEffect(() => {
-    return () => {
-      // Sign out from Supabase to prevent auth state pollution
-      supabase.auth.signOut().catch(console.error);
-    };
-  }, []);
 
   const handleLogin = async (email: string, password: string): Promise<boolean> => {
     try {

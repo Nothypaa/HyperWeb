@@ -12,26 +12,26 @@ if (!supabaseAnonKey) {
   throw new Error('Missing NEXT_PUBLIC_SUPABASE_ANON_KEY environment variable')
 }
 
-// Create singleton instances to prevent Multiple GoTrueClient warnings
-let supabaseInstance: ReturnType<typeof createClient> | null = null
-let supabaseAdminInstance: ReturnType<typeof createClient> | null = null
+// Global variables to store singleton instances
+let _supabaseClient: ReturnType<typeof createClient> | null = null
+let _supabaseAdminClient: ReturnType<typeof createClient> | null = null
 
-// Client-side Supabase instance (singleton)
-export const supabase = (() => {
-  if (!supabaseInstance) {
-    supabaseInstance = createClient(supabaseUrl, supabaseAnonKey)
+// Client-side Supabase instance (singleton getter)
+function getSupabaseClient() {
+  if (!_supabaseClient) {
+    _supabaseClient = createClient(supabaseUrl, supabaseAnonKey)
   }
-  return supabaseInstance
-})()
-
-// Server-side client with service role key (singleton)
-if (typeof window === 'undefined' && !supabaseServiceKey) {
-  console.warn('Missing SUPABASE_SERVICE_ROLE_KEY - server operations may fail')
+  return _supabaseClient
 }
 
-export const supabaseAdmin = (() => {
-  if (!supabaseAdminInstance) {
-    supabaseAdminInstance = createClient(
+// Server-side client with service role key (singleton getter)
+function getSupabaseAdminClient() {
+  if (!_supabaseAdminClient) {
+    if (typeof window === 'undefined' && !supabaseServiceKey) {
+      console.warn('Missing SUPABASE_SERVICE_ROLE_KEY - server operations may fail')
+    }
+    
+    _supabaseAdminClient = createClient(
       supabaseUrl,
       supabaseServiceKey || supabaseAnonKey, // Fallback to anon key if service key missing
       {
@@ -42,8 +42,12 @@ export const supabaseAdmin = (() => {
       }
     )
   }
-  return supabaseAdminInstance
-})()
+  return _supabaseAdminClient
+}
+
+// Export singleton instances
+export const supabase = getSupabaseClient()
+export const supabaseAdmin = getSupabaseAdminClient()
 
 // Types for our database
 export interface Contact {
