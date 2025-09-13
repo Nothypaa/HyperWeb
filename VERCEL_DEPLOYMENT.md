@@ -12,13 +12,8 @@ NEXT_PUBLIC_SUPABASE_URL=https://bfksghkgtjnimmoetour.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJma3NnaGtndGpuaW1tb2V0b3VyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc1MzYyOTIsImV4cCI6MjA3MzExMjI5Mn0.UE0lhPsDvPyybT9YTQxGnphYEaDFUEIIwBoT9Lqy2J8
 SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJma3NnaGtndGpuaW1tb2V0b3VyIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NzUzNjI5MiwiZXhwIjoyMDczMTEyMjkyfQ.K5vJzK4EKjJ9VWqGTDSdDNE0orVRvtoU6_iFlrazRyE
 
-# Optional (for chat feature if implemented)
-ANTHROPIC_API_KEY=your_actual_api_key_here
-
-# Sentry monitoring has been removed
-
-# Rate Limiting
-CHAT_RATE_LIMIT_PER_MINUTE=10
+# All required variables are listed above
+# No additional optional variables needed
 ```
 
 ## Step-by-Step Deployment:
