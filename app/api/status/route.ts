@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getSupabaseAdmin } from '@/lib/supabase'
+import { supabaseAdmin } from '@/lib/supabase'
 
 // =======================================
 // STATUS TYPES
@@ -158,7 +158,7 @@ async function checkDatabaseStatus(): Promise<ServiceStatus> {
   
   try {
     console.log('🗄️ Checking database status...')
-    const supabase = getSupabaseAdmin()
+    const supabase = supabaseAdmin
     
     const { data, error } = await supabase
       .from('contacts')
@@ -194,12 +194,7 @@ async function checkMonitoringStatus(): Promise<ServiceStatus> {
   try {
     console.log('📊 Checking monitoring status...')
     
-    // Test Sentry by adding a breadcrumb
-    Sentry.addBreadcrumb({
-      message: 'Status check monitoring test',
-      level: 'info',
-      category: 'status_check'
-    })
+    // Monitoring status check
     
     return {
       status: 'operational',
@@ -223,7 +218,7 @@ async function checkMonitoringStatus(): Promise<ServiceStatus> {
 
 async function getSystemMetrics(): Promise<SystemStatus['metrics']> {
   try {
-    const supabase = getSupabaseAdmin()
+    const supabase = supabaseAdmin
     
     // Get total contacts
     const { data: totalData, count: totalCount } = await supabase
@@ -281,13 +276,8 @@ function determineOverallStatus(services: SystemStatus['services']): SystemStatu
 // =======================================
 
 export async function GET(request: NextRequest) {
-  return Sentry.startSpan(
-    {
-      op: 'http.server',
-      name: 'GET /api/status',
-    },
-    async () => {
-      const startTime = Date.now()
+  try {
+    const startTime = Date.now()
       
       console.log('\\n📊 System status check requested...')
       
@@ -331,17 +321,7 @@ export async function GET(request: NextRequest) {
         
         console.log(`${overallStatus === 'operational' ? '✅' : overallStatus === 'degraded' ? '⚠️' : '❌'} System status check completed in ${processingTime}ms: ${overallStatus.toUpperCase()}`)
         
-        // Log status check in Sentry
-        Sentry.addBreadcrumb({
-          message: `System status check: ${overallStatus}`,
-          level: overallStatus === 'operational' ? 'info' : 'warning',
-          data: {
-            processingTime,
-            overallStatus,
-            servicesDown: Object.entries(services).filter(([_, service]) => service.status === 'down').length,
-            servicesDegraded: Object.entries(services).filter(([_, service]) => service.status === 'degraded').length
-          }
-        })
+        // Log status check complete
         
         // Set appropriate cache headers
         const headers = {
@@ -356,10 +336,7 @@ export async function GET(request: NextRequest) {
         const processingTime = Date.now() - startTime
         console.error('❌ System status check failed:', error)
         
-        Sentry.captureException(error as Error, {
-          tags: { operation: 'system_status_failed' },
-          extra: { processingTime }
-        })
+        // Log the error details
         
         return NextResponse.json(
           {
@@ -371,8 +348,13 @@ export async function GET(request: NextRequest) {
           { status: 503 }
         )
       }
-    }
-  )
+  } catch (error) {
+    console.error('Unexpected status error:', error)
+    return NextResponse.json(
+      { error: 'Status check failed' },
+      { status: 500 }
+    )
+  }
 }
 
 // =======================================
@@ -382,7 +364,7 @@ export async function GET(request: NextRequest) {
 export async function HEAD(request: NextRequest) {
   try {
     // Quick health check for status badges
-    const supabase = getSupabaseAdmin()
+    const supabase = supabaseAdmin
     const { error } = await supabase
       .from('contacts')
       .select('id')

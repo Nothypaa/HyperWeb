@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getSupabaseAdmin, type Contact, type ContactSubmission, type DatabaseResult } from '@/lib/supabase'
+import { supabaseAdmin, type Contact, type ContactSubmission, type DatabaseResult } from '@/lib/supabase'
 
 // =======================================
 // RATE LIMITING & SPAM DETECTION
@@ -30,11 +30,11 @@ function checkRateLimit(ip: string): boolean {
 // Clean up old rate limit entries periodically
 setInterval(() => {
   const now = Date.now()
-  for (const [ip, data] of rateLimitStore.entries()) {
+  rateLimitStore.forEach((data, ip) => {
     if (now > data.resetTime) {
       rateLimitStore.delete(ip)
     }
-  }
+  })
 }, 60 * 1000) // Clean every minute
 
 // =======================================
@@ -81,7 +81,7 @@ function validateFullName(name: string): { valid: boolean; error?: string } {
   return { valid: true }
 }
 
-function validatePhone(phone: string): { valid: boolean; error?: string } {
+function validatePhone(phone: string | undefined): { valid: boolean; error?: string } {
   if (!phone || phone.trim() === '') {
     return { valid: true } // Phone is optional
   }
@@ -104,7 +104,7 @@ function validateSubject(subject: string): { valid: boolean; error?: string } {
   return { valid: true }
 }
 
-function validateMessage(message: string): { valid: boolean; error?: string } {
+function validateMessage(message: string | undefined): { valid: boolean; error?: string } {
   if (!message || message.trim() === '') {
     return { valid: true } // Message is optional
   }
@@ -141,7 +141,7 @@ async function checkForDuplicates(email: string, message: string): Promise<{
   recentSubmission?: Contact
 }> {
   try {
-    const supabase = getSupabaseAdmin()
+    const supabase = supabaseAdmin
     const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString()
     
     const { data, error } = await supabase
@@ -220,7 +220,7 @@ function levenshteinDistance(str1: string, str2: string): number {
 async function saveContactToDatabase(contactData: Omit<Contact, 'id' | 'created_at' | 'updated_at'>): Promise<DatabaseResult<Contact>> {
   try {
     console.log('💾 Attempting to save contact to database...')
-    const supabase = getSupabaseAdmin()
+    const supabase = supabaseAdmin
     
     const { data, error } = await supabase
       .from('contacts')
@@ -262,7 +262,7 @@ async function saveContactToDatabase(contactData: Omit<Contact, 'id' | 'created_
 async function verifyContactSaved(contactId: number): Promise<boolean> {
   try {
     console.log(`🔍 Verifying contact ${contactId} was saved...`)
-    const supabase = getSupabaseAdmin()
+    const supabase = supabaseAdmin
     
     const { data, error } = await supabase
       .from('contacts')

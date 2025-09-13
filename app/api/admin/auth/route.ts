@@ -71,7 +71,7 @@ export async function GET(request: NextRequest) {
     }
     
     console.log('🔍 Verifying admin token...')
-    const supabase = getSupabaseAdmin()
+    const supabase = supabaseAdmin
     
     const { data: { user }, error } = await supabase.auth.getUser(token)
     
@@ -120,7 +120,7 @@ export async function DELETE(request: NextRequest) {
     }
     
     console.log('🚪 Admin logout requested...')
-    const supabase = getSupabaseAdmin()
+    const supabase = supabaseAdmin
     
     // Sign out the user
     const { error } = await supabase.auth.admin.signOut(token)

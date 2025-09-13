@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getSupabaseAdmin, type Contact, type DatabaseResult } from '@/lib/supabase'
+import { supabaseAdmin, type Contact, type DatabaseResult } from '@/lib/supabase'
 
 // =======================================
 // TYPES AND INTERFACES
@@ -30,8 +30,8 @@ interface ContactsResponse {
 
 interface ContactStatistics {
   totalContacts: number
-  byStatus: Record<Contact['status'], number>
-  bySubject: Record<Contact['subject'], number>
+  byStatus: Record<NonNullable<Contact['status']>, number>
+  bySubject: Record<NonNullable<Contact['subject']>, number>
   recentCount: number
   todayCount: number
   weekCount: number
@@ -78,7 +78,7 @@ function getClientIp(request: NextRequest): string {
 async function verifyAdminToken(token: string): Promise<{ valid: boolean; user?: any; error?: string }> {
   try {
     console.log('🔍 Verifying admin token...')
-    const supabase = getSupabaseAdmin()
+    const supabase = supabaseAdmin
     
     const { data: { user }, error } = await supabase.auth.getUser(token)
     
@@ -97,7 +97,7 @@ async function verifyAdminToken(token: string): Promise<{ valid: boolean; user?:
 
 async function getContactStatistics(): Promise<ContactStatistics> {
   try {
-    const supabase = getSupabaseAdmin()
+    const supabase = supabaseAdmin
     
     // Get all contacts for statistics
     const { data: allContacts, error } = await supabase
@@ -127,12 +127,12 @@ async function getContactStatistics(): Promise<ContactStatistics> {
       
       // Count by status
       if (contact.status && statistics.byStatus.hasOwnProperty(contact.status)) {
-        statistics.byStatus[contact.status as Contact['status']]++
+        statistics.byStatus[contact.status as NonNullable<Contact['status']>]++
       }
       
       // Count by subject
       if (contact.subject && statistics.bySubject.hasOwnProperty(contact.subject)) {
-        statistics.bySubject[contact.subject as Contact['subject']]++
+        statistics.bySubject[contact.subject as NonNullable<Contact['subject']>]++
       }
       
       // Count by time periods
@@ -160,7 +160,7 @@ async function getContactStatistics(): Promise<ContactStatistics> {
 async function fetchContacts(query: ContactsQuery): Promise<DatabaseResult<{ contacts: Contact[]; totalCount: number }>> {
   try {
     console.log('💾 Fetching contacts with query:', query)
-    const supabase = getSupabaseAdmin()
+    const supabase = supabaseAdmin
     
     let queryBuilder = supabase.from('contacts').select('*', { count: 'exact' })
     
