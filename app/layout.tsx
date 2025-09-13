@@ -42,9 +42,6 @@ export const metadata: Metadata = {
     description: 'La seule agence web Montpellier qui vous rembourse si votre site ne génère aucun résultat.',
     images: ['https://agencehyperweb.com/og-image.jpg'],
   },
-  alternates: {
-    canonical: 'https://agencehyperweb.com',
-  },
 }
 
 export default function RootLayout({

@@ -3,6 +3,9 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Politique de Confidentialité - Protection des Données Personnelles',
   description: 'Découvrez comment HyperWeb protège et traite vos données personnelles selon le RGPD. Transparence totale sur nos pratiques de confidentialité.',
+  alternates: {
+    canonical: 'https://agencehyperweb.com/politique-confidentialite',
+  },
 }
 
 export default function PolitiqueConfidentialite() {

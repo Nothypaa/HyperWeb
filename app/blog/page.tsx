@@ -1,6 +1,15 @@
 import BlogGrid from '@/components/ui/blog-grid'
 import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { FAQ } from '@/components/ui/faq'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Blog - Articles et Conseils Web | Agence HyperWeb',
+  description: 'Découvrez nos articles sur le développement web, SEO, et stratégies digitales pour votre entreprise à Montpellier.',
+  alternates: {
+    canonical: 'https://agencehyperweb.com/blog',
+  },
+}
 
 export default function BlogPage() {
   return (

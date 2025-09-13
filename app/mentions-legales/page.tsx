@@ -3,6 +3,9 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Mentions Légales - Informations Légales Obligatoires',
   description: 'Mentions légales obligatoires du site HyperWeb : éditeur, hébergeur, responsable de publication et informations légales.',
+  alternates: {
+    canonical: 'https://agencehyperweb.com/mentions-legales',
+  },
 }
 
 export default function MentionsLegales() {

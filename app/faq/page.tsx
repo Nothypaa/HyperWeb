@@ -1,5 +1,14 @@
 import { FAQ } from '@/components/ui/faq'
 import { Breadcrumb } from '@/components/ui/breadcrumb'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'FAQ - Questions Fréquentes | Agence HyperWeb',
+  description: 'Toutes les réponses à vos questions sur la création de sites web modernes avec React et Next.js.',
+  alternates: {
+    canonical: 'https://agencehyperweb.com/faq',
+  },
+}
 
 export default function FAQPage() {
   return (

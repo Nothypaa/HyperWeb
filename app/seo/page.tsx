@@ -1,5 +1,14 @@
 import Link from 'next/link'
 import { FadeUp } from '@/components/ui/fade-up'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: "C'est quoi SEO ? Guide Simple | Agence HyperWeb",
+  description: 'Guide simple et clair pour comprendre le SEO et comment être trouvé sur Google. Explications et conseils pratiques.',
+  alternates: {
+    canonical: 'https://agencehyperweb.com/seo',
+  },
+}
 
 export default function SEOPage() {
   return (
