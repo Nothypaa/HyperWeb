@@ -1,6 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export function middleware(request: NextRequest) {
+  const url = request.nextUrl.clone();
+  const hostname = request.headers.get('host') || '';
+
+  // URL Redirects for SEO canonicalization
+  const shouldRedirect =
+    // WWW to non-WWW redirect
+    hostname.startsWith('www.') ||
+    // HTTP to HTTPS redirect (in case of reverse proxy issues)
+    url.protocol === 'http:';
+
+  if (shouldRedirect) {
+    // Create the canonical URL
+    const canonicalUrl = new URL(request.url);
+    canonicalUrl.hostname = 'agencehyperweb.com'; // Remove www
+    canonicalUrl.protocol = 'https:'; // Force HTTPS
+
+    return NextResponse.redirect(canonicalUrl.toString(), 301);
+  }
+
   const response = NextResponse.next();
 
   // Security headers
@@ -9,7 +28,7 @@ export function middleware(request: NextRequest) {
   response.headers.set('X-XSS-Protection', '1; mode=block');
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
   response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
-  
+
   // Content Security Policy
   const csp = [
     "default-src 'self'",
@@ -20,7 +39,7 @@ export function middleware(request: NextRequest) {
     "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://region1.google-analytics.com https://bfksghkgtjnimmoetour.supabase.co",
     "frame-src 'none'"
   ].join('; ');
-  
+
   response.headers.set('Content-Security-Policy', csp);
 
   return response;
