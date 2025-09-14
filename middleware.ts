@@ -20,6 +20,12 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(canonicalUrl.toString(), 301);
   }
 
+  // SEO-friendly URL redirects - Old URLs to new SEO-optimized URLs
+  if (url.pathname === '/seo') {
+    url.pathname = '/c-est-quoi-seo';
+    return NextResponse.redirect(url.toString(), 301);
+  }
+
   const response = NextResponse.next();
 
   // Security headers

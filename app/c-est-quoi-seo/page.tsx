@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "C'est quoi SEO ? Guide Simple | Agence HyperWeb",
   description: 'Guide simple et clair pour comprendre le SEO et comment être trouvé sur Google. Explications et conseils pratiques.',
   alternates: {
-    canonical: 'https://agencehyperweb.com/seo',
+    canonical: 'https://agencehyperweb.com/c-est-quoi-seo',
   },
 }
 

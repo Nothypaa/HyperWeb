@@ -25,7 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/seo`,
+      url: `${baseUrl}/c-est-quoi-seo`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.8,
