@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabaseAdmin, type Contact, type ContactSubmission, type DatabaseResult } from '@/lib/supabase'
+import { sendContactNotification } from '@/lib/email'
 
 // =======================================
 // RATE LIMITING & SPAM DETECTION
@@ -419,7 +420,20 @@ export async function POST(request: NextRequest) {
           console.error('❌ Save verification failed')
         }
         
-        // Step 9: Success response
+        // Step 9: Send email notification
+        if (isVerified) {
+          console.log('📧 Sending email notification...')
+          const emailResult = await sendContactNotification(saveResult.data!)
+          
+          if (emailResult.success) {
+            console.log('✅ Email notification sent successfully')
+          } else {
+            console.warn('⚠️ Email notification failed:', emailResult.error)
+            // Don't fail the entire request if email fails
+          }
+        }
+        
+        // Step 10: Success response
         const processingTime = Date.now() - startTime
         console.log(`🎉 Contact form processed successfully in ${processingTime}ms`)
         

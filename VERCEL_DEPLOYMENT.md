@@ -12,8 +12,11 @@ NEXT_PUBLIC_SUPABASE_URL=https://bfksghkgtjnimmoetour.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJma3NnaGtndGpuaW1tb2V0b3VyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc1MzYyOTIsImV4cCI6MjA3MzExMjI5Mn0.UE0lhPsDvPyybT9YTQxGnphYEaDFUEIIwBoT9Lqy2J8
 SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJma3NnaGtndGpuaW1tb2V0b3VyIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NzUzNjI5MiwiZXhwIjoyMDczMTEyMjkyfQ.K5vJzK4EKjJ9VWqGTDSdDNE0orVRvtoU6_iFlrazRyE
 
-# All required variables are listed above
-# No additional optional variables needed
+# Email Notifications (OPTIONAL - for contact form notifications)
+RESEND_API_KEY=re_FJXA86zR_8caRtf3J1eQWNmGfPLPgprpn
+
+# All core variables listed above
+# Email notifications are optional but recommended
 ```
 
 ## Step-by-Step Deployment:
