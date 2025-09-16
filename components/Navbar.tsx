@@ -14,6 +14,7 @@ const Navbar: React.FC = () => {
   const pathname = usePathname();
   const isBlogPage = pathname === '/blog';
   const isFaqPage = pathname === '/faq';
+  const isBlogPostPage = pathname.startsWith('/blog/') && pathname !== '/blog';
   const { navigateToAnchor } = useAnchorNavigation();
 
   const handlePortfolioClick = () => {
@@ -63,8 +64,8 @@ const Navbar: React.FC = () => {
       setIsVisible(true);
     }, 100);
 
-    if (isBlogPage || isFaqPage) {
-      // Always show button on blog and FAQ pages, but allow initial animation
+    if (isBlogPage || isFaqPage || isBlogPostPage) {
+      // Always show button on blog, FAQ, and blog post pages, but allow initial animation
       setTimeout(() => setShowButton(true), 600);
       return () => clearTimeout(timer);
     }

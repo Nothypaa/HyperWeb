@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useLenis } from '../LenisProvider'
 
 // Custom scrollbar styles
@@ -109,14 +110,14 @@ const BlogGrid: React.FC<BlogGridProps> = ({ posts }) => {
     {
       id: '1',
       title: 'Comment être #1 sur Google en 2025',
-      date: '4 août 2025',
+      date: '16 septembre 2025',
       category: 'LECTURE RAPIDE',
       image: '/seo-google-2025-strategies-referencement-naturel-france.webp'
     },
     {
       id: '2',
       title: 'Combien coûte un site internet en France en 2025 ? (Guide agence web)',
-      date: '10 août 2025',
+      date: '16 septembre 2025',
       category: 'GUIDE TARIFS',
       image: '/prix-cout-site-internet-france-2025-tarifs-agence-web.webp'
     }
@@ -166,8 +167,8 @@ const BlogGrid: React.FC<BlogGridProps> = ({ posts }) => {
           "url": `https://agencehyperweb.com${post.image}`,
           "caption": getOptimizedAltText(post)
         },
-        "datePublished": post.id === '1' ? "2025-08-04" : "2025-08-10",
-        "dateModified": post.id === '1' ? "2025-08-04" : "2025-08-10",
+        "datePublished": "2025-09-16",
+        "dateModified": "2025-09-16",
         "description": post.id === '1' 
           ? "Stratégies avancées pour atteindre et maintenir la première position sur Google en 2025"
           : "Guide complet des tarifs pour la création d'un site internet professionnel en France en 2025",
@@ -250,14 +251,24 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, onReadMore, getOptimizedAltTe
         </p>
       </div>
 
-      {/* Plus Button */}
-      <button 
-        onClick={onReadMore}
-        className="absolute bottom-6 right-6 w-10 h-10 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full flex items-center justify-center transition-all duration-200 group-hover:scale-110 transform"
-        aria-label="Lire la suite"
-      >
-        <PlusIcon className="w-6 h-6 text-gray-500 dark:text-gray-500" />
-      </button>
+      {/* Plus Button - Link for posts 1 and 2, modal for others */}
+      {post.id === '1' || post.id === '2' ? (
+        <Link
+          href={post.id === '1' ? "/blog/comment-etre-premier-sur-google-2025" : "/blog/combien-coute-site-internet-france-2025"}
+          className="absolute bottom-6 right-6 w-10 h-10 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full flex items-center justify-center transition-all duration-200 group-hover:scale-110 transform"
+          aria-label="Lire l'article complet"
+        >
+          <PlusIcon className="w-6 h-6 text-gray-500 dark:text-gray-500" />
+        </Link>
+      ) : (
+        <button
+          onClick={onReadMore}
+          className="absolute bottom-6 right-6 w-10 h-10 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full flex items-center justify-center transition-all duration-200 group-hover:scale-110 transform"
+          aria-label="Lire la suite"
+        >
+          <PlusIcon className="w-6 h-6 text-gray-500 dark:text-gray-500" />
+        </button>
+      )}
     </div>
   )
 }

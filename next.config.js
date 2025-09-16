@@ -2,6 +2,8 @@
 const nextConfig = {
   images: {
     domains: [],
+    unoptimized: true, // Temporarily disable optimization to test
+    formats: ['image/webp', 'image/avif'],
   },
 }
 

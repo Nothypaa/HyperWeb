@@ -64,17 +64,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
-  // In the future, you can add dynamic blog posts here:
-  // const blogPosts = await getBlogPosts()
-  // const dynamicBlogPages = blogPosts.map(post => ({
-  //   url: `${baseUrl}/blog/${post.slug}`,
-  //   lastModified: post.updatedAt,
-  //   changeFrequency: 'monthly' as const,
-  //   priority: 0.6,
-  // }))
+  // Blog posts
+  const blogPosts = [
+    {
+      url: `${baseUrl}/blog/comment-etre-premier-sur-google-2025`,
+      lastModified: '2025-09-16T17:56:00.000Z',
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/combien-coute-site-internet-france-2025`,
+      lastModified: '2025-09-16T17:56:00.000Z',
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
+  ]
 
   return [
     ...staticPages,
-    // ...dynamicBlogPages, // Uncomment when you have dynamic blog posts
+    ...blogPosts,
   ]
 }
