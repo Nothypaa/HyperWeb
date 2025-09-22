@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { FadeUp } from '@/components/ui/fade-up'
+import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -14,7 +15,12 @@ export default function SEOPage() {
   return (
     <main className="min-h-screen pt-40 pb-20 px-6 md:px-32">
       <div className="max-w-4xl mx-auto">
-        
+
+        {/* Breadcrumb Navigation */}
+        <div className="mb-8">
+          <Breadcrumb currentPage="C'est quoi le SEO" />
+        </div>
+
         {/* Header */}
         <FadeUp delay={100} duration={800} distance={30}>
           <div className="text-center mb-16">
@@ -194,6 +200,30 @@ export default function SEOPage() {
                 Demander un devis gratuit
               </Link>
             </section>
+          </FadeUp>
+
+          {/* Additional navigation links */}
+          <FadeUp delay={800} duration={800} distance={20}>
+            <div className="border-t border-gray-200 dark:border-gray-700 pt-8 mt-8">
+              <h3 className="text-lg font-semibold mb-4 text-center">Liens utiles</h3>
+              <div className="flex flex-wrap justify-center gap-4 text-sm">
+                <Link href="/" className="text-blue-600 dark:text-blue-400 hover:underline">
+                  Retour à l'accueil
+                </Link>
+                <span className="text-gray-300">•</span>
+                <Link href="/blog" className="text-blue-600 dark:text-blue-400 hover:underline">
+                  Articles SEO
+                </Link>
+                <span className="text-gray-300">•</span>
+                <Link href="/#portfolio" className="text-blue-600 dark:text-blue-400 hover:underline">
+                  Nos réalisations
+                </Link>
+                <span className="text-gray-300">•</span>
+                <Link href="/faq" className="text-blue-600 dark:text-blue-400 hover:underline">
+                  Questions fréquentes
+                </Link>
+              </div>
+            </div>
           </FadeUp>
 
         </div>

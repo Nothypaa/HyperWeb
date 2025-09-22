@@ -76,8 +76,8 @@ export default function BlogPostPage() {
         "url": "https://agencehyperweb.com/HyperWeb-logo/Hyperweb-nobg.svg"
       }
     },
-    "datePublished": "2025-09-16",
-    "dateModified": "2025-09-16",
+    "datePublished": "2025-09-20",
+    "dateModified": "2025-09-20",
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https://agencehyperweb.com/blog/comment-etre-premier-sur-google-2025"
@@ -118,7 +118,7 @@ export default function BlogPostPage() {
               </span>
               <span className="text-sm text-gray-500 dark:text-gray-500">•</span>
               <span className="text-sm text-gray-500 dark:text-gray-500">
-                16 septembre 2025 • 17:56
+                20 septembre 2025 • 14:30
               </span>
             </div>
 
@@ -133,9 +133,7 @@ export default function BlogPostPage() {
                 Ce que vous allez apprendre dans cet article
               </h2>
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-                Découvrez les stratégies SEO avancées qui fonctionnent vraiment en 2025. Ce guide vous donnera
-                toutes les clés pour dominer les résultats de recherche Google et attirer plus de clients grâce
-                au référencement naturel.
+                Stratégies SEO avancées pour dominer Google en 2025 et attirer plus de clients.
               </p>
               <ul className="list-none space-y-2 text-sm text-gray-600 dark:text-gray-400">
                 <li>• Techniques SEO qui marchent en 2025</li>
@@ -160,7 +158,7 @@ export default function BlogPostPage() {
             </div>
 
             {/* Featured Image */}
-            <div className="w-full aspect-[16/9] mb-8 rounded-2xl overflow-hidden">
+            <div className="w-full aspect-[21/9] mb-8 rounded-2xl overflow-hidden">
               <Image
                 src="/seo-google-2025-strategies-referencement-naturel-france.webp"
                 alt="Stratégies SEO Google 2025 - agence web France création site internet optimisé référencement"
@@ -171,23 +169,9 @@ export default function BlogPostPage() {
               />
             </div>
 
-            {/* Introduction */}
-            <div className="max-w-none mb-12">
-              <p className="text-xl leading-relaxed text-gray-700 dark:text-gray-300 font-normal">
-                Le référencement naturel est devenu l'élément clé pour dominer les résultats de recherche en 2025.
-                Découvrez les stratégies avancées qui permettent d'atteindre et de maintenir la première position sur Google.
-              </p>
-            </div>
-
             {/* Article Content */}
             <article className="max-w-none">
               <div className="text-gray-700 dark:text-gray-300 leading-relaxed space-y-8">
-
-                <p>
-                  Le référencement naturel (SEO) est devenu l'un des piliers essentiels du marketing digital en 2025.
-                  Avec l'évolution constante des algorithmes de Google et l'émergence de l'intelligence artificielle,
-                  les stratégies pour atteindre la première position ont considérablement évolué.
-                </p>
 
                 <h2 className="text-3xl font-bold text-black dark:text-white mt-12 mb-6">
                   Les fondamentaux du SEO en 2025
@@ -197,6 +181,11 @@ export default function BlogPostPage() {
                   Google privilégie désormais l'expérience utilisateur avant tout. <Tooltip text="Métriques de Google qui mesurent la vitesse de chargement, l'interactivité et la stabilité visuelle d'une page web">Les Core Web Vitals</Tooltip>, l'optimisation mobile
                   et la vitesse de chargement sont devenus des facteurs de classement cruciaux. Une approche holistique
                   combinant contenu de qualité et performance technique est indispensable.
+                </p>
+
+                <p>
+                  Pour vérifier la vitesse de votre site web, nous pouvons le faire pour vous et fournir un audit complet,
+                  ou vous pouvez le faire vous-même sur <a href="https://pagespeed.web.dev/" className="text-gray-600 hover:text-gray-800 underline" target="_blank" rel="noopener noreferrer">https://pagespeed.web.dev/</a>.
                 </p>
 
                 <h2 className="text-3xl font-bold text-black dark:text-white mt-12 mb-6">
@@ -236,9 +225,7 @@ export default function BlogPostPage() {
                 </h2>
 
                 <p>
-                  En 2025, la performance technique n'est plus optionnelle. Google évalue désormais la vitesse de chargement,
-                  la stabilité visuelle et l'interactivité comme des signaux de classement majeurs. Un site lent ou instable
-                  ne peut plus espérer atteindre les premières positions, même avec un contenu exceptionnel.
+                  Un site lent = mauvais classement Google. La vitesse, stabilité et interactivité sont désormais obligatoires pour être premier.
                 </p>
 
                 <h2 className="text-3xl font-bold text-black dark:text-white mt-12 mb-6">
@@ -251,7 +238,23 @@ export default function BlogPostPage() {
                 </p>
 
                 <h3 className="text-2xl font-bold text-black dark:text-white mt-8 mb-4">
-                  1. Intégration de cartes géolocalisées
+                  1. Ciblage par mots-clés géolocalisés
+                </h3>
+
+                <p>
+                  La stratégie la plus efficace consiste à combiner votre activité avec votre localisation.
+                  Si vous êtes une agence de communication à Montpellier, ciblez "agence de communication Montpellier",
+                  "agence web à Montpellier" ou "agence Google Ads Montpellier".
+                </p>
+
+                <p>
+                  <strong>Exemple concret :</strong> Nous avons aidé un client spécialisé en installation vidéosurveillance
+                  à Montpellier (<a href="https://zozosecurite.fr/" className="text-gray-600 hover:text-gray-800 underline" target="_blank" rel="noopener noreferrer">zozosecurite.fr</a>). En ciblant des mots-clés précis comme "installation vidéosurveillance Montpellier",
+                  ils sont maintenant numéro 1 sur Google pour leurs mots-clés cibles.
+                </p>
+
+                <h3 className="text-2xl font-bold text-black dark:text-white mt-8 mb-4">
+                  2. Intégration de cartes géolocalisées
                 </h3>
 
                 <p>
@@ -362,11 +365,11 @@ export default function BlogPostPage() {
                   Google analyse ces signaux pour comprendre votre expertise et votre engagement.
                 </p>
 
-                <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 rounded-r-2xl p-6 my-8">
-                  <h4 className="text-lg font-bold text-blue-900 dark:text-blue-100 mb-4">
+                <div className="bg-gray-50 dark:bg-gray-900/20 border-l-4 border-gray-500 rounded-r-2xl p-6 my-8">
+                  <h4 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">
                     💡 Exemple concret : Agence web à Montpellier
                   </h4>
-                  <ul className="space-y-2 text-blue-800 dark:text-blue-200 text-sm">
+                  <ul className="space-y-2 text-gray-800 dark:text-gray-200 text-sm">
                     <li>• <strong>Site web :</strong> Articles techniques SEO et développement</li>
                     <li>• <strong>YouTube :</strong> Tutoriels "Comment optimiser son site"</li>
                     <li>• <strong>Instagram :</strong> Avant/après de sites créés + process</li>
@@ -496,8 +499,8 @@ export default function BlogPostPage() {
                   </div>
                 </div>
 
-                <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 rounded-r-2xl p-6 my-8">
-                  <p className="text-blue-900 dark:text-blue-100 font-medium">
+                <div className="bg-gray-50 dark:bg-gray-900/20 border-l-4 border-gray-500 rounded-r-2xl p-6 my-8">
+                  <p className="text-gray-900 dark:text-gray-100 font-medium">
                     💡 <strong>Conseil HyperWeb :</strong> Utilisez Google Search Console pour identifier vos pages
                     les plus performantes, puis mettez-les à jour avec du contenu frais. L'impact SEO est immédiat
                     et mesurable.

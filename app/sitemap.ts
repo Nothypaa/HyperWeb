@@ -30,25 +30,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
-    // Homepage sections (important for anchor linking SEO)
-    {
-      url: `${baseUrl}/#portfolio`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/#pricing`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/#contact`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    },
     // Legal pages (required but lower priority)
     {
       url: `${baseUrl}/mentions-legales`,
@@ -68,7 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const blogPosts = [
     {
       url: `${baseUrl}/blog/comment-etre-premier-sur-google-2025`,
-      lastModified: '2025-09-16T17:56:00.000Z',
+      lastModified: '2025-09-20T14:30:00.000Z',
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     },

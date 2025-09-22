@@ -1,6 +1,7 @@
 import BlogGrid from '@/components/ui/blog-grid'
 import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { FAQ } from '@/components/ui/faq'
+import Link from 'next/link'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -20,10 +21,18 @@ export default function BlogPage() {
           <Breadcrumb currentPage="Blog" />
         </div>
         
-        <div className="flex justify-center mb-32">
+        <div className="flex justify-center mb-16">
           <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-black tracking-tighter text-black dark:text-white">
             BLOG
           </h1>
+        </div>
+
+        {/* Introduction */}
+        <div className="max-w-4xl mx-auto mb-16 text-center">
+          <p className="text-lg text-gray-600 dark:text-gray-400 mb-4">
+            Découvrez nos articles sur le développement web, les stratégies SEO et les dernières tendances digitales.
+            En tant qu'agence de communication à Montpellier, explorez notre expertise pour améliorer votre présence en ligne.
+          </p>
         </div>
         
         {/* Blog Grid */}

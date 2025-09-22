@@ -20,11 +20,17 @@ function SimpleFooter() {
             >
               FAQ
             </Link>
-            <Link 
-              href="/blog" 
+            <Link
+              href="/blog"
               className="text-sm text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white transition-colors"
             >
               Blog
+            </Link>
+            <Link
+              href="/c-est-quoi-seo"
+              className="text-sm text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white transition-colors"
+            >
+              SEO
             </Link>
             <Link 
               href="https://share.google/N6Yc8AanPtFa7BZhG" 

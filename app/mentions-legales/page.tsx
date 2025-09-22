@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { Breadcrumb } from '@/components/ui/breadcrumb'
 
 export const metadata: Metadata = {
   title: 'Mentions Légales - Informations Légales Obligatoires',
@@ -12,6 +13,11 @@ export default function MentionsLegales() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4 pt-40 pb-20 max-w-4xl">
+        {/* Breadcrumb Navigation */}
+        <div className="mb-8">
+          <Breadcrumb currentPage="Mentions Légales" />
+        </div>
+
         <div className="prose prose-gray dark:prose-invert max-w-none">
           <h1 className="text-3xl font-bold mb-8">Mentions Légales</h1>
           
@@ -291,6 +297,28 @@ export default function MentionsLegales() {
               </div>
             </div>
           </section>
+
+          {/* Additional navigation links */}
+          <div className="border-t border-gray-200 dark:border-gray-700 pt-8 mt-8">
+            <h3 className="text-lg font-semibold mb-4">Liens utiles</h3>
+            <div className="flex flex-wrap gap-4 text-sm">
+              <a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">
+                Retour à l'accueil
+              </a>
+              <span className="text-gray-300">•</span>
+              <a href="/politique-confidentialite" className="text-blue-600 dark:text-blue-400 hover:underline">
+                Politique de confidentialité
+              </a>
+              <span className="text-gray-300">•</span>
+              <a href="/blog" className="text-blue-600 dark:text-blue-400 hover:underline">
+                Blog
+              </a>
+              <span className="text-gray-300">•</span>
+              <a href="/faq" className="text-blue-600 dark:text-blue-400 hover:underline">
+                FAQ
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

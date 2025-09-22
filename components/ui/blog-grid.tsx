@@ -110,7 +110,7 @@ const BlogGrid: React.FC<BlogGridProps> = ({ posts }) => {
     {
       id: '1',
       title: 'Comment être #1 sur Google en 2025',
-      date: '16 septembre 2025',
+      date: '20 septembre 2025',
       category: 'LECTURE RAPIDE',
       image: '/seo-google-2025-strategies-referencement-naturel-france.webp'
     },
@@ -167,8 +167,8 @@ const BlogGrid: React.FC<BlogGridProps> = ({ posts }) => {
           "url": `https://agencehyperweb.com${post.image}`,
           "caption": getOptimizedAltText(post)
         },
-        "datePublished": "2025-09-16",
-        "dateModified": "2025-09-16",
+        "datePublished": "2025-09-20",
+        "dateModified": "2025-09-20",
         "description": post.id === '1' 
           ? "Stratégies avancées pour atteindre et maintenir la première position sur Google en 2025"
           : "Guide complet des tarifs pour la création d'un site internet professionnel en France en 2025",
