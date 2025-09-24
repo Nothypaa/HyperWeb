@@ -10,7 +10,7 @@ import LocalBusinessSchema from '../components/LocalBusinessSchema'
 export const metadata: Metadata = {
   title: {
     template: '%s | Agence HyperWeb Montpellier',
-    default: 'Agence Web Montpellier - Sites avec Garantie Résultats | HyperWeb'
+    default: 'Agence Web à Montpellier - Sites avec Garantie Résultats | HyperWeb'
   },
   description: 'La seule agence web Montpellier qui vous rembourse si votre site ne génère aucun résultat. Création de sites web performants avec SEO inclus. Devis gratuit.',
   keywords: 'agence web montpellier, création site web montpellier, développement web, SEO montpellier, site internet montpellier, garantie résultats',
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     maximumScale: 5,
   },
   openGraph: {
-    title: 'Agence Web Montpellier - Sites avec Garantie Résultats',
+    title: 'Agence Web à Montpellier - Sites avec Garantie Résultats',
     description: 'La seule agence web Montpellier qui vous rembourse si votre site ne génère aucun résultat. Création de sites web performants avec SEO inclus.',
     url: 'https://agencehyperweb.com',
     siteName: 'Agence HyperWeb Montpellier',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Agence Web Montpellier - Sites avec Garantie Résultats',
+    title: 'Agence Web à Montpellier - Sites avec Garantie Résultats',
     description: 'La seule agence web Montpellier qui vous rembourse si votre site ne génère aucun résultat.',
     images: ['https://agencehyperweb.com/og-image.jpg'],
   },

@@ -568,6 +568,51 @@ export default function BlogPostPage() {
 
               </div>
             </article>
+
+            {/* Related Articles Section */}
+            <div className="max-w-4xl mx-auto mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+              <h3 className="text-2xl font-bold text-black dark:text-white mb-8 text-center">
+                Articles qui pourraient vous intéresser
+              </h3>
+
+              <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 border border-gray-100 dark:border-gray-800">
+                <Link href="/blog/combien-coute-site-internet-france-2025" className="group block">
+                  <div className="flex items-start gap-4">
+                    <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0">
+                      <Image
+                        src="/prix-cout-site-internet-france-2025-tarifs-agence-web.webp"
+                        alt="Prix création site internet France 2025"
+                        width={80}
+                        height={80}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-xs font-bold text-gray-500 dark:text-gray-500 uppercase">
+                          GUIDE TARIFS
+                        </span>
+                        <span className="text-xs text-gray-400">•</span>
+                        <span className="text-xs text-gray-500 dark:text-gray-500">
+                          16 septembre 2025
+                        </span>
+                      </div>
+                      <h4 className="text-lg font-bold text-black dark:text-white mb-2 group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors">
+                        Combien coûte un site internet en France en 2025 ?
+                      </h4>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        Guide complet des tarifs pour la création d'un site internet professionnel par une agence web.
+                      </p>
+                    </div>
+                    <div className="w-6 h-6 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                      </svg>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </main>

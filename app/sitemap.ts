@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://agencehyperweb.com'
-  const currentDate = new Date().toISOString()
+  const currentDate = '2025-09-22T12:00:00.000Z'
 
   // Define static pages with their metadata
   const staticPages = [
@@ -25,7 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/c-est-quoi-seo`,
+      url: `${baseUrl}/seo`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.8,

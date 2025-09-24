@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ThemeToggle } from './ui/theme-toggle';
 import { useAnchorNavigation } from '@/hooks/useAnchorNavigation';
+import { useState as useMenuState } from 'react';
 
 const Navbar: React.FC = () => {
   const [showButton, setShowButton] = useState(false);

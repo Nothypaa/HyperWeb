@@ -1,19 +1,35 @@
 export default function LocalBusinessSchema() {
   const schemaData = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": ["LocalBusiness", "WebDesignerService", "MarketingCompany"],
     "@id": "https://agencehyperweb.com/#organization",
-    "name": "HyperWeb - Agence Web France",
-    "description": "Agence web française spécialisée création sites internet professionnels",
+    "name": "HyperWeb - Agence Web & Communication Montpellier",
+    "description": "Agence web et de communication à Montpellier spécialisée en création de sites internet, SEO et services webmaster",
     "url": "https://agencehyperweb.com",
     "telephone": "+33767563926",
     "email": "contact@agencehyperweb.com",
     "priceRange": "€450-€1100+",
     "address": {
       "@type": "PostalAddress",
+      "addressLocality": "Montpellier",
+      "addressRegion": "Occitanie",
       "addressCountry": "FR",
-      "addressRegion": "France"
+      "postalCode": "34000"
     },
+    "areaServed": [
+      "Montpellier",
+      "Hérault",
+      "Occitanie",
+      "France"
+    ],
+    "serviceType": [
+      "Agence web",
+      "Agence de communication",
+      "Agence SEO",
+      "Webmaster",
+      "Création site internet",
+      "Référencement naturel"
+    ],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Services Web",
