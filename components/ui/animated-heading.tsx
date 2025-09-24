@@ -80,12 +80,13 @@ export const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
                     key={`${keyPrefix}-${lineIndex}-${charIndex}`}
                     className="inline-block transition-all duration-700 ease-out"
                     style={{
-                      transform: isVisible ? 'translateY(0px)' : 'translateY(-20px)',
+                      transform: isVisible
+                        ? 'translateY(0px) translate3d(0, 0, 0)'
+                        : 'translateY(-20px) translate3d(0, 0, 0)',
                       opacity: isVisible ? 1 : 0,
                       filter: isVisible ? 'blur(0px)' : 'blur(10px)',
                       transitionDelay: `${currentIndex * staggerDelay}ms`,
                       willChange: 'transform, opacity',
-                      transform3d: 'translate3d(0, 0, 0)',
                     }}
                   >
                     {char === ' ' ? '\u00A0' : char}
@@ -118,12 +119,13 @@ export const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
                     key={`${keyPrefix}-${lineIndex}-${charIndex}`}
                     className="inline-block transition-all duration-700 ease-out"
                     style={{
-                      transform: isVisible ? 'translateY(0px)' : 'translateY(-20px)',
+                      transform: isVisible
+                        ? 'translateY(0px) translate3d(0, 0, 0)'
+                        : 'translateY(-20px) translate3d(0, 0, 0)',
                       opacity: isVisible ? 1 : 0,
                       filter: isMobile ? 'none' : (isVisible ? 'blur(0px)' : 'blur(10px)'),
                       transitionDelay: `${currentIndex * currentStaggerDelay}ms`,
                       willChange: 'transform, opacity',
-                      transform3d: 'translate3d(0, 0, 0)',
                     }}
                   >
                     {char === ' ' ? '\u00A0' : char}
