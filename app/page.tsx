@@ -147,8 +147,18 @@ export default function Home() {
         </section>
 
         {/* Portfolio Grid Section */}
-        <section id="portfolio" className="pt-0 pb-4 md:pt-0 md:pb-12">
-          <FadeUp delay={200} duration={1000} distance={40}>
+        <section id="portfolio" className="pt-0 pb-16 md:pt-0 md:pb-24">
+          <FadeUp delay={200} duration={800} distance={30}>
+            <div className="text-center mb-12 md:mb-16 px-4">
+              <h2 className="text-4xl font-black tracking-tighter text-foreground mb-3 lg:text-6xl">
+                Nos sites ne décorent pas. Ils dominent.
+              </h2>
+              <p className="text-center opacity-75 lg:text-xl">
+                Des résultats SEO mesurables, pas des promesses en l'air.
+              </p>
+            </div>
+          </FadeUp>
+          <FadeUp delay={400} duration={1000} distance={40}>
             <MockupGrid />
           </FadeUp>
         </section>

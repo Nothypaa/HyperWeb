@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Image from 'next/image'
 
 const portfolioItems = [
@@ -8,35 +8,27 @@ const portfolioItems = [
     id: 1,
     image: "/projet-client/site-videosurveillance-montpellier-agence-web-france.webp",
     alt: "Création site internet vidéosurveillance professionnel Montpellier - HyperWeb agence web France",
-    bgClass: "bg-gradient-to-br from-zinc-900/95 via-red-950/90 to-zinc-900/95",
-    name: "Site Vidéosurveillance",
-    description: "Installation vidéosurveillance"
+    name: "Zozo Sécurité",
+    title: "Sécurité & Vidéosurveillance Montpellier",
+    challenge: "Entreprise locale invisible face à la concurrence nationale sur les recherches sécurité.",
+    results: [
+      { label: "Position #1 Google", value: "installation vidéosurveillance Montpellier" },
+      { label: "Position #1 Google My Business", value: "recherches locales" },
+      { label: "Visibilité locale", value: "Site web + fiche Google optimisés" }
+    ],
+    services: "Création site vitrine + SEO local + Optimisation GMB",
+    sector: "Sécurité & Surveillance"
   },
   {
     id: 2,
     image: "/projet-client/creation-site-tatouage-castelnau-le-lez-developpement-web.webp",
     alt: "Site web sur mesure salon tatouage Castelnau-le-Lez - développement web professionnel HyperWeb",
-    bgClass: "bg-gradient-to-br from-orange-600/95 via-amber-500/90 to-orange-600/95",
     name: "Site Tatouage",
     description: "Studio de tatouage"
   }
 ]
 
 const MockupGrid: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => 
-        prevIndex === portfolioItems.length - 1 ? 0 : prevIndex + 1
-      )
-    }, 5000) // Change every 5 seconds
-
-    return () => clearInterval(interval)
-  }, [])
-
-  const currentItem = portfolioItems[currentIndex]
-
   // Generate CreativeWork schema for portfolio items
   const portfolioSchema = {
     "@context": "https://schema.org",
@@ -48,10 +40,10 @@ const MockupGrid: React.FC = () => {
       "position": index + 1,
       "item": {
         "@type": "CreativeWork",
-        "name": item.name === "Site Vidéosurveillance" 
+        "name": item.name === "Zozo Sécurité"
           ? "Site Web Vidéosurveillance Professionnel Montpellier"
           : "Site Web Salon Tatouage Professionnel Castelnau-le-Lez",
-        "description": item.name === "Site Vidéosurveillance"
+        "description": item.name === "Zozo Sécurité"
           ? "Site web professionnel pour entreprise de vidéosurveillance à Montpellier, développé par HyperWeb agence web France"
           : "Site web sur mesure pour salon de tatouage à Castelnau-le-Lez, création HyperWeb agence web professionnelle",
         "creator": {
@@ -62,7 +54,7 @@ const MockupGrid: React.FC = () => {
         "image": `https://agencehyperweb.com${item.image}`,
         "dateCreated": "2025",
         "genre": "Site Web Professionnel",
-        "keywords": item.name === "Site Vidéosurveillance"
+        "keywords": item.name === "Zozo Sécurité"
           ? "site web vidéosurveillance, création site internet Montpellier, agence web France"
           : "site web tatouage, création site internet Castelnau-le-Lez, développement web professionnel"
       }
@@ -76,73 +68,87 @@ const MockupGrid: React.FC = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(portfolioSchema) }}
       />
-      
-      <div className="w-full max-w-[120rem] mx-auto p-4 md:p-8">
-      {/* Mobile/Tablet layout (base to md) - simplified single container */}
-      <div className="lg:hidden relative">
-        <div className="w-full aspect-[16/10] max-w-6xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-white/5 dark:bg-black/5">
-          <Image 
-            key={currentItem.id} // Force re-render for smooth transitions
-            src={currentItem.image}
-            alt={currentItem.alt}
-            width={1200}
-            height={750}
-            className="w-full h-full object-cover animate-fadeIn lazyload"
-            loading="lazy"
-          />
-        </div>
-        
-        {/* Navigation dots for mobile/tablet */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
-          {portfolioItems.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                index === currentIndex 
-                  ? 'bg-gray-800 w-8' 
-                  : 'bg-gray-400 w-2'
-              }`}
-              aria-label={`Aller à la diapositive ${index + 1}`}
-            />
-          ))}
-        </div>
-      </div>
 
-      {/* Desktop layout (lg and up) - keep exactly as it was */}
-      <div className="hidden lg:block">
-        <div 
-          className={`${currentItem.bgClass} backdrop-blur rounded-3xl h-[800px] w-full p-8 flex items-center justify-center overflow-hidden transition-all duration-1000 ease-in-out relative`}
-        >
-          <div className="w-[80%] max-w-4xl aspect-[16/10] bg-white/5 dark:bg-black/5 rounded-3xl overflow-hidden shadow-2xl border border-white/10">
-            <Image 
-              key={currentItem.id} // Force re-render for smooth transitions
-              src={currentItem.image}
-              alt={currentItem.alt}
-              width={1200}
-              height={750}
-              className="w-full h-full object-cover animate-fadeIn lazyload"
-              loading="lazy"
-            />
-          </div>
-          
-          {/* Navigation dots for desktop */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2">
-            {portfolioItems.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex 
-                    ? 'bg-white w-8' 
-                    : 'bg-white/40 w-2'
-                }`}
-                aria-label={`Aller à la diapositive ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
+      <div className="w-full max-w-7xl mx-auto px-4 md:px-8">
+        {/* Show only Zozo Sécurité for now */}
+        {portfolioItems
+          .filter(item => item.name === "Zozo Sécurité")
+          .map((project) => (
+            <div key={project.id} className="py-16 md:py-24">
+
+              {/* Desktop Layout - Side by Side */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                {/* Left: Content */}
+                <div className="space-y-6 lg:space-y-8">
+                  <div>
+                    <div className="inline-block px-3 py-1 rounded-full bg-foreground/5 text-foreground text-sm font-medium mb-4">
+                      {project.sector}
+                    </div>
+                    <h3 className="text-3xl lg:text-4xl font-black tracking-tighter text-foreground leading-tight mb-4">
+                      {project.title}
+                    </h3>
+                    <p className="text-muted-foreground text-base lg:text-lg leading-relaxed">
+                      {project.challenge}
+                    </p>
+                  </div>
+
+                  {/* Results */}
+                  <div className="space-y-4">
+                    <h4 className="text-lg font-bold tracking-tight text-foreground">
+                      RÉSULTATS SEO
+                    </h4>
+                    <div className="space-y-3">
+                      {project.results.map((result, idx) => {
+                        const labelParts = result.label.split('#1')
+                        const hasFirstPosition = labelParts.length > 1
+
+                        return (
+                          <div
+                            key={idx}
+                            className="rounded-2xl border bg-card p-4 shadow-sm"
+                          >
+                            <div className="font-semibold text-foreground text-base mb-1">
+                              {hasFirstPosition ? (
+                                <>
+                                  {labelParts[0]}
+                                  <span className="text-yellow-600 dark:text-yellow-400">#1</span>
+                                  {labelParts[1]}
+                                </>
+                              ) : (
+                                result.label
+                              )}
+                            </div>
+                            <div className="text-sm text-muted-foreground">
+                              {result.value}
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="pt-4 border-t">
+                    <div className="text-sm text-muted-foreground">
+                      <span className="font-semibold text-foreground">Services : </span>
+                      {project.services}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right: Image */}
+                <div className="w-full rounded-3xl overflow-hidden shadow-lg border bg-card">
+                  <Image
+                    src={project.image}
+                    alt={project.alt}
+                    width={1200}
+                    height={900}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
       </div>
     </>
   )

@@ -100,42 +100,25 @@ export const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
     )
   }
 
-  // Mobile-specific render function
+  // Mobile-specific render function - Simple fade in without stagger
   const renderMobileText = (textToRender: string, keyPrefix: string = 'mobile') => {
     const lines = textToRender.split('<br/>')
-    let letterIndex = 0
-    const currentStaggerDelay = isMobile ? mobileStaggerDelay : staggerDelay
 
     return (
-      <>
+      <span
+        className="block transition-all duration-1000 ease-out"
+        style={{
+          opacity: isVisible ? 1 : 0,
+          transform: isVisible ? 'translateY(0)' : 'translateY(10px)',
+        }}
+      >
         {lines.map((line, lineIndex) => (
           <React.Fragment key={`${keyPrefix}-${lineIndex}`}>
             {lineIndex > 0 && <br />}
-            <span className="inline-block whitespace-normal">
-              {line.split('').map((char, charIndex) => {
-                const currentIndex = letterIndex++
-                return (
-                  <span
-                    key={`${keyPrefix}-${lineIndex}-${charIndex}`}
-                    className="inline-block transition-all duration-700 ease-out"
-                    style={{
-                      transform: isVisible
-                        ? 'translateY(0px) translate3d(0, 0, 0)'
-                        : 'translateY(-20px) translate3d(0, 0, 0)',
-                      opacity: isVisible ? 1 : 0,
-                      filter: isMobile ? 'none' : (isVisible ? 'blur(0px)' : 'blur(10px)'),
-                      transitionDelay: `${currentIndex * currentStaggerDelay}ms`,
-                      willChange: 'transform, opacity',
-                    }}
-                  >
-                    {char === ' ' ? '\u00A0' : char}
-                  </span>
-                )
-              })}
-            </span>
+            {line}
           </React.Fragment>
         ))}
-      </>
+      </span>
     )
   }
 

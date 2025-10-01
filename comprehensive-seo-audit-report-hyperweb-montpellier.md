@@ -24,7 +24,6 @@ HyperWeb présente une base SEO solide avec plusieurs forces, mais nécessite de
 - Temps de chargement acceptables
 
 ### Défis Principaux
-- Absence de robots.txt
 - Optimisation incomplète pour "agence de communication montpellier"
 - Opportunités manquées pour "création site web vitrine"
 - SEO local perfectible
@@ -61,18 +60,7 @@ HyperWeb présente une base SEO solide avec plusieurs forces, mais nécessite de
 
 ### ❌ Problèmes Techniques Critiques
 
-#### 1. Robots.txt Manquant (URGENT)
-**Impact :** Crawl non optimisé, directives manquantes pour les bots
-**Recommandation :**
-```
-User-agent: *
-Allow: /
-Disallow: /admin
-Disallow: /api/
-Sitemap: https://agencehyperweb.com/sitemap.xml
-```
-
-#### 2. Core Web Vitals Perfectibles
+#### 1. Core Web Vitals Perfectibles
 **Métriques actuelles :**
 - LCP : ~2500ms (acceptable mais perfectible)
 - CLS : Acceptable
@@ -83,7 +71,7 @@ Sitemap: https://agencehyperweb.com/sitemap.xml
 - Prioriser le chargement critique CSS
 - Implementer des preconnect pour Fontshare
 
-#### 3. Structure d'URLs Non Optimisée
+#### 2. Structure d'URLs Non Optimisée
 **Problème :** `/c-est-quoi-seo/` au lieu d'une URL plus SEO-friendly
 **Recommandation :** `/seo-montpellier/` ou `/referencement-naturel-montpellier/`
 
@@ -270,9 +258,9 @@ Sitemap: https://agencehyperweb.com/sitemap.xml
 ## 🎯 Plan d'Action Prioritaire
 
 ### Phase 1 : Corrections Techniques (Semaine 1-2)
-1. **Créer robots.txt** avec directives optimisées
-2. **Optimiser Core Web Vitals** (images, CSS critique)
-3. **Vérifier/optimiser schema markup** Local Business
+1. **Optimiser Core Web Vitals** (images, CSS critique)
+2. **Vérifier/optimiser schema markup** Local Business
+3. **Renommer URLs pour SEO** (`/c-est-quoi-seo/` → `/seo-montpellier/`)
 
 ### Phase 2 : Contenu Local (Semaine 3-6)
 1. **Créer page "Agence Communication Montpellier"**
