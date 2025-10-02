@@ -233,8 +233,8 @@ export default function Home() {
         {/* Contact Section */}
         <DemoOne />
         
-        {/* AI Chatbot */}
-        <Chatbot />
+        {/* AI Chatbot - Hidden until API key is added */}
+        {/* <Chatbot /> */}
     </main>
   )
 }
