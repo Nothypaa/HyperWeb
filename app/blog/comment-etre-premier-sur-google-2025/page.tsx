@@ -73,7 +73,7 @@ export default function BlogPostPage() {
       "name": "HyperWeb",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://agencehyperweb.com/HyperWeb-logo/Hyperweb-nobg.svg"
+        "url": "https://agencehyperweb.com/HyperWeb-logo/hyperweb-logo.svg"
       }
     },
     "datePublished": "2025-09-20",
@@ -145,7 +145,7 @@ export default function BlogPostPage() {
             {/* Author Info */}
             <div className="flex items-center gap-4 mb-8 p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
               <Image
-                src="/HyperWeb-logo/Hyperweb-nobg.svg"
+                src="/HyperWeb-logo/hyperweb-logo.svg"
                 alt="HyperWeb Logo"
                 width={48}
                 height={48}

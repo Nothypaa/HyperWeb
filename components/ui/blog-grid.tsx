@@ -159,7 +159,7 @@ const BlogGrid: React.FC<BlogGridProps> = ({ posts }) => {
           "name": "HyperWeb",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://agencehyperweb.com/HyperWeb-logo/Hyperweb-nobg.svg"
+            "url": "https://agencehyperweb.com/HyperWeb-logo/hyperweb-logo.svg"
           }
         },
         "image": {

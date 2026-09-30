@@ -3,6 +3,19 @@ import { supabaseAdmin, type Contact, type ContactSubmission, type DatabaseResul
 import { sendContactNotification } from '@/lib/email'
 
 // =======================================
+// ⚠️ TEMPORARY: DEMO MODE
+// =======================================
+// Set CONTACT_FORM_DEMO_MODE=true to accept submissions WITHOUT storing them.
+// Validation, rate limiting and the honeypot still run, but the database write
+// and email notification are skipped entirely — submissions are ONLY written to
+// the server console and are otherwise DISCARDED.
+//
+// This exists because the Supabase project (bfksghkgtjnimmoetour) no longer
+// resolves. Remove this block once a working database is reconnected.
+
+const DEMO_MODE = process.env.CONTACT_FORM_DEMO_MODE === 'true'
+
+// =======================================
 // RATE LIMITING & SPAM DETECTION
 // =======================================
 
@@ -355,6 +368,26 @@ export async function POST(request: NextRequest) {
           )
         }
         
+        // ⚠️ TEMPORARY: short-circuit before any database access.
+        // Must stay above the duplicate check — that query also hits Supabase.
+        if (DEMO_MODE) {
+          console.warn('⚠️ DEMO MODE — submission accepted but NOT saved:', {
+            fullName: fullName.trim(),
+            email: email.trim(),
+            phone: phone?.trim() || '(none)',
+            subject,
+            message: message?.trim() || '(none)',
+            ip: clientIp
+          })
+
+          return NextResponse.json({
+            success: true,
+            message: 'Contact form submitted successfully',
+            demoMode: true,
+            processingTime: Date.now() - startTime
+          })
+        }
+
         // Step 5: Check for duplicates
         console.log('🔍 Checking for duplicates...')
         const { isDuplicate, recentSubmission } = await checkForDuplicates(

@@ -54,7 +54,7 @@ export function middleware(request: NextRequest) {
     "style-src 'self' 'unsafe-inline' https://api.fontshare.com", // unsafe-inline needed for Tailwind
     "img-src 'self' data: https:",
     "font-src 'self' https://api.fontshare.com https://cdn.fontshare.com",
-    "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://region1.google-analytics.com https://bfksghkgtjnimmoetour.supabase.co",
+    "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://region1.google-analytics.com https://bfksghkgtjnimmoetour.supabase.co https://formspree.io",
     "frame-src 'none'"
   ].join('; ');
 

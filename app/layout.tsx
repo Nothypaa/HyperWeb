@@ -57,13 +57,16 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/Hyperweb-nobg.ico" />
         
         {/* Apple Touch Icon - larger icon for mobile bookmarks */}
-        <link rel="apple-touch-icon" sizes="180x180" href="/HyperWeb-logo/Hyperweb-nobg.svg" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/HyperWeb-logo/hyperweb-logo.svg" />
         
         {/* SVG favicons for better quality at different sizes */}
-        <link rel="icon" type="image/svg+xml" href="/HyperWeb-logo/Hyperweb-nobg.svg" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/HyperWeb-logo/Hyperweb-nobg.svg" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/HyperWeb-logo/Hyperweb-nobg.svg" />
+        <link rel="icon" type="image/svg+xml" href="/HyperWeb-logo/hyperweb-logo.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/HyperWeb-logo/hyperweb-logo.svg" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/HyperWeb-logo/hyperweb-logo.svg" />
         
+        {/* Warm up the connection used by the contact form */}
+        <link rel="preconnect" href="https://formspree.io" crossOrigin="anonymous" />
+
         {/* Web App Manifest */}
         <link rel="manifest" href="/site.webmanifest" />
         

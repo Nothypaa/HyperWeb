@@ -98,10 +98,10 @@ const Navbar: React.FC = () => {
           {/* Top row with logo and hamburger/desktop nav */}
           <div className="flex items-center justify-between h-12 md:h-14">
             {/* Logo and Brand */}
-            <Link href="/" className="flex items-center space-x-1 -ml-4" onClick={closeMobileMenu}>
-              <div className="w-14 h-14 md:w-14 md:h-14 relative">
+            <Link href="/" className="flex items-center space-x-[19px]" onClick={closeMobileMenu}>
+              <div className="w-[26px] h-[21px] relative">
                 <Image
-                  src="/HyperWeb-logo/Hyperweb-nobg.svg"
+                  src="/HyperWeb-logo/hyperweb-logo.svg"
                   alt="HyperWeb logo - agence web France spécialisée création site internet et développement web professionnel"
                   fill
                   className="object-contain lazyload"

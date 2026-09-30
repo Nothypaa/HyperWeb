@@ -8,6 +8,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdekjwqy";
+
 interface Contact2Props {
   title?: string;
   description?: string;
@@ -65,24 +67,25 @@ export const Contact2 = ({
     setErrorMessage('');
     
     try {
-      const response = await fetch('/api/contact', {
+      // URL-encoded body (not JSON) so the browser skips the CORS preflight round trip
+      const response = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
-        body: JSON.stringify({
+        body: new URLSearchParams({
           fullName,
           email: userEmail,
           phone: userPhone,
           subject,
           message,
-          honeypot
+          _gotcha: honeypot // Formspree's honeypot field
         }),
       });
-      
-      const data = await response.json();
-      
-      if (data.success) {
+
+      const data = await response.json().catch(() => ({}));
+
+      if (response.ok) {
         setSubmitStatus('success');
         
         // Start circle animation
@@ -93,7 +96,7 @@ export const Contact2 = ({
         // Show checkmark after circle completes
         setTimeout(() => {
           setShowCheckmark(true);
-        }, 1200);
+        }, 600);
         
         // Reset form after animation
         setTimeout(() => {
@@ -106,7 +109,7 @@ export const Contact2 = ({
         }, 2000);
       } else {
         setSubmitStatus('error');
-        setErrorMessage(data.error || 'Une erreur est survenue');
+        setErrorMessage(data.errors?.[0]?.message || 'Une erreur est survenue');
       }
     } catch (error) {
       setSubmitStatus('error');
@@ -178,7 +181,7 @@ export const Contact2 = ({
                       stroke="currentColor"
                       strokeWidth="3"
                       fill="none"
-                      className="text-black transition-all duration-1000 ease-out"
+                      className="text-black transition-all duration-500 ease-out"
                       style={{
                         strokeDasharray: 377,
                         strokeDashoffset: animationProgress
@@ -207,7 +210,7 @@ export const Contact2 = ({
                 </div>
                 
                 {/* Success text */}
-                <div className={`text-center space-y-2 transition-all duration-700 delay-1000 ${
+                <div className={`text-center space-y-2 transition-all duration-500 delay-150 ${
                   showCheckmark ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}>
                   <h3 className="text-2xl font-bold text-gray-900">Message envoyé!</h3>
@@ -217,7 +220,7 @@ export const Contact2 = ({
                 {/* Reset button */}
                 <button 
                   onClick={resetForm}
-                  className={`text-blue-600 hover:text-blue-700 font-medium transition-all duration-700 delay-1500 ${
+                  className={`text-blue-600 hover:text-blue-700 font-medium transition-all duration-500 delay-300 ${
                     showCheckmark ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                   }`}
                 >

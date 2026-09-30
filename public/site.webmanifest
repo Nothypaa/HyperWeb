@@ -8,10 +8,10 @@
   "theme_color": "#000000",
   "icons": [
     {
-      "src": "/HyperWeb-logo/Hyperweb-nobg.svg",
+      "src": "/HyperWeb-logo/hyperweb-logo.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "/Hyperweb-nobg.ico",
