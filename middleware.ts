@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+// While true, every page shows "Site en cours de création" except the paths below.
+// Set to false to put the full website back online.
+const COMING_SOON = true;
+const COMING_SOON_ALLOWED = ['/cahier-des-charges', '/en-construction', '/admin'];
+
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const hostname = request.headers.get('host') || '';
@@ -32,14 +37,33 @@ export function middleware(request: NextRequest) {
     }
   }
 
+  if (COMING_SOON) {
+    const { pathname } = url;
+    const isAllowed = COMING_SOON_ALLOWED.some((p) => pathname === p || pathname.startsWith(`${p}/`));
+    // Let files from /public through (logo, favicon, manifest, robots.txt, sitemap.xml…)
+    const isFile = /\.[a-z0-9]+$/i.test(pathname);
+
+    if (!isAllowed && !isFile) {
+      url.pathname = '/en-construction';
+      // 503 + Retry-After tells search engines the outage is temporary, so rankings are kept
+      const response = NextResponse.rewrite(url, { status: 503 });
+      response.headers.set('Retry-After', '86400');
+      return withSecurityHeaders(response, false);
+    }
+  }
+
   // SEO-friendly URL redirects - Old URLs to new SEO-optimized URLs
   if (url.pathname === '/seo') {
     url.pathname = '/c-est-quoi-seo';
     return NextResponse.redirect(url.toString(), 301);
   }
 
-  const response = NextResponse.next();
+  // The client brief builds its PDF in the browser (@react-pdf/renderer), which needs data:/blob: URLs
+  const allowPdf = url.pathname.startsWith('/cahier-des-charges');
+  return withSecurityHeaders(NextResponse.next(), allowPdf);
+}
 
+function withSecurityHeaders(response: NextResponse, allowPdf: boolean) {
   // Security headers
   response.headers.set('X-Content-Type-Options', 'nosniff');
   response.headers.set('X-Frame-Options', 'DENY');
@@ -54,7 +78,8 @@ export function middleware(request: NextRequest) {
     "style-src 'self' 'unsafe-inline' https://api.fontshare.com", // unsafe-inline needed for Tailwind
     "img-src 'self' data: https:",
     "font-src 'self' https://api.fontshare.com https://cdn.fontshare.com",
-    "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://region1.google-analytics.com https://bfksghkgtjnimmoetour.supabase.co https://formspree.io",
+    `connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://region1.google-analytics.com https://bfksghkgtjnimmoetour.supabase.co https://formspree.io${allowPdf ? ' data: blob:' : ''}`,
+    ...(allowPdf ? ["worker-src 'self' blob:"] : []),
     "frame-src 'none'"
   ].join('; ');
 

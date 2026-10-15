@@ -14,6 +14,7 @@ export default function robots(): MetadataRoute.Robots {
           '/.next/',
           '/node_modules/',
           '/admin/',
+          '/cahier-des-charges',
           '/wp-admin/',
           '/wp-content/',
           '/wp-includes/',
