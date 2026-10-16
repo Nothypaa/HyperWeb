@@ -35,10 +35,25 @@ export const BRIEF_SECTIONS: BriefSection[] = [
     questions: [
       {
         id: 'nom',
-        label: 'Quel est ton nom complet et le nom de ton entreprise ou de ta marque ?',
-        short: 'Nom & entreprise',
+        label: 'Quel est ton nom complet ?',
+        short: 'Nom complet',
         kind: 'text',
-        placeholder: 'Ex. Camille Martin, Atelier Lumière',
+        placeholder: 'Ex. Camille Martin',
+      },
+      {
+        id: 'entreprise',
+        label: 'Quel est le nom de ton entreprise ou de ta marque ?',
+        short: 'Entreprise / marque',
+        kind: 'text',
+        placeholder: 'Ex. Atelier Lumière',
+      },
+      {
+        id: 'siret',
+        label: 'Quel est ton numéro SIRET ?',
+        short: 'SIRET',
+        kind: 'text',
+        hint: '14 chiffres. Il apparaîtra dans les mentions légales de ton site.',
+        placeholder: 'Ex. 123 456 789 00012',
       },
       {
         id: 'email',

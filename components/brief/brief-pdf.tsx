@@ -51,10 +51,12 @@ interface BriefPdfProps {
   answers: Answers
   picks: Picks
   title: string
+  /** ISO date of the submission; defaults to today */
+  date?: string
   logoSrc?: string
 }
 
-function BriefPdf({ answers, picks, title, logoSrc }: BriefPdfProps) {
+function BriefPdf({ answers, picks, title, date, logoSrc }: BriefPdfProps) {
   const answered = ALL_QUESTIONS.filter((q) => formatAnswer(q, answers, picks) !== "").length
 
   return (
@@ -84,7 +86,7 @@ function BriefPdf({ answers, picks, title, logoSrc }: BriefPdfProps) {
             {logoSrc && <Image src={logoSrc} style={s.logo} />}
             <Text style={s.brandName}>HyperWeb</Text>
           </View>
-          <Text style={s.date}>{briefDate()}</Text>
+          <Text style={s.date}>{briefDate(date)}</Text>
         </View>
 
         <Text style={s.eyebrow}>CAHIER DES CHARGES DU SITE WEB</Text>
@@ -169,9 +171,9 @@ const slugify = (value: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "") || "projet"
 
-export async function downloadBriefPdf({ answers, picks, title }: Omit<BriefPdfProps, "logoSrc">) {
+export async function downloadBriefPdf({ answers, picks, title, date }: Omit<BriefPdfProps, "logoSrc">) {
   const logoSrc = await loadLogo()
-  const blob = await pdf(<BriefPdf answers={answers} picks={picks} title={title} logoSrc={logoSrc} />).toBlob()
+  const blob = await pdf(<BriefPdf answers={answers} picks={picks} title={title} date={date} logoSrc={logoSrc} />).toBlob()
   const url = URL.createObjectURL(blob)
   const link = document.createElement("a")
   link.href = url

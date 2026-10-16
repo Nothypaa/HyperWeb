@@ -10,7 +10,7 @@ import { ThemeToggle } from "@/components/ui/theme-toggle"
 import { useLenis } from "@/components/LenisProvider"
 import { cn } from "@/lib/utils"
 import { ALL_QUESTIONS, BRIEF_SECTIONS, DONT_KNOW, DRIVE_FOLDER_URL, type BriefQuestion } from "./questions"
-import { briefDate, extractHexes, formatAnswer, pad, type Answers, type Picks } from "./format"
+import { briefDate, encodeBrief, extractHexes, formatAnswer, pad, type Answers, type Picks } from "./format"
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdekjwqy"
 // Same heading treatment as the rest of the site
@@ -34,6 +34,8 @@ export default function ClientBrief({ clientName, storageKey }: { clientName?: s
   const [answers, setAnswers] = useState<Answers>({})
   const [picks, setPicks] = useState<Picks>({})
   const [step, setStep] = useState(0)
+  // Last chapter the client was on, so "Reprendre" can bring them back after the intro screen
+  const [resumeStep, setResumeStep] = useState(1)
   const [status, setStatus] = useState<Status>("idle")
   const [errorMessage, setErrorMessage] = useState("")
   const [honeypot, setHoneypot] = useState("")
@@ -51,7 +53,8 @@ export default function ClientBrief({ clientName, storageKey }: { clientName?: s
         const saved: SavedBrief = JSON.parse(raw)
         setAnswers(saved.answers || {})
         setPicks(saved.picks || {})
-        setStep(Math.min(saved.step || 0, REVIEW_STEP))
+        // Always open on the intro screen; "Reprendre où j’en étais" jumps back to the saved chapter
+        setResumeStep(Math.min(Math.max(saved.step || 1, 1), REVIEW_STEP))
         if (saved.submitted) setStatus("sent")
       }
     } catch {
@@ -64,11 +67,15 @@ export default function ClientBrief({ clientName, storageKey }: { clientName?: s
   useEffect(() => {
     if (!hydrated) return
     try {
-      const data: SavedBrief = { answers, picks, step, submitted: status === "sent" }
+      const data: SavedBrief = { answers, picks, step: step > 0 ? step : resumeStep, submitted: status === "sent" }
       localStorage.setItem(storageKey, JSON.stringify(data))
       setSavedAt(Date.now())
     } catch {}
-  }, [answers, picks, step, status, hydrated, storageKey])
+  }, [answers, picks, step, resumeStep, status, hydrated, storageKey])
+
+  useEffect(() => {
+    if (step > 0) setResumeStep(step)
+  }, [step])
 
   // Runs once the previous view has animated out, so the new one always starts at the top
   const scrollToTop = useCallback(() => {
@@ -142,6 +149,11 @@ export default function ClientBrief({ clientName, storageKey }: { clientName?: s
     body.append("email", answers.email.trim())
     body.append("Client", displayName || nameAnswer || "—")
     body.append("Progression", `${answeredCount} / ${ALL_QUESTIONS.length} réponses`)
+    try {
+      // Private link that opens the full brief with a PDF download, for the agency
+      const token = await encodeBrief({ name: displayName || nameAnswer, date: new Date().toISOString(), answers, picks })
+      body.append("PDF du cahier des charges", `${window.location.origin}/cahier-des-charges/voir#${token}`)
+    } catch {}
     BRIEF_SECTIONS.forEach((section, i) => {
       section.questions.forEach((q) => {
         body.append(`${pad(i + 1)} · ${section.title} — ${q.short}`, formatAnswer(q, answers, picks) || "—")
@@ -220,9 +232,14 @@ export default function ClientBrief({ clientName, storageKey }: { clientName?: s
             <BrandLogo />
             <span className="text-lg font-black tracking-tight">HyperWeb</span>
           </Link>
-          <p className="hidden text-sm text-neutral-500 dark:text-neutral-400 md:block">
+          <button
+            type="button"
+            onClick={() => status !== "sent" && goTo(0)}
+            className="hidden rounded-full px-3 py-1 text-sm text-neutral-500 transition hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white md:block"
+            title="Revenir à l’introduction"
+          >
             Cahier des charges{displayName && <> · <span className="text-neutral-900 dark:text-neutral-100">{displayName}</span></>}
-          </p>
+          </button>
           <div className="flex items-center gap-3">
             {hydrated && savedAt && status !== "sent" && (
               <span className="hidden items-center gap-1.5 text-xs text-neutral-500 dark:text-neutral-400 sm:flex">
@@ -259,7 +276,7 @@ export default function ClientBrief({ clientName, storageKey }: { clientName?: s
           {status === "sent" ? (
             <motion.div key="sent" {...motionProps}>
               <SuccessView
-                displayName={displayName || (answers.nom || "").split(",")[0].trim()}
+                displayName={displayName || (answers.nom || "").trim()}
                 onDownload={downloadPdf}
                 downloading={downloading}
                 onEdit={() => {
@@ -275,7 +292,7 @@ export default function ClientBrief({ clientName, storageKey }: { clientName?: s
               <Welcome
                 displayName={displayName}
                 hasDraft={answeredCount > 0}
-                onStart={() => goTo(1)}
+                onStart={() => goTo(answeredCount > 0 ? resumeStep : 1)}
               />
             </motion.div>
           ) : step === REVIEW_STEP ? (
@@ -410,7 +427,7 @@ export default function ClientBrief({ clientName, storageKey }: { clientName?: s
 const inputClass =
   "mt-3 block w-full rounded-2xl border border-neutral-200 bg-white px-4 py-3.5 text-[17px] leading-relaxed text-neutral-900 shadow-[0_1px_2px_rgba(0,0,0,0.04)] outline-none transition placeholder:text-neutral-400 hover:border-neutral-300 focus:border-neutral-900 focus:ring-4 focus:ring-neutral-900/5 dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-100 dark:placeholder:text-neutral-500 dark:hover:border-white/20 dark:focus:border-white/60 dark:focus:ring-white/10"
 
-const primaryButtonClass =
+export const primaryButtonClass =
   "inline-flex h-12 items-center justify-center gap-2 rounded-full bg-neutral-900 px-6 text-[15px] font-semibold text-white shadow-[0_10px_30px_-12px_rgba(0,0,0,0.5)] transition hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-neutral-900/20 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200 dark:focus-visible:ring-white/30"
 
 const ghostButtonClass =
@@ -429,29 +446,20 @@ function Welcome({ displayName, hasDraft, onStart }: { displayName: string; hasD
         <br />
         <span className="text-neutral-400 dark:text-neutral-500">imaginons ton site ensemble.</span>
       </h1>
-      <p className="mt-8 max-w-xl text-lg leading-relaxed text-neutral-600 dark:text-neutral-400">
-        Ce document rassemble toutes les informations nécessaires pour concevoir et créer ton site web. Réponds autant
-        que possible : les exemples et les liens sont les bienvenus dans toutes tes réponses.
-      </p>
-
-      <ul className="mt-10 grid gap-3 sm:grid-cols-3">
+      <ul className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-neutral-500 dark:text-neutral-400">
         {[
-          { icon: Clock, title: "Environ 15 minutes", text: "10 courts chapitres" },
-          { icon: Save, title: "Sauvegarde automatique", text: "Reprends quand tu veux" },
-          { icon: Sparkles, title: "Aucune pression", text: `« ${DONT_KNOW} » est une réponse` },
-        ].map(({ icon: Icon, title, text }) => (
-          <li
-            key={title}
-            className="rounded-2xl border border-neutral-200 bg-white/70 p-5 dark:border-white/10 dark:bg-white/[0.03]"
-          >
-            <Icon className="h-5 w-5 text-neutral-400" aria-hidden />
-            <p className="mt-4 text-[15px] font-semibold">{title}</p>
-            <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">{text}</p>
+          { icon: Clock, label: "15 minutes" },
+          { icon: Save, label: "Sauvegarde automatique" },
+          { icon: Sparkles, label: "Aucune pression" },
+        ].map(({ icon: Icon, label }) => (
+          <li key={label} className="flex items-center gap-2">
+            <Icon className="h-4 w-4 text-neutral-400" aria-hidden />
+            {label}
           </li>
         ))}
       </ul>
 
-      <div className="mt-12 flex flex-wrap items-center gap-4">
+      <div className="mt-10 flex flex-wrap items-center gap-4">
         <button type="button" onClick={onStart} className={cn(primaryButtonClass, "h-14 px-8 text-base")}>
           {hasDraft ? "Reprendre où j’en étais" : "Commencer"} <ArrowRight className="h-4 w-4" aria-hidden />
         </button>
@@ -642,8 +650,8 @@ function QuestionField({
             <input
               id={fieldId}
               type={q.kind === "email" ? "email" : "text"}
-              inputMode={q.kind === "email" ? "email" : undefined}
-              autoComplete={q.kind === "email" ? "email" : q.id === "nom" ? "name" : "off"}
+              inputMode={q.kind === "email" ? "email" : q.id === "siret" ? "numeric" : undefined}
+              autoComplete={q.kind === "email" ? "email" : q.id === "nom" ? "name" : q.id === "entreprise" ? "organization" : "off"}
               value={value}
               onChange={(e) => onChange(e.target.value)}
               placeholder={q.placeholder}
@@ -730,20 +738,22 @@ function ColorTools({ hexes, onAdd }: { hexes: string[]; onAdd: (hex: string) =>
 
 /* ------------------------------------------------------------------ */
 
-function BriefDocument({
+export function BriefDocument({
   answers,
   picks,
   clientName,
   answeredCount,
+  date,
   onEditSection,
 }: {
   answers: Answers
   picks: Picks
   clientName: string
   answeredCount: number
+  date?: string
   onEditSection?: (i: number) => void
 }) {
-  const today = briefDate()
+  const today = briefDate(date)
   const title = clientName || (answers.nom || "").trim() || "Ton projet"
 
   return (
